@@ -1,0 +1,14 @@
+---
+description: Zod schema conventions
+globs: ["*.ts"]
+alwaysApply: false
+---
+
+# Zod schemas
+
+- Import with `import { z } from 'zod'`.
+- Prefer `z.object({ ... }).strict()` for external inputs.
+- Keep schemas near the code they validate or in `src/schemas`.
+- Use `.optional()` and `.default()` intentionally; avoid implicit defaults.
+- Use `safeParse` when you need non-throwing validation; handle errors explicitly.
+- Co-locate schema tests with schema files when tests exist.
