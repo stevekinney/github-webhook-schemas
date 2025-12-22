@@ -4,14 +4,1736 @@
   "private": true,
   "type": "module",
   "exports": {
-    "bun": "./dist/index.js",
-    "node": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "bun": "./dist/index.js",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./branch-protection-configuration-disabled-event": {
+      "types": "./dist/schemas/branch-protection-configuration-disabled-event.d.ts",
+      "bun": "./dist/schemas/branch-protection-configuration-disabled-event.js",
+      "import": "./dist/schemas/branch-protection-configuration-disabled-event.js",
+      "default": "./dist/schemas/branch-protection-configuration-disabled-event.js"
+    },
+    "./branch-protection-configuration-enabled-event": {
+      "types": "./dist/schemas/branch-protection-configuration-enabled-event.d.ts",
+      "bun": "./dist/schemas/branch-protection-configuration-enabled-event.js",
+      "import": "./dist/schemas/branch-protection-configuration-enabled-event.js",
+      "default": "./dist/schemas/branch-protection-configuration-enabled-event.js"
+    },
+    "./branch-protection-rule-created-event": {
+      "types": "./dist/schemas/branch-protection-rule-created-event.d.ts",
+      "bun": "./dist/schemas/branch-protection-rule-created-event.js",
+      "import": "./dist/schemas/branch-protection-rule-created-event.js",
+      "default": "./dist/schemas/branch-protection-rule-created-event.js"
+    },
+    "./branch-protection-rule-deleted-event": {
+      "types": "./dist/schemas/branch-protection-rule-deleted-event.d.ts",
+      "bun": "./dist/schemas/branch-protection-rule-deleted-event.js",
+      "import": "./dist/schemas/branch-protection-rule-deleted-event.js",
+      "default": "./dist/schemas/branch-protection-rule-deleted-event.js"
+    },
+    "./branch-protection-rule-edited-event": {
+      "types": "./dist/schemas/branch-protection-rule-edited-event.d.ts",
+      "bun": "./dist/schemas/branch-protection-rule-edited-event.js",
+      "import": "./dist/schemas/branch-protection-rule-edited-event.js",
+      "default": "./dist/schemas/branch-protection-rule-edited-event.js"
+    },
+    "./check-run-completed-event": {
+      "types": "./dist/schemas/check-run-completed-event.d.ts",
+      "bun": "./dist/schemas/check-run-completed-event.js",
+      "import": "./dist/schemas/check-run-completed-event.js",
+      "default": "./dist/schemas/check-run-completed-event.js"
+    },
+    "./check-run-created-event": {
+      "types": "./dist/schemas/check-run-created-event.d.ts",
+      "bun": "./dist/schemas/check-run-created-event.js",
+      "import": "./dist/schemas/check-run-created-event.js",
+      "default": "./dist/schemas/check-run-created-event.js"
+    },
+    "./check-run-requested-action-event": {
+      "types": "./dist/schemas/check-run-requested-action-event.d.ts",
+      "bun": "./dist/schemas/check-run-requested-action-event.js",
+      "import": "./dist/schemas/check-run-requested-action-event.js",
+      "default": "./dist/schemas/check-run-requested-action-event.js"
+    },
+    "./check-run-rerequested-event": {
+      "types": "./dist/schemas/check-run-rerequested-event.d.ts",
+      "bun": "./dist/schemas/check-run-rerequested-event.js",
+      "import": "./dist/schemas/check-run-rerequested-event.js",
+      "default": "./dist/schemas/check-run-rerequested-event.js"
+    },
+    "./check-suite-completed-event": {
+      "types": "./dist/schemas/check-suite-completed-event.d.ts",
+      "bun": "./dist/schemas/check-suite-completed-event.js",
+      "import": "./dist/schemas/check-suite-completed-event.js",
+      "default": "./dist/schemas/check-suite-completed-event.js"
+    },
+    "./check-suite-requested-event": {
+      "types": "./dist/schemas/check-suite-requested-event.d.ts",
+      "bun": "./dist/schemas/check-suite-requested-event.js",
+      "import": "./dist/schemas/check-suite-requested-event.js",
+      "default": "./dist/schemas/check-suite-requested-event.js"
+    },
+    "./check-suite-rerequested-event": {
+      "types": "./dist/schemas/check-suite-rerequested-event.d.ts",
+      "bun": "./dist/schemas/check-suite-rerequested-event.js",
+      "import": "./dist/schemas/check-suite-rerequested-event.js",
+      "default": "./dist/schemas/check-suite-rerequested-event.js"
+    },
+    "./code-scanning-alert-appeared-in-branch-event": {
+      "types": "./dist/schemas/code-scanning-alert-appeared-in-branch-event.d.ts",
+      "bun": "./dist/schemas/code-scanning-alert-appeared-in-branch-event.js",
+      "import": "./dist/schemas/code-scanning-alert-appeared-in-branch-event.js",
+      "default": "./dist/schemas/code-scanning-alert-appeared-in-branch-event.js"
+    },
+    "./code-scanning-alert-closed-by-user-event": {
+      "types": "./dist/schemas/code-scanning-alert-closed-by-user-event.d.ts",
+      "bun": "./dist/schemas/code-scanning-alert-closed-by-user-event.js",
+      "import": "./dist/schemas/code-scanning-alert-closed-by-user-event.js",
+      "default": "./dist/schemas/code-scanning-alert-closed-by-user-event.js"
+    },
+    "./code-scanning-alert-created-event": {
+      "types": "./dist/schemas/code-scanning-alert-created-event.d.ts",
+      "bun": "./dist/schemas/code-scanning-alert-created-event.js",
+      "import": "./dist/schemas/code-scanning-alert-created-event.js",
+      "default": "./dist/schemas/code-scanning-alert-created-event.js"
+    },
+    "./code-scanning-alert-fixed-event": {
+      "types": "./dist/schemas/code-scanning-alert-fixed-event.d.ts",
+      "bun": "./dist/schemas/code-scanning-alert-fixed-event.js",
+      "import": "./dist/schemas/code-scanning-alert-fixed-event.js",
+      "default": "./dist/schemas/code-scanning-alert-fixed-event.js"
+    },
+    "./code-scanning-alert-reopened-by-user-event": {
+      "types": "./dist/schemas/code-scanning-alert-reopened-by-user-event.d.ts",
+      "bun": "./dist/schemas/code-scanning-alert-reopened-by-user-event.js",
+      "import": "./dist/schemas/code-scanning-alert-reopened-by-user-event.js",
+      "default": "./dist/schemas/code-scanning-alert-reopened-by-user-event.js"
+    },
+    "./code-scanning-alert-reopened-event": {
+      "types": "./dist/schemas/code-scanning-alert-reopened-event.d.ts",
+      "bun": "./dist/schemas/code-scanning-alert-reopened-event.js",
+      "import": "./dist/schemas/code-scanning-alert-reopened-event.js",
+      "default": "./dist/schemas/code-scanning-alert-reopened-event.js"
+    },
+    "./commit-comment-created-event": {
+      "types": "./dist/schemas/commit-comment-created-event.d.ts",
+      "bun": "./dist/schemas/commit-comment-created-event.js",
+      "import": "./dist/schemas/commit-comment-created-event.js",
+      "default": "./dist/schemas/commit-comment-created-event.js"
+    },
+    "./create-event": {
+      "types": "./dist/schemas/create-event.d.ts",
+      "bun": "./dist/schemas/create-event.js",
+      "import": "./dist/schemas/create-event.js",
+      "default": "./dist/schemas/create-event.js"
+    },
+    "./custom-property-created-event": {
+      "types": "./dist/schemas/custom-property-created-event.d.ts",
+      "bun": "./dist/schemas/custom-property-created-event.js",
+      "import": "./dist/schemas/custom-property-created-event.js",
+      "default": "./dist/schemas/custom-property-created-event.js"
+    },
+    "./custom-property-deleted-event": {
+      "types": "./dist/schemas/custom-property-deleted-event.d.ts",
+      "bun": "./dist/schemas/custom-property-deleted-event.js",
+      "import": "./dist/schemas/custom-property-deleted-event.js",
+      "default": "./dist/schemas/custom-property-deleted-event.js"
+    },
+    "./custom-property-values-updated-event": {
+      "types": "./dist/schemas/custom-property-values-updated-event.d.ts",
+      "bun": "./dist/schemas/custom-property-values-updated-event.js",
+      "import": "./dist/schemas/custom-property-values-updated-event.js",
+      "default": "./dist/schemas/custom-property-values-updated-event.js"
+    },
+    "./delete-event": {
+      "types": "./dist/schemas/delete-event.d.ts",
+      "bun": "./dist/schemas/delete-event.js",
+      "import": "./dist/schemas/delete-event.js",
+      "default": "./dist/schemas/delete-event.js"
+    },
+    "./dependabot-alert-created-event": {
+      "types": "./dist/schemas/dependabot-alert-created-event.d.ts",
+      "bun": "./dist/schemas/dependabot-alert-created-event.js",
+      "import": "./dist/schemas/dependabot-alert-created-event.js",
+      "default": "./dist/schemas/dependabot-alert-created-event.js"
+    },
+    "./dependabot-alert-dismissed-event": {
+      "types": "./dist/schemas/dependabot-alert-dismissed-event.d.ts",
+      "bun": "./dist/schemas/dependabot-alert-dismissed-event.js",
+      "import": "./dist/schemas/dependabot-alert-dismissed-event.js",
+      "default": "./dist/schemas/dependabot-alert-dismissed-event.js"
+    },
+    "./dependabot-alert-fixed-event": {
+      "types": "./dist/schemas/dependabot-alert-fixed-event.d.ts",
+      "bun": "./dist/schemas/dependabot-alert-fixed-event.js",
+      "import": "./dist/schemas/dependabot-alert-fixed-event.js",
+      "default": "./dist/schemas/dependabot-alert-fixed-event.js"
+    },
+    "./dependabot-alert-reintroduced-event": {
+      "types": "./dist/schemas/dependabot-alert-reintroduced-event.d.ts",
+      "bun": "./dist/schemas/dependabot-alert-reintroduced-event.js",
+      "import": "./dist/schemas/dependabot-alert-reintroduced-event.js",
+      "default": "./dist/schemas/dependabot-alert-reintroduced-event.js"
+    },
+    "./dependabot-alert-reopened-event": {
+      "types": "./dist/schemas/dependabot-alert-reopened-event.d.ts",
+      "bun": "./dist/schemas/dependabot-alert-reopened-event.js",
+      "import": "./dist/schemas/dependabot-alert-reopened-event.js",
+      "default": "./dist/schemas/dependabot-alert-reopened-event.js"
+    },
+    "./deploy-key-created-event": {
+      "types": "./dist/schemas/deploy-key-created-event.d.ts",
+      "bun": "./dist/schemas/deploy-key-created-event.js",
+      "import": "./dist/schemas/deploy-key-created-event.js",
+      "default": "./dist/schemas/deploy-key-created-event.js"
+    },
+    "./deploy-key-deleted-event": {
+      "types": "./dist/schemas/deploy-key-deleted-event.d.ts",
+      "bun": "./dist/schemas/deploy-key-deleted-event.js",
+      "import": "./dist/schemas/deploy-key-deleted-event.js",
+      "default": "./dist/schemas/deploy-key-deleted-event.js"
+    },
+    "./deployment-created-event": {
+      "types": "./dist/schemas/deployment-created-event.d.ts",
+      "bun": "./dist/schemas/deployment-created-event.js",
+      "import": "./dist/schemas/deployment-created-event.js",
+      "default": "./dist/schemas/deployment-created-event.js"
+    },
+    "./deployment-protection-rule-requested-event": {
+      "types": "./dist/schemas/deployment-protection-rule-requested-event.d.ts",
+      "bun": "./dist/schemas/deployment-protection-rule-requested-event.js",
+      "import": "./dist/schemas/deployment-protection-rule-requested-event.js",
+      "default": "./dist/schemas/deployment-protection-rule-requested-event.js"
+    },
+    "./deployment-review-approved-event": {
+      "types": "./dist/schemas/deployment-review-approved-event.d.ts",
+      "bun": "./dist/schemas/deployment-review-approved-event.js",
+      "import": "./dist/schemas/deployment-review-approved-event.js",
+      "default": "./dist/schemas/deployment-review-approved-event.js"
+    },
+    "./deployment-review-rejected-event": {
+      "types": "./dist/schemas/deployment-review-rejected-event.d.ts",
+      "bun": "./dist/schemas/deployment-review-rejected-event.js",
+      "import": "./dist/schemas/deployment-review-rejected-event.js",
+      "default": "./dist/schemas/deployment-review-rejected-event.js"
+    },
+    "./deployment-review-requested-event": {
+      "types": "./dist/schemas/deployment-review-requested-event.d.ts",
+      "bun": "./dist/schemas/deployment-review-requested-event.js",
+      "import": "./dist/schemas/deployment-review-requested-event.js",
+      "default": "./dist/schemas/deployment-review-requested-event.js"
+    },
+    "./deployment-status-created-event": {
+      "types": "./dist/schemas/deployment-status-created-event.d.ts",
+      "bun": "./dist/schemas/deployment-status-created-event.js",
+      "import": "./dist/schemas/deployment-status-created-event.js",
+      "default": "./dist/schemas/deployment-status-created-event.js"
+    },
+    "./discussion-answered-event": {
+      "types": "./dist/schemas/discussion-answered-event.d.ts",
+      "bun": "./dist/schemas/discussion-answered-event.js",
+      "import": "./dist/schemas/discussion-answered-event.js",
+      "default": "./dist/schemas/discussion-answered-event.js"
+    },
+    "./discussion-category-changed-event": {
+      "types": "./dist/schemas/discussion-category-changed-event.d.ts",
+      "bun": "./dist/schemas/discussion-category-changed-event.js",
+      "import": "./dist/schemas/discussion-category-changed-event.js",
+      "default": "./dist/schemas/discussion-category-changed-event.js"
+    },
+    "./discussion-comment-created-event": {
+      "types": "./dist/schemas/discussion-comment-created-event.d.ts",
+      "bun": "./dist/schemas/discussion-comment-created-event.js",
+      "import": "./dist/schemas/discussion-comment-created-event.js",
+      "default": "./dist/schemas/discussion-comment-created-event.js"
+    },
+    "./discussion-comment-deleted-event": {
+      "types": "./dist/schemas/discussion-comment-deleted-event.d.ts",
+      "bun": "./dist/schemas/discussion-comment-deleted-event.js",
+      "import": "./dist/schemas/discussion-comment-deleted-event.js",
+      "default": "./dist/schemas/discussion-comment-deleted-event.js"
+    },
+    "./discussion-comment-edited-event": {
+      "types": "./dist/schemas/discussion-comment-edited-event.d.ts",
+      "bun": "./dist/schemas/discussion-comment-edited-event.js",
+      "import": "./dist/schemas/discussion-comment-edited-event.js",
+      "default": "./dist/schemas/discussion-comment-edited-event.js"
+    },
+    "./discussion-created-event": {
+      "types": "./dist/schemas/discussion-created-event.d.ts",
+      "bun": "./dist/schemas/discussion-created-event.js",
+      "import": "./dist/schemas/discussion-created-event.js",
+      "default": "./dist/schemas/discussion-created-event.js"
+    },
+    "./discussion-deleted-event": {
+      "types": "./dist/schemas/discussion-deleted-event.d.ts",
+      "bun": "./dist/schemas/discussion-deleted-event.js",
+      "import": "./dist/schemas/discussion-deleted-event.js",
+      "default": "./dist/schemas/discussion-deleted-event.js"
+    },
+    "./discussion-edited-event": {
+      "types": "./dist/schemas/discussion-edited-event.d.ts",
+      "bun": "./dist/schemas/discussion-edited-event.js",
+      "import": "./dist/schemas/discussion-edited-event.js",
+      "default": "./dist/schemas/discussion-edited-event.js"
+    },
+    "./discussion-labeled-event": {
+      "types": "./dist/schemas/discussion-labeled-event.d.ts",
+      "bun": "./dist/schemas/discussion-labeled-event.js",
+      "import": "./dist/schemas/discussion-labeled-event.js",
+      "default": "./dist/schemas/discussion-labeled-event.js"
+    },
+    "./discussion-locked-event": {
+      "types": "./dist/schemas/discussion-locked-event.d.ts",
+      "bun": "./dist/schemas/discussion-locked-event.js",
+      "import": "./dist/schemas/discussion-locked-event.js",
+      "default": "./dist/schemas/discussion-locked-event.js"
+    },
+    "./discussion-pinned-event": {
+      "types": "./dist/schemas/discussion-pinned-event.d.ts",
+      "bun": "./dist/schemas/discussion-pinned-event.js",
+      "import": "./dist/schemas/discussion-pinned-event.js",
+      "default": "./dist/schemas/discussion-pinned-event.js"
+    },
+    "./discussion-transferred-event": {
+      "types": "./dist/schemas/discussion-transferred-event.d.ts",
+      "bun": "./dist/schemas/discussion-transferred-event.js",
+      "import": "./dist/schemas/discussion-transferred-event.js",
+      "default": "./dist/schemas/discussion-transferred-event.js"
+    },
+    "./discussion-unanswered-event": {
+      "types": "./dist/schemas/discussion-unanswered-event.d.ts",
+      "bun": "./dist/schemas/discussion-unanswered-event.js",
+      "import": "./dist/schemas/discussion-unanswered-event.js",
+      "default": "./dist/schemas/discussion-unanswered-event.js"
+    },
+    "./discussion-unlabeled-event": {
+      "types": "./dist/schemas/discussion-unlabeled-event.d.ts",
+      "bun": "./dist/schemas/discussion-unlabeled-event.js",
+      "import": "./dist/schemas/discussion-unlabeled-event.js",
+      "default": "./dist/schemas/discussion-unlabeled-event.js"
+    },
+    "./discussion-unlocked-event": {
+      "types": "./dist/schemas/discussion-unlocked-event.d.ts",
+      "bun": "./dist/schemas/discussion-unlocked-event.js",
+      "import": "./dist/schemas/discussion-unlocked-event.js",
+      "default": "./dist/schemas/discussion-unlocked-event.js"
+    },
+    "./discussion-unpinned-event": {
+      "types": "./dist/schemas/discussion-unpinned-event.d.ts",
+      "bun": "./dist/schemas/discussion-unpinned-event.js",
+      "import": "./dist/schemas/discussion-unpinned-event.js",
+      "default": "./dist/schemas/discussion-unpinned-event.js"
+    },
+    "./fork-event": {
+      "types": "./dist/schemas/fork-event.d.ts",
+      "bun": "./dist/schemas/fork-event.js",
+      "import": "./dist/schemas/fork-event.js",
+      "default": "./dist/schemas/fork-event.js"
+    },
+    "./github-app-authorization-revoked-event": {
+      "types": "./dist/schemas/github-app-authorization-revoked-event.d.ts",
+      "bun": "./dist/schemas/github-app-authorization-revoked-event.js",
+      "import": "./dist/schemas/github-app-authorization-revoked-event.js",
+      "default": "./dist/schemas/github-app-authorization-revoked-event.js"
+    },
+    "./gollum-event": {
+      "types": "./dist/schemas/gollum-event.d.ts",
+      "bun": "./dist/schemas/gollum-event.js",
+      "import": "./dist/schemas/gollum-event.js",
+      "default": "./dist/schemas/gollum-event.js"
+    },
+    "./installation-created-event": {
+      "types": "./dist/schemas/installation-created-event.d.ts",
+      "bun": "./dist/schemas/installation-created-event.js",
+      "import": "./dist/schemas/installation-created-event.js",
+      "default": "./dist/schemas/installation-created-event.js"
+    },
+    "./installation-deleted-event": {
+      "types": "./dist/schemas/installation-deleted-event.d.ts",
+      "bun": "./dist/schemas/installation-deleted-event.js",
+      "import": "./dist/schemas/installation-deleted-event.js",
+      "default": "./dist/schemas/installation-deleted-event.js"
+    },
+    "./installation-new-permissions-accepted-event": {
+      "types": "./dist/schemas/installation-new-permissions-accepted-event.d.ts",
+      "bun": "./dist/schemas/installation-new-permissions-accepted-event.js",
+      "import": "./dist/schemas/installation-new-permissions-accepted-event.js",
+      "default": "./dist/schemas/installation-new-permissions-accepted-event.js"
+    },
+    "./installation-repositories-added-event": {
+      "types": "./dist/schemas/installation-repositories-added-event.d.ts",
+      "bun": "./dist/schemas/installation-repositories-added-event.js",
+      "import": "./dist/schemas/installation-repositories-added-event.js",
+      "default": "./dist/schemas/installation-repositories-added-event.js"
+    },
+    "./installation-repositories-removed-event": {
+      "types": "./dist/schemas/installation-repositories-removed-event.d.ts",
+      "bun": "./dist/schemas/installation-repositories-removed-event.js",
+      "import": "./dist/schemas/installation-repositories-removed-event.js",
+      "default": "./dist/schemas/installation-repositories-removed-event.js"
+    },
+    "./installation-suspend-event": {
+      "types": "./dist/schemas/installation-suspend-event.d.ts",
+      "bun": "./dist/schemas/installation-suspend-event.js",
+      "import": "./dist/schemas/installation-suspend-event.js",
+      "default": "./dist/schemas/installation-suspend-event.js"
+    },
+    "./installation-target-renamed-event": {
+      "types": "./dist/schemas/installation-target-renamed-event.d.ts",
+      "bun": "./dist/schemas/installation-target-renamed-event.js",
+      "import": "./dist/schemas/installation-target-renamed-event.js",
+      "default": "./dist/schemas/installation-target-renamed-event.js"
+    },
+    "./installation-unsuspend-event": {
+      "types": "./dist/schemas/installation-unsuspend-event.d.ts",
+      "bun": "./dist/schemas/installation-unsuspend-event.js",
+      "import": "./dist/schemas/installation-unsuspend-event.js",
+      "default": "./dist/schemas/installation-unsuspend-event.js"
+    },
+    "./issue-comment-created-event": {
+      "types": "./dist/schemas/issue-comment-created-event.d.ts",
+      "bun": "./dist/schemas/issue-comment-created-event.js",
+      "import": "./dist/schemas/issue-comment-created-event.js",
+      "default": "./dist/schemas/issue-comment-created-event.js"
+    },
+    "./issue-comment-deleted-event": {
+      "types": "./dist/schemas/issue-comment-deleted-event.d.ts",
+      "bun": "./dist/schemas/issue-comment-deleted-event.js",
+      "import": "./dist/schemas/issue-comment-deleted-event.js",
+      "default": "./dist/schemas/issue-comment-deleted-event.js"
+    },
+    "./issue-comment-edited-event": {
+      "types": "./dist/schemas/issue-comment-edited-event.d.ts",
+      "bun": "./dist/schemas/issue-comment-edited-event.js",
+      "import": "./dist/schemas/issue-comment-edited-event.js",
+      "default": "./dist/schemas/issue-comment-edited-event.js"
+    },
+    "./issues-assigned-event": {
+      "types": "./dist/schemas/issues-assigned-event.d.ts",
+      "bun": "./dist/schemas/issues-assigned-event.js",
+      "import": "./dist/schemas/issues-assigned-event.js",
+      "default": "./dist/schemas/issues-assigned-event.js"
+    },
+    "./issues-closed-event": {
+      "types": "./dist/schemas/issues-closed-event.d.ts",
+      "bun": "./dist/schemas/issues-closed-event.js",
+      "import": "./dist/schemas/issues-closed-event.js",
+      "default": "./dist/schemas/issues-closed-event.js"
+    },
+    "./issues-deleted-event": {
+      "types": "./dist/schemas/issues-deleted-event.d.ts",
+      "bun": "./dist/schemas/issues-deleted-event.js",
+      "import": "./dist/schemas/issues-deleted-event.js",
+      "default": "./dist/schemas/issues-deleted-event.js"
+    },
+    "./issues-demilestoned-event": {
+      "types": "./dist/schemas/issues-demilestoned-event.d.ts",
+      "bun": "./dist/schemas/issues-demilestoned-event.js",
+      "import": "./dist/schemas/issues-demilestoned-event.js",
+      "default": "./dist/schemas/issues-demilestoned-event.js"
+    },
+    "./issues-edited-event": {
+      "types": "./dist/schemas/issues-edited-event.d.ts",
+      "bun": "./dist/schemas/issues-edited-event.js",
+      "import": "./dist/schemas/issues-edited-event.js",
+      "default": "./dist/schemas/issues-edited-event.js"
+    },
+    "./issues-labeled-event": {
+      "types": "./dist/schemas/issues-labeled-event.d.ts",
+      "bun": "./dist/schemas/issues-labeled-event.js",
+      "import": "./dist/schemas/issues-labeled-event.js",
+      "default": "./dist/schemas/issues-labeled-event.js"
+    },
+    "./issues-locked-event": {
+      "types": "./dist/schemas/issues-locked-event.d.ts",
+      "bun": "./dist/schemas/issues-locked-event.js",
+      "import": "./dist/schemas/issues-locked-event.js",
+      "default": "./dist/schemas/issues-locked-event.js"
+    },
+    "./issues-milestoned-event": {
+      "types": "./dist/schemas/issues-milestoned-event.d.ts",
+      "bun": "./dist/schemas/issues-milestoned-event.js",
+      "import": "./dist/schemas/issues-milestoned-event.js",
+      "default": "./dist/schemas/issues-milestoned-event.js"
+    },
+    "./issues-opened-event": {
+      "types": "./dist/schemas/issues-opened-event.d.ts",
+      "bun": "./dist/schemas/issues-opened-event.js",
+      "import": "./dist/schemas/issues-opened-event.js",
+      "default": "./dist/schemas/issues-opened-event.js"
+    },
+    "./issues-pinned-event": {
+      "types": "./dist/schemas/issues-pinned-event.d.ts",
+      "bun": "./dist/schemas/issues-pinned-event.js",
+      "import": "./dist/schemas/issues-pinned-event.js",
+      "default": "./dist/schemas/issues-pinned-event.js"
+    },
+    "./issues-reopened-event": {
+      "types": "./dist/schemas/issues-reopened-event.d.ts",
+      "bun": "./dist/schemas/issues-reopened-event.js",
+      "import": "./dist/schemas/issues-reopened-event.js",
+      "default": "./dist/schemas/issues-reopened-event.js"
+    },
+    "./issues-transferred-event": {
+      "types": "./dist/schemas/issues-transferred-event.d.ts",
+      "bun": "./dist/schemas/issues-transferred-event.js",
+      "import": "./dist/schemas/issues-transferred-event.js",
+      "default": "./dist/schemas/issues-transferred-event.js"
+    },
+    "./issues-unassigned-event": {
+      "types": "./dist/schemas/issues-unassigned-event.d.ts",
+      "bun": "./dist/schemas/issues-unassigned-event.js",
+      "import": "./dist/schemas/issues-unassigned-event.js",
+      "default": "./dist/schemas/issues-unassigned-event.js"
+    },
+    "./issues-unlabeled-event": {
+      "types": "./dist/schemas/issues-unlabeled-event.d.ts",
+      "bun": "./dist/schemas/issues-unlabeled-event.js",
+      "import": "./dist/schemas/issues-unlabeled-event.js",
+      "default": "./dist/schemas/issues-unlabeled-event.js"
+    },
+    "./issues-unlocked-event": {
+      "types": "./dist/schemas/issues-unlocked-event.d.ts",
+      "bun": "./dist/schemas/issues-unlocked-event.js",
+      "import": "./dist/schemas/issues-unlocked-event.js",
+      "default": "./dist/schemas/issues-unlocked-event.js"
+    },
+    "./issues-unpinned-event": {
+      "types": "./dist/schemas/issues-unpinned-event.d.ts",
+      "bun": "./dist/schemas/issues-unpinned-event.js",
+      "import": "./dist/schemas/issues-unpinned-event.js",
+      "default": "./dist/schemas/issues-unpinned-event.js"
+    },
+    "./label-created-event": {
+      "types": "./dist/schemas/label-created-event.d.ts",
+      "bun": "./dist/schemas/label-created-event.js",
+      "import": "./dist/schemas/label-created-event.js",
+      "default": "./dist/schemas/label-created-event.js"
+    },
+    "./label-deleted-event": {
+      "types": "./dist/schemas/label-deleted-event.d.ts",
+      "bun": "./dist/schemas/label-deleted-event.js",
+      "import": "./dist/schemas/label-deleted-event.js",
+      "default": "./dist/schemas/label-deleted-event.js"
+    },
+    "./label-edited-event": {
+      "types": "./dist/schemas/label-edited-event.d.ts",
+      "bun": "./dist/schemas/label-edited-event.js",
+      "import": "./dist/schemas/label-edited-event.js",
+      "default": "./dist/schemas/label-edited-event.js"
+    },
+    "./marketplace-purchase-cancelled-event": {
+      "types": "./dist/schemas/marketplace-purchase-cancelled-event.d.ts",
+      "bun": "./dist/schemas/marketplace-purchase-cancelled-event.js",
+      "import": "./dist/schemas/marketplace-purchase-cancelled-event.js",
+      "default": "./dist/schemas/marketplace-purchase-cancelled-event.js"
+    },
+    "./marketplace-purchase-changed-event": {
+      "types": "./dist/schemas/marketplace-purchase-changed-event.d.ts",
+      "bun": "./dist/schemas/marketplace-purchase-changed-event.js",
+      "import": "./dist/schemas/marketplace-purchase-changed-event.js",
+      "default": "./dist/schemas/marketplace-purchase-changed-event.js"
+    },
+    "./marketplace-purchase-pending-change-cancelled-event": {
+      "types": "./dist/schemas/marketplace-purchase-pending-change-cancelled-event.d.ts",
+      "bun": "./dist/schemas/marketplace-purchase-pending-change-cancelled-event.js",
+      "import": "./dist/schemas/marketplace-purchase-pending-change-cancelled-event.js",
+      "default": "./dist/schemas/marketplace-purchase-pending-change-cancelled-event.js"
+    },
+    "./marketplace-purchase-pending-change-event": {
+      "types": "./dist/schemas/marketplace-purchase-pending-change-event.d.ts",
+      "bun": "./dist/schemas/marketplace-purchase-pending-change-event.js",
+      "import": "./dist/schemas/marketplace-purchase-pending-change-event.js",
+      "default": "./dist/schemas/marketplace-purchase-pending-change-event.js"
+    },
+    "./marketplace-purchase-purchased-event": {
+      "types": "./dist/schemas/marketplace-purchase-purchased-event.d.ts",
+      "bun": "./dist/schemas/marketplace-purchase-purchased-event.js",
+      "import": "./dist/schemas/marketplace-purchase-purchased-event.js",
+      "default": "./dist/schemas/marketplace-purchase-purchased-event.js"
+    },
+    "./member-added-event": {
+      "types": "./dist/schemas/member-added-event.d.ts",
+      "bun": "./dist/schemas/member-added-event.js",
+      "import": "./dist/schemas/member-added-event.js",
+      "default": "./dist/schemas/member-added-event.js"
+    },
+    "./member-edited-event": {
+      "types": "./dist/schemas/member-edited-event.d.ts",
+      "bun": "./dist/schemas/member-edited-event.js",
+      "import": "./dist/schemas/member-edited-event.js",
+      "default": "./dist/schemas/member-edited-event.js"
+    },
+    "./member-removed-event": {
+      "types": "./dist/schemas/member-removed-event.d.ts",
+      "bun": "./dist/schemas/member-removed-event.js",
+      "import": "./dist/schemas/member-removed-event.js",
+      "default": "./dist/schemas/member-removed-event.js"
+    },
+    "./membership-added-event": {
+      "types": "./dist/schemas/membership-added-event.d.ts",
+      "bun": "./dist/schemas/membership-added-event.js",
+      "import": "./dist/schemas/membership-added-event.js",
+      "default": "./dist/schemas/membership-added-event.js"
+    },
+    "./membership-removed-event": {
+      "types": "./dist/schemas/membership-removed-event.d.ts",
+      "bun": "./dist/schemas/membership-removed-event.js",
+      "import": "./dist/schemas/membership-removed-event.js",
+      "default": "./dist/schemas/membership-removed-event.js"
+    },
+    "./merge-group-checks-requested-event": {
+      "types": "./dist/schemas/merge-group-checks-requested-event.d.ts",
+      "bun": "./dist/schemas/merge-group-checks-requested-event.js",
+      "import": "./dist/schemas/merge-group-checks-requested-event.js",
+      "default": "./dist/schemas/merge-group-checks-requested-event.js"
+    },
+    "./merge-group-destroyed-event": {
+      "types": "./dist/schemas/merge-group-destroyed-event.d.ts",
+      "bun": "./dist/schemas/merge-group-destroyed-event.js",
+      "import": "./dist/schemas/merge-group-destroyed-event.js",
+      "default": "./dist/schemas/merge-group-destroyed-event.js"
+    },
+    "./meta-deleted-event": {
+      "types": "./dist/schemas/meta-deleted-event.d.ts",
+      "bun": "./dist/schemas/meta-deleted-event.js",
+      "import": "./dist/schemas/meta-deleted-event.js",
+      "default": "./dist/schemas/meta-deleted-event.js"
+    },
+    "./milestone-closed-event": {
+      "types": "./dist/schemas/milestone-closed-event.d.ts",
+      "bun": "./dist/schemas/milestone-closed-event.js",
+      "import": "./dist/schemas/milestone-closed-event.js",
+      "default": "./dist/schemas/milestone-closed-event.js"
+    },
+    "./milestone-created-event": {
+      "types": "./dist/schemas/milestone-created-event.d.ts",
+      "bun": "./dist/schemas/milestone-created-event.js",
+      "import": "./dist/schemas/milestone-created-event.js",
+      "default": "./dist/schemas/milestone-created-event.js"
+    },
+    "./milestone-deleted-event": {
+      "types": "./dist/schemas/milestone-deleted-event.d.ts",
+      "bun": "./dist/schemas/milestone-deleted-event.js",
+      "import": "./dist/schemas/milestone-deleted-event.js",
+      "default": "./dist/schemas/milestone-deleted-event.js"
+    },
+    "./milestone-edited-event": {
+      "types": "./dist/schemas/milestone-edited-event.d.ts",
+      "bun": "./dist/schemas/milestone-edited-event.js",
+      "import": "./dist/schemas/milestone-edited-event.js",
+      "default": "./dist/schemas/milestone-edited-event.js"
+    },
+    "./milestone-opened-event": {
+      "types": "./dist/schemas/milestone-opened-event.d.ts",
+      "bun": "./dist/schemas/milestone-opened-event.js",
+      "import": "./dist/schemas/milestone-opened-event.js",
+      "default": "./dist/schemas/milestone-opened-event.js"
+    },
+    "./org-block-blocked-event": {
+      "types": "./dist/schemas/org-block-blocked-event.d.ts",
+      "bun": "./dist/schemas/org-block-blocked-event.js",
+      "import": "./dist/schemas/org-block-blocked-event.js",
+      "default": "./dist/schemas/org-block-blocked-event.js"
+    },
+    "./org-block-unblocked-event": {
+      "types": "./dist/schemas/org-block-unblocked-event.d.ts",
+      "bun": "./dist/schemas/org-block-unblocked-event.js",
+      "import": "./dist/schemas/org-block-unblocked-event.js",
+      "default": "./dist/schemas/org-block-unblocked-event.js"
+    },
+    "./organization-deleted-event": {
+      "types": "./dist/schemas/organization-deleted-event.d.ts",
+      "bun": "./dist/schemas/organization-deleted-event.js",
+      "import": "./dist/schemas/organization-deleted-event.js",
+      "default": "./dist/schemas/organization-deleted-event.js"
+    },
+    "./organization-member-added-event": {
+      "types": "./dist/schemas/organization-member-added-event.d.ts",
+      "bun": "./dist/schemas/organization-member-added-event.js",
+      "import": "./dist/schemas/organization-member-added-event.js",
+      "default": "./dist/schemas/organization-member-added-event.js"
+    },
+    "./organization-member-invited-event": {
+      "types": "./dist/schemas/organization-member-invited-event.d.ts",
+      "bun": "./dist/schemas/organization-member-invited-event.js",
+      "import": "./dist/schemas/organization-member-invited-event.js",
+      "default": "./dist/schemas/organization-member-invited-event.js"
+    },
+    "./organization-member-removed-event": {
+      "types": "./dist/schemas/organization-member-removed-event.d.ts",
+      "bun": "./dist/schemas/organization-member-removed-event.js",
+      "import": "./dist/schemas/organization-member-removed-event.js",
+      "default": "./dist/schemas/organization-member-removed-event.js"
+    },
+    "./organization-renamed-event": {
+      "types": "./dist/schemas/organization-renamed-event.d.ts",
+      "bun": "./dist/schemas/organization-renamed-event.js",
+      "import": "./dist/schemas/organization-renamed-event.js",
+      "default": "./dist/schemas/organization-renamed-event.js"
+    },
+    "./package-published-event": {
+      "types": "./dist/schemas/package-published-event.d.ts",
+      "bun": "./dist/schemas/package-published-event.js",
+      "import": "./dist/schemas/package-published-event.js",
+      "default": "./dist/schemas/package-published-event.js"
+    },
+    "./package-updated-event": {
+      "types": "./dist/schemas/package-updated-event.d.ts",
+      "bun": "./dist/schemas/package-updated-event.js",
+      "import": "./dist/schemas/package-updated-event.js",
+      "default": "./dist/schemas/package-updated-event.js"
+    },
+    "./page-build-event": {
+      "types": "./dist/schemas/page-build-event.d.ts",
+      "bun": "./dist/schemas/page-build-event.js",
+      "import": "./dist/schemas/page-build-event.js",
+      "default": "./dist/schemas/page-build-event.js"
+    },
+    "./ping-event": {
+      "types": "./dist/schemas/ping-event.d.ts",
+      "bun": "./dist/schemas/ping-event.js",
+      "import": "./dist/schemas/ping-event.js",
+      "default": "./dist/schemas/ping-event.js"
+    },
+    "./project-card-converted-event": {
+      "types": "./dist/schemas/project-card-converted-event.d.ts",
+      "bun": "./dist/schemas/project-card-converted-event.js",
+      "import": "./dist/schemas/project-card-converted-event.js",
+      "default": "./dist/schemas/project-card-converted-event.js"
+    },
+    "./project-card-created-event": {
+      "types": "./dist/schemas/project-card-created-event.d.ts",
+      "bun": "./dist/schemas/project-card-created-event.js",
+      "import": "./dist/schemas/project-card-created-event.js",
+      "default": "./dist/schemas/project-card-created-event.js"
+    },
+    "./project-card-deleted-event": {
+      "types": "./dist/schemas/project-card-deleted-event.d.ts",
+      "bun": "./dist/schemas/project-card-deleted-event.js",
+      "import": "./dist/schemas/project-card-deleted-event.js",
+      "default": "./dist/schemas/project-card-deleted-event.js"
+    },
+    "./project-card-edited-event": {
+      "types": "./dist/schemas/project-card-edited-event.d.ts",
+      "bun": "./dist/schemas/project-card-edited-event.js",
+      "import": "./dist/schemas/project-card-edited-event.js",
+      "default": "./dist/schemas/project-card-edited-event.js"
+    },
+    "./project-card-moved-event": {
+      "types": "./dist/schemas/project-card-moved-event.d.ts",
+      "bun": "./dist/schemas/project-card-moved-event.js",
+      "import": "./dist/schemas/project-card-moved-event.js",
+      "default": "./dist/schemas/project-card-moved-event.js"
+    },
+    "./project-closed-event": {
+      "types": "./dist/schemas/project-closed-event.d.ts",
+      "bun": "./dist/schemas/project-closed-event.js",
+      "import": "./dist/schemas/project-closed-event.js",
+      "default": "./dist/schemas/project-closed-event.js"
+    },
+    "./project-column-created-event": {
+      "types": "./dist/schemas/project-column-created-event.d.ts",
+      "bun": "./dist/schemas/project-column-created-event.js",
+      "import": "./dist/schemas/project-column-created-event.js",
+      "default": "./dist/schemas/project-column-created-event.js"
+    },
+    "./project-column-deleted-event": {
+      "types": "./dist/schemas/project-column-deleted-event.d.ts",
+      "bun": "./dist/schemas/project-column-deleted-event.js",
+      "import": "./dist/schemas/project-column-deleted-event.js",
+      "default": "./dist/schemas/project-column-deleted-event.js"
+    },
+    "./project-column-edited-event": {
+      "types": "./dist/schemas/project-column-edited-event.d.ts",
+      "bun": "./dist/schemas/project-column-edited-event.js",
+      "import": "./dist/schemas/project-column-edited-event.js",
+      "default": "./dist/schemas/project-column-edited-event.js"
+    },
+    "./project-column-moved-event": {
+      "types": "./dist/schemas/project-column-moved-event.d.ts",
+      "bun": "./dist/schemas/project-column-moved-event.js",
+      "import": "./dist/schemas/project-column-moved-event.js",
+      "default": "./dist/schemas/project-column-moved-event.js"
+    },
+    "./project-created-event": {
+      "types": "./dist/schemas/project-created-event.d.ts",
+      "bun": "./dist/schemas/project-created-event.js",
+      "import": "./dist/schemas/project-created-event.js",
+      "default": "./dist/schemas/project-created-event.js"
+    },
+    "./project-deleted-event": {
+      "types": "./dist/schemas/project-deleted-event.d.ts",
+      "bun": "./dist/schemas/project-deleted-event.js",
+      "import": "./dist/schemas/project-deleted-event.js",
+      "default": "./dist/schemas/project-deleted-event.js"
+    },
+    "./project-edited-event": {
+      "types": "./dist/schemas/project-edited-event.d.ts",
+      "bun": "./dist/schemas/project-edited-event.js",
+      "import": "./dist/schemas/project-edited-event.js",
+      "default": "./dist/schemas/project-edited-event.js"
+    },
+    "./project-reopened-event": {
+      "types": "./dist/schemas/project-reopened-event.d.ts",
+      "bun": "./dist/schemas/project-reopened-event.js",
+      "import": "./dist/schemas/project-reopened-event.js",
+      "default": "./dist/schemas/project-reopened-event.js"
+    },
+    "./projects-v2-item-archived-event": {
+      "types": "./dist/schemas/projects-v2-item-archived-event.d.ts",
+      "bun": "./dist/schemas/projects-v2-item-archived-event.js",
+      "import": "./dist/schemas/projects-v2-item-archived-event.js",
+      "default": "./dist/schemas/projects-v2-item-archived-event.js"
+    },
+    "./projects-v2-item-converted-event": {
+      "types": "./dist/schemas/projects-v2-item-converted-event.d.ts",
+      "bun": "./dist/schemas/projects-v2-item-converted-event.js",
+      "import": "./dist/schemas/projects-v2-item-converted-event.js",
+      "default": "./dist/schemas/projects-v2-item-converted-event.js"
+    },
+    "./projects-v2-item-created-event": {
+      "types": "./dist/schemas/projects-v2-item-created-event.d.ts",
+      "bun": "./dist/schemas/projects-v2-item-created-event.js",
+      "import": "./dist/schemas/projects-v2-item-created-event.js",
+      "default": "./dist/schemas/projects-v2-item-created-event.js"
+    },
+    "./projects-v2-item-deleted-event": {
+      "types": "./dist/schemas/projects-v2-item-deleted-event.d.ts",
+      "bun": "./dist/schemas/projects-v2-item-deleted-event.js",
+      "import": "./dist/schemas/projects-v2-item-deleted-event.js",
+      "default": "./dist/schemas/projects-v2-item-deleted-event.js"
+    },
+    "./projects-v2-item-edited-event": {
+      "types": "./dist/schemas/projects-v2-item-edited-event.d.ts",
+      "bun": "./dist/schemas/projects-v2-item-edited-event.js",
+      "import": "./dist/schemas/projects-v2-item-edited-event.js",
+      "default": "./dist/schemas/projects-v2-item-edited-event.js"
+    },
+    "./projects-v2-item-reordered-event": {
+      "types": "./dist/schemas/projects-v2-item-reordered-event.d.ts",
+      "bun": "./dist/schemas/projects-v2-item-reordered-event.js",
+      "import": "./dist/schemas/projects-v2-item-reordered-event.js",
+      "default": "./dist/schemas/projects-v2-item-reordered-event.js"
+    },
+    "./projects-v2-item-restored-event": {
+      "types": "./dist/schemas/projects-v2-item-restored-event.d.ts",
+      "bun": "./dist/schemas/projects-v2-item-restored-event.js",
+      "import": "./dist/schemas/projects-v2-item-restored-event.js",
+      "default": "./dist/schemas/projects-v2-item-restored-event.js"
+    },
+    "./public-event": {
+      "types": "./dist/schemas/public-event.d.ts",
+      "bun": "./dist/schemas/public-event.js",
+      "import": "./dist/schemas/public-event.js",
+      "default": "./dist/schemas/public-event.js"
+    },
+    "./pull-request-assigned-event": {
+      "types": "./dist/schemas/pull-request-assigned-event.d.ts",
+      "bun": "./dist/schemas/pull-request-assigned-event.js",
+      "import": "./dist/schemas/pull-request-assigned-event.js",
+      "default": "./dist/schemas/pull-request-assigned-event.js"
+    },
+    "./pull-request-auto-merge-disabled-event": {
+      "types": "./dist/schemas/pull-request-auto-merge-disabled-event.d.ts",
+      "bun": "./dist/schemas/pull-request-auto-merge-disabled-event.js",
+      "import": "./dist/schemas/pull-request-auto-merge-disabled-event.js",
+      "default": "./dist/schemas/pull-request-auto-merge-disabled-event.js"
+    },
+    "./pull-request-auto-merge-enabled-event": {
+      "types": "./dist/schemas/pull-request-auto-merge-enabled-event.d.ts",
+      "bun": "./dist/schemas/pull-request-auto-merge-enabled-event.js",
+      "import": "./dist/schemas/pull-request-auto-merge-enabled-event.js",
+      "default": "./dist/schemas/pull-request-auto-merge-enabled-event.js"
+    },
+    "./pull-request-closed-event": {
+      "types": "./dist/schemas/pull-request-closed-event.d.ts",
+      "bun": "./dist/schemas/pull-request-closed-event.js",
+      "import": "./dist/schemas/pull-request-closed-event.js",
+      "default": "./dist/schemas/pull-request-closed-event.js"
+    },
+    "./pull-request-converted-to-draft-event": {
+      "types": "./dist/schemas/pull-request-converted-to-draft-event.d.ts",
+      "bun": "./dist/schemas/pull-request-converted-to-draft-event.js",
+      "import": "./dist/schemas/pull-request-converted-to-draft-event.js",
+      "default": "./dist/schemas/pull-request-converted-to-draft-event.js"
+    },
+    "./pull-request-demilestoned-event": {
+      "types": "./dist/schemas/pull-request-demilestoned-event.d.ts",
+      "bun": "./dist/schemas/pull-request-demilestoned-event.js",
+      "import": "./dist/schemas/pull-request-demilestoned-event.js",
+      "default": "./dist/schemas/pull-request-demilestoned-event.js"
+    },
+    "./pull-request-dequeued-event": {
+      "types": "./dist/schemas/pull-request-dequeued-event.d.ts",
+      "bun": "./dist/schemas/pull-request-dequeued-event.js",
+      "import": "./dist/schemas/pull-request-dequeued-event.js",
+      "default": "./dist/schemas/pull-request-dequeued-event.js"
+    },
+    "./pull-request-edited-event": {
+      "types": "./dist/schemas/pull-request-edited-event.d.ts",
+      "bun": "./dist/schemas/pull-request-edited-event.js",
+      "import": "./dist/schemas/pull-request-edited-event.js",
+      "default": "./dist/schemas/pull-request-edited-event.js"
+    },
+    "./pull-request-enqueued-event": {
+      "types": "./dist/schemas/pull-request-enqueued-event.d.ts",
+      "bun": "./dist/schemas/pull-request-enqueued-event.js",
+      "import": "./dist/schemas/pull-request-enqueued-event.js",
+      "default": "./dist/schemas/pull-request-enqueued-event.js"
+    },
+    "./pull-request-labeled-event": {
+      "types": "./dist/schemas/pull-request-labeled-event.d.ts",
+      "bun": "./dist/schemas/pull-request-labeled-event.js",
+      "import": "./dist/schemas/pull-request-labeled-event.js",
+      "default": "./dist/schemas/pull-request-labeled-event.js"
+    },
+    "./pull-request-locked-event": {
+      "types": "./dist/schemas/pull-request-locked-event.d.ts",
+      "bun": "./dist/schemas/pull-request-locked-event.js",
+      "import": "./dist/schemas/pull-request-locked-event.js",
+      "default": "./dist/schemas/pull-request-locked-event.js"
+    },
+    "./pull-request-milestoned-event": {
+      "types": "./dist/schemas/pull-request-milestoned-event.d.ts",
+      "bun": "./dist/schemas/pull-request-milestoned-event.js",
+      "import": "./dist/schemas/pull-request-milestoned-event.js",
+      "default": "./dist/schemas/pull-request-milestoned-event.js"
+    },
+    "./pull-request-opened-event": {
+      "types": "./dist/schemas/pull-request-opened-event.d.ts",
+      "bun": "./dist/schemas/pull-request-opened-event.js",
+      "import": "./dist/schemas/pull-request-opened-event.js",
+      "default": "./dist/schemas/pull-request-opened-event.js"
+    },
+    "./pull-request-ready-for-review-event": {
+      "types": "./dist/schemas/pull-request-ready-for-review-event.d.ts",
+      "bun": "./dist/schemas/pull-request-ready-for-review-event.js",
+      "import": "./dist/schemas/pull-request-ready-for-review-event.js",
+      "default": "./dist/schemas/pull-request-ready-for-review-event.js"
+    },
+    "./pull-request-reopened-event": {
+      "types": "./dist/schemas/pull-request-reopened-event.d.ts",
+      "bun": "./dist/schemas/pull-request-reopened-event.js",
+      "import": "./dist/schemas/pull-request-reopened-event.js",
+      "default": "./dist/schemas/pull-request-reopened-event.js"
+    },
+    "./pull-request-review-comment-created-event": {
+      "types": "./dist/schemas/pull-request-review-comment-created-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-comment-created-event.js",
+      "import": "./dist/schemas/pull-request-review-comment-created-event.js",
+      "default": "./dist/schemas/pull-request-review-comment-created-event.js"
+    },
+    "./pull-request-review-comment-deleted-event": {
+      "types": "./dist/schemas/pull-request-review-comment-deleted-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-comment-deleted-event.js",
+      "import": "./dist/schemas/pull-request-review-comment-deleted-event.js",
+      "default": "./dist/schemas/pull-request-review-comment-deleted-event.js"
+    },
+    "./pull-request-review-comment-edited-event": {
+      "types": "./dist/schemas/pull-request-review-comment-edited-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-comment-edited-event.js",
+      "import": "./dist/schemas/pull-request-review-comment-edited-event.js",
+      "default": "./dist/schemas/pull-request-review-comment-edited-event.js"
+    },
+    "./pull-request-review-dismissed-event": {
+      "types": "./dist/schemas/pull-request-review-dismissed-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-dismissed-event.js",
+      "import": "./dist/schemas/pull-request-review-dismissed-event.js",
+      "default": "./dist/schemas/pull-request-review-dismissed-event.js"
+    },
+    "./pull-request-review-edited-event": {
+      "types": "./dist/schemas/pull-request-review-edited-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-edited-event.js",
+      "import": "./dist/schemas/pull-request-review-edited-event.js",
+      "default": "./dist/schemas/pull-request-review-edited-event.js"
+    },
+    "./pull-request-review-submitted-event": {
+      "types": "./dist/schemas/pull-request-review-submitted-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-submitted-event.js",
+      "import": "./dist/schemas/pull-request-review-submitted-event.js",
+      "default": "./dist/schemas/pull-request-review-submitted-event.js"
+    },
+    "./pull-request-review-thread-resolved-event": {
+      "types": "./dist/schemas/pull-request-review-thread-resolved-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-thread-resolved-event.js",
+      "import": "./dist/schemas/pull-request-review-thread-resolved-event.js",
+      "default": "./dist/schemas/pull-request-review-thread-resolved-event.js"
+    },
+    "./pull-request-review-thread-unresolved-event": {
+      "types": "./dist/schemas/pull-request-review-thread-unresolved-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-thread-unresolved-event.js",
+      "import": "./dist/schemas/pull-request-review-thread-unresolved-event.js",
+      "default": "./dist/schemas/pull-request-review-thread-unresolved-event.js"
+    },
+    "./pull-request-synchronize-event": {
+      "types": "./dist/schemas/pull-request-synchronize-event.d.ts",
+      "bun": "./dist/schemas/pull-request-synchronize-event.js",
+      "import": "./dist/schemas/pull-request-synchronize-event.js",
+      "default": "./dist/schemas/pull-request-synchronize-event.js"
+    },
+    "./pull-request-unassigned-event": {
+      "types": "./dist/schemas/pull-request-unassigned-event.d.ts",
+      "bun": "./dist/schemas/pull-request-unassigned-event.js",
+      "import": "./dist/schemas/pull-request-unassigned-event.js",
+      "default": "./dist/schemas/pull-request-unassigned-event.js"
+    },
+    "./pull-request-unlabeled-event": {
+      "types": "./dist/schemas/pull-request-unlabeled-event.d.ts",
+      "bun": "./dist/schemas/pull-request-unlabeled-event.js",
+      "import": "./dist/schemas/pull-request-unlabeled-event.js",
+      "default": "./dist/schemas/pull-request-unlabeled-event.js"
+    },
+    "./pull-request-unlocked-event": {
+      "types": "./dist/schemas/pull-request-unlocked-event.d.ts",
+      "bun": "./dist/schemas/pull-request-unlocked-event.js",
+      "import": "./dist/schemas/pull-request-unlocked-event.js",
+      "default": "./dist/schemas/pull-request-unlocked-event.js"
+    },
+    "./push-event": {
+      "types": "./dist/schemas/push-event.d.ts",
+      "bun": "./dist/schemas/push-event.js",
+      "import": "./dist/schemas/push-event.js",
+      "default": "./dist/schemas/push-event.js"
+    },
+    "./registry-package-published-event": {
+      "types": "./dist/schemas/registry-package-published-event.d.ts",
+      "bun": "./dist/schemas/registry-package-published-event.js",
+      "import": "./dist/schemas/registry-package-published-event.js",
+      "default": "./dist/schemas/registry-package-published-event.js"
+    },
+    "./registry-package-updated-event": {
+      "types": "./dist/schemas/registry-package-updated-event.d.ts",
+      "bun": "./dist/schemas/registry-package-updated-event.js",
+      "import": "./dist/schemas/registry-package-updated-event.js",
+      "default": "./dist/schemas/registry-package-updated-event.js"
+    },
+    "./release-created-event": {
+      "types": "./dist/schemas/release-created-event.d.ts",
+      "bun": "./dist/schemas/release-created-event.js",
+      "import": "./dist/schemas/release-created-event.js",
+      "default": "./dist/schemas/release-created-event.js"
+    },
+    "./release-deleted-event": {
+      "types": "./dist/schemas/release-deleted-event.d.ts",
+      "bun": "./dist/schemas/release-deleted-event.js",
+      "import": "./dist/schemas/release-deleted-event.js",
+      "default": "./dist/schemas/release-deleted-event.js"
+    },
+    "./release-edited-event": {
+      "types": "./dist/schemas/release-edited-event.d.ts",
+      "bun": "./dist/schemas/release-edited-event.js",
+      "import": "./dist/schemas/release-edited-event.js",
+      "default": "./dist/schemas/release-edited-event.js"
+    },
+    "./release-prereleased-event": {
+      "types": "./dist/schemas/release-prereleased-event.d.ts",
+      "bun": "./dist/schemas/release-prereleased-event.js",
+      "import": "./dist/schemas/release-prereleased-event.js",
+      "default": "./dist/schemas/release-prereleased-event.js"
+    },
+    "./release-published-event": {
+      "types": "./dist/schemas/release-published-event.d.ts",
+      "bun": "./dist/schemas/release-published-event.js",
+      "import": "./dist/schemas/release-published-event.js",
+      "default": "./dist/schemas/release-published-event.js"
+    },
+    "./release-released-event": {
+      "types": "./dist/schemas/release-released-event.d.ts",
+      "bun": "./dist/schemas/release-released-event.js",
+      "import": "./dist/schemas/release-released-event.js",
+      "default": "./dist/schemas/release-released-event.js"
+    },
+    "./release-unpublished-event": {
+      "types": "./dist/schemas/release-unpublished-event.d.ts",
+      "bun": "./dist/schemas/release-unpublished-event.js",
+      "import": "./dist/schemas/release-unpublished-event.js",
+      "default": "./dist/schemas/release-unpublished-event.js"
+    },
+    "./repository-archived-event": {
+      "types": "./dist/schemas/repository-archived-event.d.ts",
+      "bun": "./dist/schemas/repository-archived-event.js",
+      "import": "./dist/schemas/repository-archived-event.js",
+      "default": "./dist/schemas/repository-archived-event.js"
+    },
+    "./repository-created-event": {
+      "types": "./dist/schemas/repository-created-event.d.ts",
+      "bun": "./dist/schemas/repository-created-event.js",
+      "import": "./dist/schemas/repository-created-event.js",
+      "default": "./dist/schemas/repository-created-event.js"
+    },
+    "./repository-deleted-event": {
+      "types": "./dist/schemas/repository-deleted-event.d.ts",
+      "bun": "./dist/schemas/repository-deleted-event.js",
+      "import": "./dist/schemas/repository-deleted-event.js",
+      "default": "./dist/schemas/repository-deleted-event.js"
+    },
+    "./repository-dispatch-event": {
+      "types": "./dist/schemas/repository-dispatch-event.d.ts",
+      "bun": "./dist/schemas/repository-dispatch-event.js",
+      "import": "./dist/schemas/repository-dispatch-event.js",
+      "default": "./dist/schemas/repository-dispatch-event.js"
+    },
+    "./repository-edited-event": {
+      "types": "./dist/schemas/repository-edited-event.d.ts",
+      "bun": "./dist/schemas/repository-edited-event.js",
+      "import": "./dist/schemas/repository-edited-event.js",
+      "default": "./dist/schemas/repository-edited-event.js"
+    },
+    "./repository-import-event": {
+      "types": "./dist/schemas/repository-import-event.d.ts",
+      "bun": "./dist/schemas/repository-import-event.js",
+      "import": "./dist/schemas/repository-import-event.js",
+      "default": "./dist/schemas/repository-import-event.js"
+    },
+    "./repository-privatized-event": {
+      "types": "./dist/schemas/repository-privatized-event.d.ts",
+      "bun": "./dist/schemas/repository-privatized-event.js",
+      "import": "./dist/schemas/repository-privatized-event.js",
+      "default": "./dist/schemas/repository-privatized-event.js"
+    },
+    "./repository-publicized-event": {
+      "types": "./dist/schemas/repository-publicized-event.d.ts",
+      "bun": "./dist/schemas/repository-publicized-event.js",
+      "import": "./dist/schemas/repository-publicized-event.js",
+      "default": "./dist/schemas/repository-publicized-event.js"
+    },
+    "./repository-renamed-event": {
+      "types": "./dist/schemas/repository-renamed-event.d.ts",
+      "bun": "./dist/schemas/repository-renamed-event.js",
+      "import": "./dist/schemas/repository-renamed-event.js",
+      "default": "./dist/schemas/repository-renamed-event.js"
+    },
+    "./repository-transferred-event": {
+      "types": "./dist/schemas/repository-transferred-event.d.ts",
+      "bun": "./dist/schemas/repository-transferred-event.js",
+      "import": "./dist/schemas/repository-transferred-event.js",
+      "default": "./dist/schemas/repository-transferred-event.js"
+    },
+    "./repository-unarchived-event": {
+      "types": "./dist/schemas/repository-unarchived-event.d.ts",
+      "bun": "./dist/schemas/repository-unarchived-event.js",
+      "import": "./dist/schemas/repository-unarchived-event.js",
+      "default": "./dist/schemas/repository-unarchived-event.js"
+    },
+    "./repository-vulnerability-alert-create-event": {
+      "types": "./dist/schemas/repository-vulnerability-alert-create-event.d.ts",
+      "bun": "./dist/schemas/repository-vulnerability-alert-create-event.js",
+      "import": "./dist/schemas/repository-vulnerability-alert-create-event.js",
+      "default": "./dist/schemas/repository-vulnerability-alert-create-event.js"
+    },
+    "./repository-vulnerability-alert-dismiss-event": {
+      "types": "./dist/schemas/repository-vulnerability-alert-dismiss-event.d.ts",
+      "bun": "./dist/schemas/repository-vulnerability-alert-dismiss-event.js",
+      "import": "./dist/schemas/repository-vulnerability-alert-dismiss-event.js",
+      "default": "./dist/schemas/repository-vulnerability-alert-dismiss-event.js"
+    },
+    "./repository-vulnerability-alert-reopen-event": {
+      "types": "./dist/schemas/repository-vulnerability-alert-reopen-event.d.ts",
+      "bun": "./dist/schemas/repository-vulnerability-alert-reopen-event.js",
+      "import": "./dist/schemas/repository-vulnerability-alert-reopen-event.js",
+      "default": "./dist/schemas/repository-vulnerability-alert-reopen-event.js"
+    },
+    "./repository-vulnerability-alert-resolve-event": {
+      "types": "./dist/schemas/repository-vulnerability-alert-resolve-event.d.ts",
+      "bun": "./dist/schemas/repository-vulnerability-alert-resolve-event.js",
+      "import": "./dist/schemas/repository-vulnerability-alert-resolve-event.js",
+      "default": "./dist/schemas/repository-vulnerability-alert-resolve-event.js"
+    },
+    "./secret-scanning-alert-created-event": {
+      "types": "./dist/schemas/secret-scanning-alert-created-event.d.ts",
+      "bun": "./dist/schemas/secret-scanning-alert-created-event.js",
+      "import": "./dist/schemas/secret-scanning-alert-created-event.js",
+      "default": "./dist/schemas/secret-scanning-alert-created-event.js"
+    },
+    "./secret-scanning-alert-location-created-event": {
+      "types": "./dist/schemas/secret-scanning-alert-location-created-event.d.ts",
+      "bun": "./dist/schemas/secret-scanning-alert-location-created-event.js",
+      "import": "./dist/schemas/secret-scanning-alert-location-created-event.js",
+      "default": "./dist/schemas/secret-scanning-alert-location-created-event.js"
+    },
+    "./secret-scanning-alert-reopened-event": {
+      "types": "./dist/schemas/secret-scanning-alert-reopened-event.d.ts",
+      "bun": "./dist/schemas/secret-scanning-alert-reopened-event.js",
+      "import": "./dist/schemas/secret-scanning-alert-reopened-event.js",
+      "default": "./dist/schemas/secret-scanning-alert-reopened-event.js"
+    },
+    "./secret-scanning-alert-resolved-event": {
+      "types": "./dist/schemas/secret-scanning-alert-resolved-event.d.ts",
+      "bun": "./dist/schemas/secret-scanning-alert-resolved-event.js",
+      "import": "./dist/schemas/secret-scanning-alert-resolved-event.js",
+      "default": "./dist/schemas/secret-scanning-alert-resolved-event.js"
+    },
+    "./secret-scanning-alert-revoked-event": {
+      "types": "./dist/schemas/secret-scanning-alert-revoked-event.d.ts",
+      "bun": "./dist/schemas/secret-scanning-alert-revoked-event.js",
+      "import": "./dist/schemas/secret-scanning-alert-revoked-event.js",
+      "default": "./dist/schemas/secret-scanning-alert-revoked-event.js"
+    },
+    "./security-advisory-performed-event": {
+      "types": "./dist/schemas/security-advisory-performed-event.d.ts",
+      "bun": "./dist/schemas/security-advisory-performed-event.js",
+      "import": "./dist/schemas/security-advisory-performed-event.js",
+      "default": "./dist/schemas/security-advisory-performed-event.js"
+    },
+    "./security-advisory-published-event": {
+      "types": "./dist/schemas/security-advisory-published-event.d.ts",
+      "bun": "./dist/schemas/security-advisory-published-event.js",
+      "import": "./dist/schemas/security-advisory-published-event.js",
+      "default": "./dist/schemas/security-advisory-published-event.js"
+    },
+    "./security-advisory-updated-event": {
+      "types": "./dist/schemas/security-advisory-updated-event.d.ts",
+      "bun": "./dist/schemas/security-advisory-updated-event.js",
+      "import": "./dist/schemas/security-advisory-updated-event.js",
+      "default": "./dist/schemas/security-advisory-updated-event.js"
+    },
+    "./security-advisory-withdrawn-event": {
+      "types": "./dist/schemas/security-advisory-withdrawn-event.d.ts",
+      "bun": "./dist/schemas/security-advisory-withdrawn-event.js",
+      "import": "./dist/schemas/security-advisory-withdrawn-event.js",
+      "default": "./dist/schemas/security-advisory-withdrawn-event.js"
+    },
+    "./sponsorship-cancelled-event": {
+      "types": "./dist/schemas/sponsorship-cancelled-event.d.ts",
+      "bun": "./dist/schemas/sponsorship-cancelled-event.js",
+      "import": "./dist/schemas/sponsorship-cancelled-event.js",
+      "default": "./dist/schemas/sponsorship-cancelled-event.js"
+    },
+    "./sponsorship-created-event": {
+      "types": "./dist/schemas/sponsorship-created-event.d.ts",
+      "bun": "./dist/schemas/sponsorship-created-event.js",
+      "import": "./dist/schemas/sponsorship-created-event.js",
+      "default": "./dist/schemas/sponsorship-created-event.js"
+    },
+    "./sponsorship-edited-event": {
+      "types": "./dist/schemas/sponsorship-edited-event.d.ts",
+      "bun": "./dist/schemas/sponsorship-edited-event.js",
+      "import": "./dist/schemas/sponsorship-edited-event.js",
+      "default": "./dist/schemas/sponsorship-edited-event.js"
+    },
+    "./sponsorship-pending-cancellation-event": {
+      "types": "./dist/schemas/sponsorship-pending-cancellation-event.d.ts",
+      "bun": "./dist/schemas/sponsorship-pending-cancellation-event.js",
+      "import": "./dist/schemas/sponsorship-pending-cancellation-event.js",
+      "default": "./dist/schemas/sponsorship-pending-cancellation-event.js"
+    },
+    "./sponsorship-pending-tier-change-event": {
+      "types": "./dist/schemas/sponsorship-pending-tier-change-event.d.ts",
+      "bun": "./dist/schemas/sponsorship-pending-tier-change-event.js",
+      "import": "./dist/schemas/sponsorship-pending-tier-change-event.js",
+      "default": "./dist/schemas/sponsorship-pending-tier-change-event.js"
+    },
+    "./sponsorship-tier-changed-event": {
+      "types": "./dist/schemas/sponsorship-tier-changed-event.d.ts",
+      "bun": "./dist/schemas/sponsorship-tier-changed-event.js",
+      "import": "./dist/schemas/sponsorship-tier-changed-event.js",
+      "default": "./dist/schemas/sponsorship-tier-changed-event.js"
+    },
+    "./star-created-event": {
+      "types": "./dist/schemas/star-created-event.d.ts",
+      "bun": "./dist/schemas/star-created-event.js",
+      "import": "./dist/schemas/star-created-event.js",
+      "default": "./dist/schemas/star-created-event.js"
+    },
+    "./star-deleted-event": {
+      "types": "./dist/schemas/star-deleted-event.d.ts",
+      "bun": "./dist/schemas/star-deleted-event.js",
+      "import": "./dist/schemas/star-deleted-event.js",
+      "default": "./dist/schemas/star-deleted-event.js"
+    },
+    "./status-event": {
+      "types": "./dist/schemas/status-event.d.ts",
+      "bun": "./dist/schemas/status-event.js",
+      "import": "./dist/schemas/status-event.js",
+      "default": "./dist/schemas/status-event.js"
+    },
+    "./team-add-event": {
+      "types": "./dist/schemas/team-add-event.d.ts",
+      "bun": "./dist/schemas/team-add-event.js",
+      "import": "./dist/schemas/team-add-event.js",
+      "default": "./dist/schemas/team-add-event.js"
+    },
+    "./team-added-to-repository-event": {
+      "types": "./dist/schemas/team-added-to-repository-event.d.ts",
+      "bun": "./dist/schemas/team-added-to-repository-event.js",
+      "import": "./dist/schemas/team-added-to-repository-event.js",
+      "default": "./dist/schemas/team-added-to-repository-event.js"
+    },
+    "./team-created-event": {
+      "types": "./dist/schemas/team-created-event.d.ts",
+      "bun": "./dist/schemas/team-created-event.js",
+      "import": "./dist/schemas/team-created-event.js",
+      "default": "./dist/schemas/team-created-event.js"
+    },
+    "./team-deleted-event": {
+      "types": "./dist/schemas/team-deleted-event.d.ts",
+      "bun": "./dist/schemas/team-deleted-event.js",
+      "import": "./dist/schemas/team-deleted-event.js",
+      "default": "./dist/schemas/team-deleted-event.js"
+    },
+    "./team-edited-event": {
+      "types": "./dist/schemas/team-edited-event.d.ts",
+      "bun": "./dist/schemas/team-edited-event.js",
+      "import": "./dist/schemas/team-edited-event.js",
+      "default": "./dist/schemas/team-edited-event.js"
+    },
+    "./team-removed-from-repository-event": {
+      "types": "./dist/schemas/team-removed-from-repository-event.d.ts",
+      "bun": "./dist/schemas/team-removed-from-repository-event.js",
+      "import": "./dist/schemas/team-removed-from-repository-event.js",
+      "default": "./dist/schemas/team-removed-from-repository-event.js"
+    },
+    "./watch-started-event": {
+      "types": "./dist/schemas/watch-started-event.d.ts",
+      "bun": "./dist/schemas/watch-started-event.js",
+      "import": "./dist/schemas/watch-started-event.js",
+      "default": "./dist/schemas/watch-started-event.js"
+    },
+    "./workflow-dispatch-event": {
+      "types": "./dist/schemas/workflow-dispatch-event.d.ts",
+      "bun": "./dist/schemas/workflow-dispatch-event.js",
+      "import": "./dist/schemas/workflow-dispatch-event.js",
+      "default": "./dist/schemas/workflow-dispatch-event.js"
+    },
+    "./workflow-job-completed-event": {
+      "types": "./dist/schemas/workflow-job-completed-event.d.ts",
+      "bun": "./dist/schemas/workflow-job-completed-event.js",
+      "import": "./dist/schemas/workflow-job-completed-event.js",
+      "default": "./dist/schemas/workflow-job-completed-event.js"
+    },
+    "./workflow-job-in-progress-event": {
+      "types": "./dist/schemas/workflow-job-in-progress-event.d.ts",
+      "bun": "./dist/schemas/workflow-job-in-progress-event.js",
+      "import": "./dist/schemas/workflow-job-in-progress-event.js",
+      "default": "./dist/schemas/workflow-job-in-progress-event.js"
+    },
+    "./workflow-job-queued-event": {
+      "types": "./dist/schemas/workflow-job-queued-event.d.ts",
+      "bun": "./dist/schemas/workflow-job-queued-event.js",
+      "import": "./dist/schemas/workflow-job-queued-event.js",
+      "default": "./dist/schemas/workflow-job-queued-event.js"
+    },
+    "./workflow-job-waiting-event": {
+      "types": "./dist/schemas/workflow-job-waiting-event.d.ts",
+      "bun": "./dist/schemas/workflow-job-waiting-event.js",
+      "import": "./dist/schemas/workflow-job-waiting-event.js",
+      "default": "./dist/schemas/workflow-job-waiting-event.js"
+    },
+    "./workflow-run-completed-event": {
+      "types": "./dist/schemas/workflow-run-completed-event.d.ts",
+      "bun": "./dist/schemas/workflow-run-completed-event.js",
+      "import": "./dist/schemas/workflow-run-completed-event.js",
+      "default": "./dist/schemas/workflow-run-completed-event.js"
+    },
+    "./workflow-run-in-progress-event": {
+      "types": "./dist/schemas/workflow-run-in-progress-event.d.ts",
+      "bun": "./dist/schemas/workflow-run-in-progress-event.js",
+      "import": "./dist/schemas/workflow-run-in-progress-event.js",
+      "default": "./dist/schemas/workflow-run-in-progress-event.js"
+    },
+    "./workflow-run-requested-event": {
+      "types": "./dist/schemas/workflow-run-requested-event.d.ts",
+      "bun": "./dist/schemas/workflow-run-requested-event.js",
+      "import": "./dist/schemas/workflow-run-requested-event.js",
+      "default": "./dist/schemas/workflow-run-requested-event.js"
+    },
+    "./shared/alert-instance": {
+      "types": "./dist/schemas/shared/alert-instance.d.ts",
+      "bun": "./dist/schemas/shared/alert-instance.js",
+      "import": "./dist/schemas/shared/alert-instance.js",
+      "default": "./dist/schemas/shared/alert-instance.js"
+    },
+    "./shared/app": {
+      "types": "./dist/schemas/shared/app.d.ts",
+      "bun": "./dist/schemas/shared/app.js",
+      "import": "./dist/schemas/shared/app.js",
+      "default": "./dist/schemas/shared/app.js"
+    },
+    "./shared/branch-protection-rule": {
+      "types": "./dist/schemas/shared/branch-protection-rule.d.ts",
+      "bun": "./dist/schemas/shared/branch-protection-rule.js",
+      "import": "./dist/schemas/shared/branch-protection-rule.js",
+      "default": "./dist/schemas/shared/branch-protection-rule.js"
+    },
+    "./shared/check-run-deployment": {
+      "types": "./dist/schemas/shared/check-run-deployment.d.ts",
+      "bun": "./dist/schemas/shared/check-run-deployment.js",
+      "import": "./dist/schemas/shared/check-run-deployment.js",
+      "default": "./dist/schemas/shared/check-run-deployment.js"
+    },
+    "./shared/check-run-pull-request": {
+      "types": "./dist/schemas/shared/check-run-pull-request.d.ts",
+      "bun": "./dist/schemas/shared/check-run-pull-request.js",
+      "import": "./dist/schemas/shared/check-run-pull-request.js",
+      "default": "./dist/schemas/shared/check-run-pull-request.js"
+    },
+    "./shared/commit": {
+      "types": "./dist/schemas/shared/commit.d.ts",
+      "bun": "./dist/schemas/shared/commit.js",
+      "import": "./dist/schemas/shared/commit.js",
+      "default": "./dist/schemas/shared/commit.js"
+    },
+    "./shared/committer": {
+      "types": "./dist/schemas/shared/committer.d.ts",
+      "bun": "./dist/schemas/shared/committer.js",
+      "import": "./dist/schemas/shared/committer.js",
+      "default": "./dist/schemas/shared/committer.js"
+    },
+    "./shared/custom-property-value": {
+      "types": "./dist/schemas/shared/custom-property-value.d.ts",
+      "bun": "./dist/schemas/shared/custom-property-value.js",
+      "import": "./dist/schemas/shared/custom-property-value.js",
+      "default": "./dist/schemas/shared/custom-property-value.js"
+    },
+    "./shared/dependabot-alert": {
+      "types": "./dist/schemas/shared/dependabot-alert.d.ts",
+      "bun": "./dist/schemas/shared/dependabot-alert.js",
+      "import": "./dist/schemas/shared/dependabot-alert.js",
+      "default": "./dist/schemas/shared/dependabot-alert.js"
+    },
+    "./shared/dependabot-alert-package": {
+      "types": "./dist/schemas/shared/dependabot-alert-package.d.ts",
+      "bun": "./dist/schemas/shared/dependabot-alert-package.js",
+      "import": "./dist/schemas/shared/dependabot-alert-package.js",
+      "default": "./dist/schemas/shared/dependabot-alert-package.js"
+    },
+    "./shared/deployment": {
+      "types": "./dist/schemas/shared/deployment.d.ts",
+      "bun": "./dist/schemas/shared/deployment.js",
+      "import": "./dist/schemas/shared/deployment.js",
+      "default": "./dist/schemas/shared/deployment.js"
+    },
+    "./shared/deployment-workflow-run": {
+      "types": "./dist/schemas/shared/deployment-workflow-run.d.ts",
+      "bun": "./dist/schemas/shared/deployment-workflow-run.js",
+      "import": "./dist/schemas/shared/deployment-workflow-run.js",
+      "default": "./dist/schemas/shared/deployment-workflow-run.js"
+    },
+    "./shared/discussion": {
+      "types": "./dist/schemas/shared/discussion.d.ts",
+      "bun": "./dist/schemas/shared/discussion.js",
+      "import": "./dist/schemas/shared/discussion.js",
+      "default": "./dist/schemas/shared/discussion.js"
+    },
+    "./shared/discussion-category": {
+      "types": "./dist/schemas/shared/discussion-category.d.ts",
+      "bun": "./dist/schemas/shared/discussion-category.js",
+      "import": "./dist/schemas/shared/discussion-category.js",
+      "default": "./dist/schemas/shared/discussion-category.js"
+    },
+    "./shared/git-hub-org": {
+      "types": "./dist/schemas/shared/git-hub-org.d.ts",
+      "bun": "./dist/schemas/shared/git-hub-org.js",
+      "import": "./dist/schemas/shared/git-hub-org.js",
+      "default": "./dist/schemas/shared/git-hub-org.js"
+    },
+    "./shared/installation": {
+      "types": "./dist/schemas/shared/installation.d.ts",
+      "bun": "./dist/schemas/shared/installation.js",
+      "import": "./dist/schemas/shared/installation.js",
+      "default": "./dist/schemas/shared/installation.js"
+    },
+    "./shared/installation-lite": {
+      "types": "./dist/schemas/shared/installation-lite.d.ts",
+      "bun": "./dist/schemas/shared/installation-lite.js",
+      "import": "./dist/schemas/shared/installation-lite.js",
+      "default": "./dist/schemas/shared/installation-lite.js"
+    },
+    "./shared/issue": {
+      "types": "./dist/schemas/shared/issue.d.ts",
+      "bun": "./dist/schemas/shared/issue.js",
+      "import": "./dist/schemas/shared/issue.js",
+      "default": "./dist/schemas/shared/issue.js"
+    },
+    "./shared/issue-comment": {
+      "types": "./dist/schemas/shared/issue-comment.d.ts",
+      "bun": "./dist/schemas/shared/issue-comment.js",
+      "import": "./dist/schemas/shared/issue-comment.js",
+      "default": "./dist/schemas/shared/issue-comment.js"
+    },
+    "./shared/label": {
+      "types": "./dist/schemas/shared/label.d.ts",
+      "bun": "./dist/schemas/shared/label.js",
+      "import": "./dist/schemas/shared/label.js",
+      "default": "./dist/schemas/shared/label.js"
+    },
+    "./shared/license": {
+      "types": "./dist/schemas/shared/license.d.ts",
+      "bun": "./dist/schemas/shared/license.js",
+      "import": "./dist/schemas/shared/license.js",
+      "default": "./dist/schemas/shared/license.js"
+    },
+    "./shared/link": {
+      "types": "./dist/schemas/shared/link.d.ts",
+      "bun": "./dist/schemas/shared/link.js",
+      "import": "./dist/schemas/shared/link.js",
+      "default": "./dist/schemas/shared/link.js"
+    },
+    "./shared/marketplace-purchase": {
+      "types": "./dist/schemas/shared/marketplace-purchase.d.ts",
+      "bun": "./dist/schemas/shared/marketplace-purchase.js",
+      "import": "./dist/schemas/shared/marketplace-purchase.js",
+      "default": "./dist/schemas/shared/marketplace-purchase.js"
+    },
+    "./shared/membership": {
+      "types": "./dist/schemas/shared/membership.d.ts",
+      "bun": "./dist/schemas/shared/membership.js",
+      "import": "./dist/schemas/shared/membership.js",
+      "default": "./dist/schemas/shared/membership.js"
+    },
+    "./shared/milestone": {
+      "types": "./dist/schemas/shared/milestone.d.ts",
+      "bun": "./dist/schemas/shared/milestone.js",
+      "import": "./dist/schemas/shared/milestone.js",
+      "default": "./dist/schemas/shared/milestone.js"
+    },
+    "./shared/organization": {
+      "types": "./dist/schemas/shared/organization.d.ts",
+      "bun": "./dist/schemas/shared/organization.js",
+      "import": "./dist/schemas/shared/organization.js",
+      "default": "./dist/schemas/shared/organization.js"
+    },
+    "./shared/organization-custom-property": {
+      "types": "./dist/schemas/shared/organization-custom-property.d.ts",
+      "bun": "./dist/schemas/shared/organization-custom-property.js",
+      "import": "./dist/schemas/shared/organization-custom-property.js",
+      "default": "./dist/schemas/shared/organization-custom-property.js"
+    },
+    "./shared/package-npm-metadata": {
+      "types": "./dist/schemas/shared/package-npm-metadata.d.ts",
+      "bun": "./dist/schemas/shared/package-npm-metadata.js",
+      "import": "./dist/schemas/shared/package-npm-metadata.js",
+      "default": "./dist/schemas/shared/package-npm-metadata.js"
+    },
+    "./shared/package-nuget-metadata": {
+      "types": "./dist/schemas/shared/package-nuget-metadata.d.ts",
+      "bun": "./dist/schemas/shared/package-nuget-metadata.js",
+      "import": "./dist/schemas/shared/package-nuget-metadata.js",
+      "default": "./dist/schemas/shared/package-nuget-metadata.js"
+    },
+    "./shared/project": {
+      "types": "./dist/schemas/shared/project.d.ts",
+      "bun": "./dist/schemas/shared/project.js",
+      "import": "./dist/schemas/shared/project.js",
+      "default": "./dist/schemas/shared/project.js"
+    },
+    "./shared/project-card": {
+      "types": "./dist/schemas/shared/project-card.d.ts",
+      "bun": "./dist/schemas/shared/project-card.js",
+      "import": "./dist/schemas/shared/project-card.js",
+      "default": "./dist/schemas/shared/project-card.js"
+    },
+    "./shared/project-column": {
+      "types": "./dist/schemas/shared/project-column.d.ts",
+      "bun": "./dist/schemas/shared/project-column.js",
+      "import": "./dist/schemas/shared/project-column.js",
+      "default": "./dist/schemas/shared/project-column.js"
+    },
+    "./shared/projects-v2-item": {
+      "types": "./dist/schemas/shared/projects-v2-item.d.ts",
+      "bun": "./dist/schemas/shared/projects-v2-item.js",
+      "import": "./dist/schemas/shared/projects-v2-item.js",
+      "default": "./dist/schemas/shared/projects-v2-item.js"
+    },
+    "./shared/pull-request": {
+      "types": "./dist/schemas/shared/pull-request.d.ts",
+      "bun": "./dist/schemas/shared/pull-request.js",
+      "import": "./dist/schemas/shared/pull-request.js",
+      "default": "./dist/schemas/shared/pull-request.js"
+    },
+    "./shared/pull-request-auto-merge": {
+      "types": "./dist/schemas/shared/pull-request-auto-merge.d.ts",
+      "bun": "./dist/schemas/shared/pull-request-auto-merge.js",
+      "import": "./dist/schemas/shared/pull-request-auto-merge.js",
+      "default": "./dist/schemas/shared/pull-request-auto-merge.js"
+    },
+    "./shared/pull-request-review": {
+      "types": "./dist/schemas/shared/pull-request-review.d.ts",
+      "bun": "./dist/schemas/shared/pull-request-review.js",
+      "import": "./dist/schemas/shared/pull-request-review.js",
+      "default": "./dist/schemas/shared/pull-request-review.js"
+    },
+    "./shared/pull-request-review-comment": {
+      "types": "./dist/schemas/shared/pull-request-review-comment.d.ts",
+      "bun": "./dist/schemas/shared/pull-request-review-comment.js",
+      "import": "./dist/schemas/shared/pull-request-review-comment.js",
+      "default": "./dist/schemas/shared/pull-request-review-comment.js"
+    },
+    "./shared/reactions": {
+      "types": "./dist/schemas/shared/reactions.d.ts",
+      "bun": "./dist/schemas/shared/reactions.js",
+      "import": "./dist/schemas/shared/reactions.js",
+      "default": "./dist/schemas/shared/reactions.js"
+    },
+    "./shared/referenced-workflow": {
+      "types": "./dist/schemas/shared/referenced-workflow.d.ts",
+      "bun": "./dist/schemas/shared/referenced-workflow.js",
+      "import": "./dist/schemas/shared/referenced-workflow.js",
+      "default": "./dist/schemas/shared/referenced-workflow.js"
+    },
+    "./shared/release": {
+      "types": "./dist/schemas/shared/release.d.ts",
+      "bun": "./dist/schemas/shared/release.js",
+      "import": "./dist/schemas/shared/release.js",
+      "default": "./dist/schemas/shared/release.js"
+    },
+    "./shared/release-asset": {
+      "types": "./dist/schemas/shared/release-asset.d.ts",
+      "bun": "./dist/schemas/shared/release-asset.js",
+      "import": "./dist/schemas/shared/release-asset.js",
+      "default": "./dist/schemas/shared/release-asset.js"
+    },
+    "./shared/repo-ref": {
+      "types": "./dist/schemas/shared/repo-ref.d.ts",
+      "bun": "./dist/schemas/shared/repo-ref.js",
+      "import": "./dist/schemas/shared/repo-ref.js",
+      "default": "./dist/schemas/shared/repo-ref.js"
+    },
+    "./shared/repository": {
+      "types": "./dist/schemas/shared/repository.d.ts",
+      "bun": "./dist/schemas/shared/repository.js",
+      "import": "./dist/schemas/shared/repository.js",
+      "default": "./dist/schemas/shared/repository.js"
+    },
+    "./shared/repository-lite": {
+      "types": "./dist/schemas/shared/repository-lite.d.ts",
+      "bun": "./dist/schemas/shared/repository-lite.js",
+      "import": "./dist/schemas/shared/repository-lite.js",
+      "default": "./dist/schemas/shared/repository-lite.js"
+    },
+    "./shared/repository-vulnerability-alert-alert": {
+      "types": "./dist/schemas/shared/repository-vulnerability-alert-alert.d.ts",
+      "bun": "./dist/schemas/shared/repository-vulnerability-alert-alert.js",
+      "import": "./dist/schemas/shared/repository-vulnerability-alert-alert.js",
+      "default": "./dist/schemas/shared/repository-vulnerability-alert-alert.js"
+    },
+    "./shared/secret-scanning-alert": {
+      "types": "./dist/schemas/shared/secret-scanning-alert.d.ts",
+      "bun": "./dist/schemas/shared/secret-scanning-alert.js",
+      "import": "./dist/schemas/shared/secret-scanning-alert.js",
+      "default": "./dist/schemas/shared/secret-scanning-alert.js"
+    },
+    "./shared/secret-scanning-location-commit": {
+      "types": "./dist/schemas/shared/secret-scanning-location-commit.d.ts",
+      "bun": "./dist/schemas/shared/secret-scanning-location-commit.js",
+      "import": "./dist/schemas/shared/secret-scanning-location-commit.js",
+      "default": "./dist/schemas/shared/secret-scanning-location-commit.js"
+    },
+    "./shared/secret-scanning-location-issue-body": {
+      "types": "./dist/schemas/shared/secret-scanning-location-issue-body.d.ts",
+      "bun": "./dist/schemas/shared/secret-scanning-location-issue-body.js",
+      "import": "./dist/schemas/shared/secret-scanning-location-issue-body.js",
+      "default": "./dist/schemas/shared/secret-scanning-location-issue-body.js"
+    },
+    "./shared/secret-scanning-location-issue-comment": {
+      "types": "./dist/schemas/shared/secret-scanning-location-issue-comment.d.ts",
+      "bun": "./dist/schemas/shared/secret-scanning-location-issue-comment.js",
+      "import": "./dist/schemas/shared/secret-scanning-location-issue-comment.js",
+      "default": "./dist/schemas/shared/secret-scanning-location-issue-comment.js"
+    },
+    "./shared/secret-scanning-location-issue-title": {
+      "types": "./dist/schemas/shared/secret-scanning-location-issue-title.d.ts",
+      "bun": "./dist/schemas/shared/secret-scanning-location-issue-title.js",
+      "import": "./dist/schemas/shared/secret-scanning-location-issue-title.js",
+      "default": "./dist/schemas/shared/secret-scanning-location-issue-title.js"
+    },
+    "./shared/security-advisory-cvss": {
+      "types": "./dist/schemas/shared/security-advisory-cvss.d.ts",
+      "bun": "./dist/schemas/shared/security-advisory-cvss.js",
+      "import": "./dist/schemas/shared/security-advisory-cvss.js",
+      "default": "./dist/schemas/shared/security-advisory-cvss.js"
+    },
+    "./shared/security-advisory-cwes": {
+      "types": "./dist/schemas/shared/security-advisory-cwes.d.ts",
+      "bun": "./dist/schemas/shared/security-advisory-cwes.js",
+      "import": "./dist/schemas/shared/security-advisory-cwes.js",
+      "default": "./dist/schemas/shared/security-advisory-cwes.js"
+    },
+    "./shared/simple-commit": {
+      "types": "./dist/schemas/shared/simple-commit.d.ts",
+      "bun": "./dist/schemas/shared/simple-commit.js",
+      "import": "./dist/schemas/shared/simple-commit.js",
+      "default": "./dist/schemas/shared/simple-commit.js"
+    },
+    "./shared/simple-pull-request": {
+      "types": "./dist/schemas/shared/simple-pull-request.d.ts",
+      "bun": "./dist/schemas/shared/simple-pull-request.js",
+      "import": "./dist/schemas/shared/simple-pull-request.js",
+      "default": "./dist/schemas/shared/simple-pull-request.js"
+    },
+    "./shared/sponsorship-tier": {
+      "types": "./dist/schemas/shared/sponsorship-tier.d.ts",
+      "bun": "./dist/schemas/shared/sponsorship-tier.js",
+      "import": "./dist/schemas/shared/sponsorship-tier.js",
+      "default": "./dist/schemas/shared/sponsorship-tier.js"
+    },
+    "./shared/team": {
+      "types": "./dist/schemas/shared/team.d.ts",
+      "bun": "./dist/schemas/shared/team.js",
+      "import": "./dist/schemas/shared/team.js",
+      "default": "./dist/schemas/shared/team.js"
+    },
+    "./shared/user": {
+      "types": "./dist/schemas/shared/user.d.ts",
+      "bun": "./dist/schemas/shared/user.js",
+      "import": "./dist/schemas/shared/user.js",
+      "default": "./dist/schemas/shared/user.js"
+    },
+    "./shared/workflow": {
+      "types": "./dist/schemas/shared/workflow.d.ts",
+      "bun": "./dist/schemas/shared/workflow.js",
+      "import": "./dist/schemas/shared/workflow.js",
+      "default": "./dist/schemas/shared/workflow.js"
+    },
+    "./shared/workflow-job": {
+      "types": "./dist/schemas/shared/workflow-job.d.ts",
+      "bun": "./dist/schemas/shared/workflow-job.js",
+      "import": "./dist/schemas/shared/workflow-job.js",
+      "default": "./dist/schemas/shared/workflow-job.js"
+    },
+    "./shared/workflow-run": {
+      "types": "./dist/schemas/shared/workflow-run.d.ts",
+      "bun": "./dist/schemas/shared/workflow-run.js",
+      "import": "./dist/schemas/shared/workflow-run.js",
+      "default": "./dist/schemas/shared/workflow-run.js"
+    },
+    "./shared/workflow-step-completed": {
+      "types": "./dist/schemas/shared/workflow-step-completed.d.ts",
+      "bun": "./dist/schemas/shared/workflow-step-completed.js",
+      "import": "./dist/schemas/shared/workflow-step-completed.js",
+      "default": "./dist/schemas/shared/workflow-step-completed.js"
+    },
+    "./shared/workflow-step-in-progress": {
+      "types": "./dist/schemas/shared/workflow-step-in-progress.d.ts",
+      "bun": "./dist/schemas/shared/workflow-step-in-progress.js",
+      "import": "./dist/schemas/shared/workflow-step-in-progress.js",
+      "default": "./dist/schemas/shared/workflow-step-in-progress.js"
+    },
+    "./shared/workflow-step-queued": {
+      "types": "./dist/schemas/shared/workflow-step-queued.d.ts",
+      "bun": "./dist/schemas/shared/workflow-step-queued.js",
+      "import": "./dist/schemas/shared/workflow-step-queued.js",
+      "default": "./dist/schemas/shared/workflow-step-queued.js"
+    }
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "bun build --target=bun --outdir=dist --minify --sourcemap=external ./src/index.ts",
+    "build": "bun run scripts/build.ts",
     "dev": "bun --watch run src/index.ts",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "generate:event-types": "bun run scripts/generate-webhook-event-types.ts",
+    "generate:schemas": "bun run scripts/generate-webhook-schemas.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
@@ -19,6 +1741,7 @@
     "test": "bun test",
     "test:coverage": "bun test --coverage",
     "typecheck": "tsc --noEmit",
+    "update:exports": "bun run scripts/update-exports.ts",
     "validate": "bun run lint && bun run typecheck && bun run test"
   },
   "lint-staged": {
@@ -45,6 +1768,8 @@
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
     "@eslint/markdown": "^7.5.1",
+    "@octokit/webhooks": "^14.2.0",
+    "@octokit/webhooks-types": "^7.6.1",
     "@types/bun": "^1.3.4",
     "@typescript-eslint/eslint-plugin": "^8.50.0",
     "@typescript-eslint/parser": "^8.50.0",
@@ -65,6 +1790,7 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "sort-package-json": "^3.6.0",
+    "ts-morph": "^27.0.2",
     "typescript-eslint": "^8.50.0"
   },
   "engines": {

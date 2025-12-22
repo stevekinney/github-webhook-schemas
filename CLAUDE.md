@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Golden Rule**: When generating code, the generated code _must_ pass format and lint checks.
+
 ## Essential Commands
 
 ### Development
