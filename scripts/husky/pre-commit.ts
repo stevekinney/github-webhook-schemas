@@ -23,11 +23,19 @@ let ok = true;
 const staged = await getStagedFiles();
 if (staged.includes('package.json')) {
   info('package.json is staged');
-  if (!staged.includes('bun.lock')) {
+  // Check if dependency fields changed (not just version/metadata)
+  const diff = await $`git diff --cached --no-color -- package.json`.text();
+  const hasDepsChange =
+    diff.includes('"dependencies"') ||
+    diff.includes('"devDependencies"') ||
+    diff.includes('"peerDependencies"') ||
+    diff.includes('"optionalDependencies"');
+
+  if (hasDepsChange && !staged.includes('bun.lock')) {
     warning('bun.lock is not staged');
     info('Run bun install and stage bun.lock');
     ok = false;
-  } else {
+  } else if (staged.includes('bun.lock')) {
     info('Dependencies changed, installing…');
     try {
       await $`bun install`;
