@@ -1,114 +1,151 @@
-# Project Name
+# github-webhook-schemas
 
-## Prerequisites
-
-- [Bun](https://bun.sh) installed on your machine.
+Zod schemas for validating GitHub webhook payloads with full TypeScript support.
 
 ## Installation
 
-Create a new project based on this template:
-
 ```bash
-# Basic installation
-bun create github.com/stevekinney/bun-template $PROJECT_DIRECTORY
+# npm
+npm install github-webhook-schemas zod
 
-# Skip installing dependencies (useful for CI or offline work)
-bun create github.com/stevekinney/bun-template $PROJECT_DIRECTORY --no-install
+# pnpm
+pnpm add github-webhook-schemas zod
+
+# bun
+bun add github-webhook-schemas zod
 ```
 
-The `--no-install` flag is helpful when:
+> **Note:** `zod` is a peer dependency and must be installed separately.
 
-- Working in offline environments
-- Using CI pipelines with cached dependencies
-- You plan to modify dependencies before installation
+## Usage
 
-## Core Tools
+### Import all schemas
 
-- Bun: runtime, bundler, test runner, and package manager
-- TypeScript: strict type checking
-- ESLint + Prettier: linting and formatting (flat config)
-- Husky + lint-staged: fast pre-commit checks
+```typescript
+import {
+  PushEventSchema,
+  PullRequestOpenedEventSchema,
+  IssuesOpenedEventSchema,
+} from 'github-webhook-schemas';
 
-## Development
+// Validate a webhook payload
+const result = PushEventSchema.safeParse(payload);
 
-Start the development server:
-
-```bash
-bun run dev
+if (result.success) {
+  console.log('Valid push event:', result.data);
+} else {
+  console.error('Invalid payload:', result.error);
+}
 ```
 
-### Git Hooks (Husky)
+### Import individual schemas (tree-shakeable)
 
-Husky is set up via the `prepare` script on install. Hooks are implemented as Bun TypeScript files in `scripts/husky/` and invoked by wrappers in `.husky/`.
+For smaller bundle sizes, import only the schemas you need:
 
-- `pre-commit`: runs lint-staged; ensures `bun.lock` is staged when `package.json` is.
-- `post-checkout`: on branch checkouts, installs deps when `package.json` + `bun.lock` changed; surfaces config changes.
-- `post-merge`: installs deps and cleans caches when config changed; prints merge stats and conflict checks.
-
-Use `--no-verify` to bypass hooks (not recommended).
-
-### Running Tests
-
-This template comes with Bun's built-in test runner. To run tests:
-
-```bash
-bun test
+```typescript
+import { PushEventSchema } from 'github-webhook-schemas/push-event';
+import { PullRequestOpenedEventSchema } from 'github-webhook-schemas/pull-request-opened-event';
 ```
 
-For watching mode:
+### Type guards
 
-```bash
-bun test --watch
+Each schema exports a type guard function:
+
+```typescript
+import { isPushEvent, type PushEvent } from 'github-webhook-schemas/push-event';
+
+function handleWebhook(payload: unknown) {
+  if (isPushEvent(payload)) {
+    // payload is now typed as PushEvent
+    console.log(`Push to ${payload.repository.full_name}`);
+  }
+}
 ```
 
-For test coverage:
+### Shared schemas
 
-```bash
-bun test --coverage
+Common types used across events are available as shared schemas:
+
+```typescript
+import { RepositorySchema } from 'github-webhook-schemas/shared/repository';
+import { UserSchema } from 'github-webhook-schemas/shared/user';
 ```
 
-### Continuous Integration
+## Available Schemas
 
-No CI workflows are included by default. Add your own under `.github/workflows/` as needed.
+This package includes Zod schemas for all GitHub webhook events:
 
-### Understanding `bun run` vs `bunx`
+- Branch protection events
+- Check run/suite events
+- Code scanning alerts
+- Commit comments
+- Deployments
+- Discussions
+- Forks
+- Issues and issue comments
+- Labels
+- Milestones
+- Organizations
+- Packages
+- Pull requests and reviews
+- Pushes
+- Releases
+- Repositories
+- Secret scanning alerts
+- Security advisories
+- Sponsorships
+- Stars
+- Teams
+- Workflows
+- And more...
 
-`bun run` and `bunx` are two different commands that often confuse beginners:
+## TypeScript Support
 
-- **bun run**: Executes scripts defined in your project's package.json (like `bun run dev` runs the "dev" script). Also runs local TypeScript/JavaScript files directly (like `bun run src/index.ts`).
+All schemas export their inferred types:
 
-- **bunx**: Executes binaries from npm packages without installing them globally (similar to `npx`). Use it for one-off commands or tools you don't need permanently installed (like `bunx prettier --write .` or `bunx shadcn@canary add button`).
+```typescript
+import { PushEventSchema, type PushEvent } from 'github-webhook-schemas/push-event';
 
-## Project Structure
+// Use the type directly
+function processPush(event: PushEvent) {
+  console.log(`${event.pusher.name} pushed to ${event.ref}`);
+}
 
-- `src/` - Source code for your application
-- `.husky/` - Git hook wrappers (shell) calling Bun scripts in `scripts/husky/`
-- `scripts/husky/` - Hook implementations (TypeScript + Bun)
+// Or infer from the schema
+type InferredPushEvent = z.infer<typeof PushEventSchema>;
+```
 
-## Customization
+## Webhook Handler Example
 
-### TypeScript Configuration
+```typescript
+import { PushEventSchema, isPushEvent } from 'github-webhook-schemas/push-event';
+import {
+  PullRequestOpenedEventSchema,
+  isPullRequestOpenedEvent,
+} from 'github-webhook-schemas/pull-request-opened-event';
 
-The template includes TypeScript configuration with path aliases:
+async function handleGitHubWebhook(request: Request) {
+  const event = request.headers.get('x-github-event');
+  const payload = await request.json();
 
-```json
-{
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"]
+  switch (event) {
+    case 'push': {
+      const result = PushEventSchema.safeParse(payload);
+      if (result.success) {
+        await handlePush(result.data);
+      }
+      break;
+    }
+    case 'pull_request': {
+      if (isPullRequestOpenedEvent(payload)) {
+        await handlePullRequestOpened(payload);
+      }
+      break;
     }
   }
 }
 ```
 
-## Template Setup (bun-create)
+## License
 
-When using `bun create` with this template, a postinstall sequence runs once to bootstrap the project:
-
-- Sets `package.json:name` from the folder name
-- Copies `.env.example` to `.env` (or appends missing keys)
-- Writes `OPEN_AI_API_KEY`, `ANTHROPIC_AI_API_KEY`, and `GEMINI_AI_API_KEY` from your shell into `.env` if present
-- Runs `bun run prepare` to install Husky
-- Cleans up setup scripts and removes the `bun-create` entry from `package.json`
-
-These steps self-delete after running; you can adjust them by editing files in `scripts/setup/` before the first install.
+MIT
