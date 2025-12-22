@@ -2,6 +2,19 @@
 
 Zod schemas for validating GitHub webhook payloads with full TypeScript support.
 
+## What this package provides
+
+- Runtime validation for GitHub webhook payloads using Zod
+- One schema per event or action (for example, `PushEventSchema`, `PullRequestOpenedEventSchema`)
+- Shared schemas for common objects (for example, `Repository`, `User`)
+- Type guards and exported TypeScript types for every schema
+- Tree-shakeable subpath exports
+
+This package does not:
+
+- verify webhook signatures
+- run an HTTP server or route requests
+
 ## Installation
 
 ```bash
@@ -15,20 +28,16 @@ pnpm add github-webhook-schemas zod
 bun add github-webhook-schemas zod
 ```
 
-> **Note:** `zod` is a peer dependency and must be installed separately.
+Notes:
 
-## Usage
+- `zod` is a peer dependency and must be installed separately.
+- This package is ESM only.
 
-### Import all schemas
+## Quick start
 
-```typescript
-import {
-  PushEventSchema,
-  PullRequestOpenedEventSchema,
-  IssuesOpenedEventSchema,
-} from 'github-webhook-schemas';
+```ts
+import { PushEventSchema } from 'github-webhook-schemas';
 
-// Validate a webhook payload
 const result = PushEventSchema.safeParse(payload);
 
 if (result.success) {
@@ -38,113 +47,154 @@ if (result.success) {
 }
 ```
 
-### Import individual schemas (tree-shakeable)
+## Importing schemas
 
-For smaller bundle sizes, import only the schemas you need:
+Import from the main entry point for convenience:
 
-```typescript
+```ts
+import {
+  IssuesOpenedEventSchema,
+  PullRequestOpenedEventSchema,
+  PushEventSchema,
+} from 'github-webhook-schemas';
+```
+
+Import from subpaths for smaller bundles:
+
+```ts
 import { PushEventSchema } from 'github-webhook-schemas/push-event';
 import { PullRequestOpenedEventSchema } from 'github-webhook-schemas/pull-request-opened-event';
 ```
 
-### Type guards
+Shared schemas live under `shared/`:
 
-Each schema exports a type guard function:
-
-```typescript
-import { isPushEvent, type PushEvent } from 'github-webhook-schemas/push-event';
-
-function handleWebhook(payload: unknown) {
-  if (isPushEvent(payload)) {
-    // payload is now typed as PushEvent
-    console.log(`Push to ${payload.repository.full_name}`);
-  }
-}
-```
-
-### Shared schemas
-
-Common types used across events are available as shared schemas:
-
-```typescript
+```ts
 import { RepositorySchema } from 'github-webhook-schemas/shared/repository';
 import { UserSchema } from 'github-webhook-schemas/shared/user';
 ```
 
-## Available Schemas
+## Event names and actions
 
-This package includes Zod schemas for all GitHub webhook events:
+GitHub sends event names in the `x-github-event` header and includes `action` on many
+payloads. This library exposes schemas for specific actions (for example, opened, closed).
 
-- Branch protection events
-- Check run/suite events
-- Code scanning alerts
-- Commit comments
-- Deployments
-- Discussions
-- Forks
-- Issues and issue comments
-- Labels
-- Milestones
-- Organizations
-- Packages
-- Pull requests and reviews
-- Pushes
-- Releases
-- Repositories
-- Secret scanning alerts
-- Security advisories
-- Sponsorships
-- Stars
-- Teams
-- Workflows
-- And more...
-
-## TypeScript Support
-
-All schemas export their inferred types:
-
-```typescript
-import { PushEventSchema, type PushEvent } from 'github-webhook-schemas/push-event';
-
-// Use the type directly
-function processPush(event: PushEvent) {
-  console.log(`${event.pusher.name} pushed to ${event.ref}`);
-}
-
-// Or infer from the schema
-type InferredPushEvent = z.infer<typeof PushEventSchema>;
-```
-
-## Webhook Handler Example
-
-```typescript
-import { PushEventSchema, isPushEvent } from 'github-webhook-schemas/push-event';
+```ts
 import {
+  PullRequestClosedEventSchema,
   PullRequestOpenedEventSchema,
-  isPullRequestOpenedEvent,
-} from 'github-webhook-schemas/pull-request-opened-event';
+} from 'github-webhook-schemas';
 
-async function handleGitHubWebhook(request: Request) {
-  const event = request.headers.get('x-github-event');
-  const payload = await request.json();
+function parsePullRequest(payload: unknown) {
+  const action = (payload as { action?: string }).action;
 
-  switch (event) {
-    case 'push': {
-      const result = PushEventSchema.safeParse(payload);
-      if (result.success) {
-        await handlePush(result.data);
-      }
-      break;
-    }
-    case 'pull_request': {
-      if (isPullRequestOpenedEvent(payload)) {
-        await handlePullRequestOpened(payload);
-      }
-      break;
-    }
+  switch (action) {
+    case 'opened':
+      return PullRequestOpenedEventSchema.parse(payload);
+    case 'closed':
+      return PullRequestClosedEventSchema.parse(payload);
+    default:
+      throw new Error(`Unsupported action: ${action ?? 'unknown'}`);
   }
 }
 ```
+
+You can also access the canonical event names list:
+
+```ts
+import { eventTypes } from 'github-webhook-schemas';
+
+console.log(eventTypes);
+```
+
+## Type guards and TypeScript types
+
+Every schema exports:
+
+- `XxxEventSchema` (the Zod schema)
+- `XxxEvent` (the TypeScript type)
+- `isXxxEvent` (a type guard)
+
+Example:
+
+```ts
+import { isPushEvent, type PushEvent } from 'github-webhook-schemas/push-event';
+
+function handleWebhook(payload: unknown) {
+  if (isPushEvent(payload)) {
+    const event: PushEvent = payload;
+    console.log(`Push to ${event.repository.full_name}`);
+  }
+}
+```
+
+You can also infer types directly from a schema:
+
+```ts
+import { z } from 'zod';
+import { PushEventSchema } from 'github-webhook-schemas/push-event';
+
+type PushEvent = z.infer<typeof PushEventSchema>;
+```
+
+## Working with Zod
+
+These are regular Zod schemas, so you can compose them as needed:
+
+```ts
+import { PushEventSchema } from 'github-webhook-schemas/push-event';
+
+const MinimalPushSchema = PushEventSchema.pick({
+  ref: true,
+  repository: true,
+}).required();
+```
+
+## Development
+
+This project is built and tested with Bun.
+
+### Prerequisites
+
+- Bun >= 1.3.0
+
+### Repo layout
+
+```
+src/
+  index.ts                 # main entry point
+  schemas/                 # generated event schemas and tests
+  schemas/shared/          # generated shared schemas
+scripts/
+  generate-webhook-schemas.ts  # generates schemas from @octokit/webhooks-types
+  update-exports.ts            # keeps package.json exports in sync
+  build.ts                     # builds dist/ and type declarations
+```
+
+### Key scripts
+
+```bash
+bun run generate:schemas   # regenerate src/schemas from @octokit/webhooks-types
+bun run update:exports     # update package.json exports after schema changes
+bun run build              # build dist/ and .d.ts files
+bun run test               # run tests
+bun run lint               # lint the codebase
+bun run typecheck          # run TypeScript type checking
+```
+
+### Regenerating schemas
+
+The schemas are generated from `@octokit/webhooks-types`. When GitHub adds or changes
+event payloads:
+
+1. Update the `@octokit/webhooks-types` version in `package.json`.
+2. Run `bun install`.
+3. Run `bun run generate:schemas`.
+4. Run `bun run update:exports`.
+5. Run `bun run test` and `bun run build` to validate output.
+
+Do not hand edit files in `src/schemas` or `src/schemas/shared`. They are overwritten
+on every generation run. If you need to change output, update
+`scripts/generate-webhook-schemas.ts` instead.
 
 ## License
 
