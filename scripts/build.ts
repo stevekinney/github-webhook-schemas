@@ -32,6 +32,14 @@ async function getEntrypoints(): Promise<string[]> {
     }
   }
 
+  const fixturesDir = resolve(SRC_DIR, 'fixtures');
+  const fixturesGlob = new Bun.Glob('**/*.ts');
+  for await (const file of fixturesGlob.scan({ cwd: fixturesDir, absolute: true })) {
+    if (!file.endsWith('.test.ts')) {
+      entrypoints.push(file);
+    }
+  }
+
   return entrypoints;
 }
 

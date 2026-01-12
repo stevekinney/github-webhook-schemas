@@ -1733,6 +1733,12 @@
       "bun": "./dist/schemas/shared/workflow-step-queued.js",
       "import": "./dist/schemas/shared/workflow-step-queued.js",
       "default": "./dist/schemas/shared/workflow-step-queued.js"
+    },
+    "./fixtures": {
+      "types": "./dist/fixtures/index.d.ts",
+      "bun": "./dist/fixtures/index.js",
+      "import": "./dist/fixtures/index.js",
+      "default": "./dist/fixtures/index.js"
     }
   },
   "files": [

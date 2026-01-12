@@ -88,6 +88,9 @@ async function main(): Promise<void> {
     exports[`./shared/${shared}`] = createExportEntry(`./dist/schemas/shared/${shared}`);
   }
 
+  // Add fixtures export
+  exports['./fixtures'] = createExportEntry('./dist/fixtures/index');
+
   // Update package.json
   packageJson.exports = exports;
 
