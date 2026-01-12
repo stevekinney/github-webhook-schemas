@@ -19,12 +19,14 @@ export const IssuesLockedEventSchema = z.object({
   issue: IssueSchema.and(
     z.object({
       locked: z.literal(true),
-      active_lock_reason: z.union([
-        z.literal('resolved'),
-        z.literal('off-topic'),
-        z.literal('too heated'),
-        z.literal('spam'),
-      ]),
+      active_lock_reason: z
+        .union([
+          z.literal('resolved'),
+          z.literal('off-topic'),
+          z.literal('too heated'),
+          z.literal('spam'),
+        ])
+        .nullable(),
     }),
   ),
   repository: RepositorySchema,

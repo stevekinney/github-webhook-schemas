@@ -18,7 +18,10 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-function buildFixture(schema: z.ZodTypeAny): unknown {
+function buildFixture(
+  schema: z.ZodTypeAny,
+  options: { includeOptional?: boolean } = {},
+): unknown {
   const def = schema.def as unknown;
 
   switch (schema.type) {
@@ -30,10 +33,15 @@ function buildFixture(schema: z.ZodTypeAny): unknown {
       if (defaultValue !== undefined) {
         return defaultValue;
       }
-      return innerType ? buildFixture(innerType) : null;
+      return innerType ? buildFixture(innerType, options) : null;
     }
-    case 'optional':
+    case 'optional': {
+      const { innerType } = def as { innerType?: z.ZodTypeAny };
+      if (options.includeOptional && innerType) {
+        return buildFixture(innerType, options);
+      }
       return undefined;
+    }
     case 'nullable':
     case 'null':
       return null;
@@ -58,19 +66,30 @@ function buildFixture(schema: z.ZodTypeAny): unknown {
       return [];
     case 'tuple': {
       const { items } = def as { items: z.ZodTypeAny[] };
-      return items.map((item) => buildFixture(item));
+      return items.map((item) => buildFixture(item, options));
     }
     case 'union': {
-      const { options } = def as { options: z.ZodTypeAny[] };
-      const firstOption = options[0];
-      return firstOption ? buildFixture(firstOption) : null;
+      const { options: unionOptions } = def as { options: z.ZodTypeAny[] };
+      const firstOption = unionOptions[0];
+      return firstOption ? buildFixture(firstOption, options) : null;
+    }
+    case 'intersection': {
+      const { left, right } = def as { left: z.ZodTypeAny; right: z.ZodTypeAny };
+      const leftValue = buildFixture(left, options);
+      const rightValue = buildFixture(right, { ...options, includeOptional: true });
+
+      if (isPlainObject(leftValue) && isPlainObject(rightValue)) {
+        return mergeFixture(leftValue, rightValue);
+      }
+
+      return rightValue ?? leftValue ?? null;
     }
     case 'object': {
       const { shape } = def as { shape: Record<string, z.ZodTypeAny> };
       const value: Record<string, unknown> = {};
 
       for (const [key, fieldSchema] of Object.entries(shape)) {
-        const fieldValue = buildFixture(fieldSchema);
+        const fieldValue = buildFixture(fieldSchema, options);
         if (fieldValue !== undefined) {
           value[key] = fieldValue;
         }
@@ -78,9 +97,11 @@ function buildFixture(schema: z.ZodTypeAny): unknown {
 
       return value;
     }
+    case 'record':
+      return {};
     case 'lazy': {
       const { getter } = def as { getter: () => z.ZodTypeAny };
-      return getter ? buildFixture(getter()) : null;
+      return getter ? buildFixture(getter(), options) : null;
     }
     default:
       return null;

@@ -25,26 +25,30 @@ export const CodeScanningAlertAppearedInBranchEventSchema = z.object({
     instances: z.array(AlertInstanceSchema),
     most_recent_instance: AlertInstanceSchema.optional(),
     state: z.union([z.literal('open'), z.literal('dismissed'), z.literal('fixed')]),
-    dismissed_by: UserSchema,
-    dismissed_at: z.string(),
-    dismissed_reason: z.union([
-      z.literal('false positive'),
-      z.literal("won't fix"),
-      z.literal('used in tests'),
-    ]),
+    dismissed_by: UserSchema.nullable(),
+    dismissed_at: z.string().nullable(),
+    dismissed_reason: z
+      .union([
+        z.literal('false positive'),
+        z.literal("won't fix"),
+        z.literal('used in tests'),
+      ])
+      .nullable(),
     rule: z.object({
       id: z.string(),
-      severity: z.union([
-        z.literal('none'),
-        z.literal('note'),
-        z.literal('warning'),
-        z.literal('error'),
-      ]),
+      severity: z
+        .union([
+          z.literal('none'),
+          z.literal('note'),
+          z.literal('warning'),
+          z.literal('error'),
+        ])
+        .nullable(),
       description: z.string(),
     }),
     tool: z.object({
       name: z.string(),
-      version: z.string(),
+      version: z.string().nullable(),
     }),
   }),
   ref: z.string(),

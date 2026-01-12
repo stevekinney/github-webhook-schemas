@@ -8,7 +8,7 @@ import { z } from 'zod';
 
 export const SecurityAdvisoryCvssSchema = z.object({
   score: z.number(),
-  vector_string: z.string(),
+  vector_string: z.string().nullable(),
 }) satisfies z.ZodType<SecurityAdvisoryCvssOctokit>;
 
 export type SecurityAdvisoryCvss = SecurityAdvisoryCvssOctokit;

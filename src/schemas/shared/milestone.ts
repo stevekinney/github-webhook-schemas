@@ -16,15 +16,15 @@ export const MilestoneSchema = z.object({
   node_id: z.string(),
   number: z.number(),
   title: z.string(),
-  description: z.string(),
+  description: z.string().nullable(),
   creator: UserSchema,
   open_issues: z.number(),
   closed_issues: z.number(),
   state: z.union([z.literal('open'), z.literal('closed')]),
   created_at: z.string(),
   updated_at: z.string(),
-  due_on: z.string(),
-  closed_at: z.string(),
+  due_on: z.string().nullable(),
+  closed_at: z.string().nullable(),
 }) satisfies z.ZodType<MilestoneOctokit>;
 
 export type Milestone = MilestoneOctokit;

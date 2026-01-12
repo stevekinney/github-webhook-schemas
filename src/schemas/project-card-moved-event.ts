@@ -25,7 +25,7 @@ export const ProjectCardMovedEventSchema = z.object({
     .optional(),
   project_card: ProjectCardSchema.and(
     z.object({
-      after_id: z.number(),
+      after_id: z.number().nullable(),
     }),
   ),
   repository: RepositorySchema.optional(),

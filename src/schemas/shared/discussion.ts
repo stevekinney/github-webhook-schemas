@@ -13,8 +13,8 @@ import { UserSchema } from './user.js';
 export const DiscussionSchema = z.object({
   repository_url: z.string(),
   category: DiscussionCategorySchema,
-  answer_html_url: z.string(),
-  answer_chosen_at: z.string(),
+  answer_html_url: z.string().nullable(),
+  answer_chosen_at: z.string().nullable(),
   answer_chosen_by: UserSchema.nullable(),
   html_url: z.string(),
   id: z.number(),
@@ -37,7 +37,7 @@ export const DiscussionSchema = z.object({
     z.literal('NONE'),
     z.literal('OWNER'),
   ]),
-  active_lock_reason: z.string(),
+  active_lock_reason: z.string().nullable(),
   body: z.string(),
   reactions: ReactionsSchema.optional(),
 }) satisfies z.ZodType<DiscussionOctokit>;

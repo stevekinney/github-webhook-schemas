@@ -10,7 +10,7 @@ export const LicenseSchema = z.object({
   key: z.string(),
   name: z.string(),
   spdx_id: z.string(),
-  url: z.string(),
+  url: z.string().nullable(),
   node_id: z.string(),
 }) satisfies z.ZodType<LicenseOctokit>;
 

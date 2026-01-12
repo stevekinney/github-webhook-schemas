@@ -8,7 +8,7 @@ import { z } from 'zod';
 
 export const CustomPropertyValueSchema = z.object({
   property_name: z.string(),
-  value: z.union([z.string(), z.array(z.string())]),
+  value: z.union([z.string(), z.array(z.string())]).nullable(),
 }) satisfies z.ZodType<CustomPropertyValueOctokit>;
 
 export type CustomPropertyValue = CustomPropertyValueOctokit;

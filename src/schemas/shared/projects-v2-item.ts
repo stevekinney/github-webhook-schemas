@@ -21,7 +21,7 @@ export const ProjectsV2ItemSchema = z.object({
   creator: UserSchema,
   created_at: z.string(),
   updated_at: z.string(),
-  archived_at: z.string(),
+  archived_at: z.string().nullable(),
 }) satisfies z.ZodType<ProjectsV2ItemOctokit>;
 
 export type ProjectsV2Item = ProjectsV2ItemOctokit;

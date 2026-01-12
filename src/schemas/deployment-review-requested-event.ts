@@ -28,12 +28,14 @@ export const DeploymentReviewRequestedEventSchema = z.object({
       z.literal('queued'),
       z.literal('waiting'),
     ]),
-    conclusion: z.union([
-      z.literal('success'),
-      z.literal('failure'),
-      z.literal('cancelled'),
-      z.literal('skipped'),
-    ]),
+    conclusion: z
+      .union([
+        z.literal('success'),
+        z.literal('failure'),
+        z.literal('cancelled'),
+        z.literal('skipped'),
+      ])
+      .nullable(),
     html_url: z.string(),
     created_at: z.string(),
     updated_at: z.string(),

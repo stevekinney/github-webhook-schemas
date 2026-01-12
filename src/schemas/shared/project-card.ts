@@ -15,13 +15,13 @@ export const ProjectCardSchema = z.object({
   column_id: z.number(),
   id: z.number(),
   node_id: z.string(),
-  note: z.string(),
+  note: z.string().nullable(),
   archived: z.boolean(),
   creator: UserSchema,
   created_at: z.string(),
   updated_at: z.string(),
   content_url: z.string().optional(),
-  after_id: z.union([z.string(), z.number()]).optional(),
+  after_id: z.union([z.string(), z.number()]).nullable().optional(),
 }) satisfies z.ZodType<ProjectCardOctokit>;
 
 export type ProjectCard = ProjectCardOctokit;

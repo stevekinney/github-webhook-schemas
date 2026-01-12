@@ -19,7 +19,7 @@ export const OrganizationSchema = z.object({
   members_url: z.string(),
   public_members_url: z.string(),
   avatar_url: z.string(),
-  description: z.string(),
+  description: z.string().nullable(),
 }) satisfies z.ZodType<OrganizationOctokit>;
 
 export type Organization = OrganizationOctokit;

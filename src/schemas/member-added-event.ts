@@ -15,13 +15,15 @@ import {
 
 export const MemberAddedEventSchema = z.object({
   action: z.literal('added'),
-  changes: z.object({
-    permission: z
-      .object({
-        to: z.union([z.literal('write'), z.literal('admin')]),
-      })
-      .optional(),
-  }),
+  changes: z
+    .object({
+      permission: z
+        .object({
+          to: z.union([z.literal('write'), z.literal('admin')]),
+        })
+        .optional(),
+    })
+    .optional(),
   member: UserSchema,
   repository: RepositorySchema,
   installation: InstallationLiteSchema.optional(),

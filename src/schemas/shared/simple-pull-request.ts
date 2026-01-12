@@ -27,12 +27,12 @@ export const SimplePullRequestSchema = z.object({
   locked: z.boolean(),
   title: z.string(),
   user: UserSchema,
-  body: z.string(),
+  body: z.string().nullable(),
   created_at: z.string(),
   updated_at: z.string(),
-  closed_at: z.string(),
-  merged_at: z.string(),
-  merge_commit_sha: z.string(),
+  closed_at: z.string().nullable(),
+  merged_at: z.string().nullable(),
+  merge_commit_sha: z.string().nullable(),
   assignee: UserSchema.nullable(),
   assignees: z.array(UserSchema),
   requested_reviewers: z.array(z.union([UserSchema, TeamSchema])),
@@ -80,12 +80,14 @@ export const SimplePullRequestSchema = z.object({
     z.literal('OWNER'),
   ]),
   auto_merge: PullRequestAutoMergeSchema.nullable(),
-  active_lock_reason: z.union([
-    z.literal('resolved'),
-    z.literal('off-topic'),
-    z.literal('too heated'),
-    z.literal('spam'),
-  ]),
+  active_lock_reason: z
+    .union([
+      z.literal('resolved'),
+      z.literal('off-topic'),
+      z.literal('too heated'),
+      z.literal('spam'),
+    ])
+    .nullable(),
 }) satisfies z.ZodType<SimplePullRequestOctokit>;
 
 export type SimplePullRequest = SimplePullRequestOctokit;

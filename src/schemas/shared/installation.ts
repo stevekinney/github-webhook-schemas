@@ -121,11 +121,11 @@ export const InstallationSchema = z.object({
   ),
   created_at: z.union([z.string(), z.number()]),
   updated_at: z.union([z.string(), z.number()]),
-  single_file_name: z.string(),
-  has_multiple_single_files: z.boolean().optional(),
+  single_file_name: z.string().nullable(),
+  has_multiple_single_files: z.union([z.literal(false), z.literal(true)]).optional(),
   single_file_paths: z.array(z.string()).optional(),
   suspended_by: UserSchema.nullable(),
-  suspended_at: z.string(),
+  suspended_at: z.string().nullable(),
 }) satisfies z.ZodType<InstallationOctokit>;
 
 export type Installation = InstallationOctokit;

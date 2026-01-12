@@ -26,14 +26,14 @@ export const IssueSchema = z.object({
   user: UserSchema,
   labels: z.array(LabelSchema).optional(),
   state: z.union([z.literal('open'), z.literal('closed')]).optional(),
-  locked: z.boolean().optional(),
+  locked: z.union([z.literal(false), z.literal(true)]).optional(),
   assignee: UserSchema.nullable().optional(),
   assignees: z.array(UserSchema),
   milestone: MilestoneSchema.nullable(),
   comments: z.number(),
   created_at: z.string(),
   updated_at: z.string(),
-  closed_at: z.string(),
+  closed_at: z.string().nullable(),
   author_association: z.union([
     z.literal('COLLABORATOR'),
     z.literal('CONTRIBUTOR'),
@@ -44,25 +44,29 @@ export const IssueSchema = z.object({
     z.literal('NONE'),
     z.literal('OWNER'),
   ]),
-  active_lock_reason: z.union([
-    z.literal('resolved'),
-    z.literal('off-topic'),
-    z.literal('too heated'),
-    z.literal('spam'),
-  ]),
-  draft: z.boolean().optional(),
+  active_lock_reason: z
+    .union([
+      z.literal('resolved'),
+      z.literal('off-topic'),
+      z.literal('too heated'),
+      z.literal('spam'),
+    ])
+    .nullable(),
+  draft: z.union([z.literal(false), z.literal(true)]).optional(),
   performed_via_github_app: AppSchema.nullable().optional(),
-  pull_request: z.object({
-    url: z.string().optional(),
-    html_url: z.string().optional(),
-    diff_url: z.string().optional(),
-    patch_url: z.string().optional(),
-    merged_at: z.string().optional(),
-  }),
-  body: z.string(),
+  pull_request: z
+    .object({
+      url: z.string().optional(),
+      html_url: z.string().optional(),
+      diff_url: z.string().optional(),
+      patch_url: z.string().optional(),
+      merged_at: z.string().nullable().optional(),
+    })
+    .optional(),
+  body: z.string().nullable(),
   reactions: ReactionsSchema,
   timeline_url: z.string().optional(),
-  state_reason: z.string().optional(),
+  state_reason: z.string().nullable().optional(),
 }) satisfies z.ZodType<IssueOctokit>;
 
 export type Issue = IssueOctokit;

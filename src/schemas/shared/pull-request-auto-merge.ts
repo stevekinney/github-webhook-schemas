@@ -11,8 +11,8 @@ import { UserSchema } from './user.js';
 export const PullRequestAutoMergeSchema = z.object({
   enabled_by: UserSchema.nullable(),
   merge_method: z.union([z.literal('merge'), z.literal('squash'), z.literal('rebase')]),
-  commit_title: z.string(),
-  commit_message: z.string(),
+  commit_title: z.string().nullable(),
+  commit_message: z.string().nullable(),
 }) satisfies z.ZodType<PullRequestAutoMergeOctokit>;
 
 export type PullRequestAutoMerge = PullRequestAutoMergeOctokit;

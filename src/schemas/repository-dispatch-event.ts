@@ -16,7 +16,7 @@ import {
 export const RepositoryDispatchEventSchema = z.object({
   action: z.string(),
   branch: z.string(),
-  client_payload: z.object({}),
+  client_payload: z.record(z.string(), z.unknown()),
   repository: RepositorySchema,
   sender: UserSchema,
   installation: InstallationLiteSchema,

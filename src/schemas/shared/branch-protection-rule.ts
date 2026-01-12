@@ -22,7 +22,7 @@ export const BranchProtectionRuleSchema = z.object({
   require_code_owner_review: z.boolean(),
   authorized_dismissal_actors_only: z.boolean(),
   ignore_approvals_from_contributors: z.boolean(),
-  require_last_push_approval: z.boolean().optional(),
+  require_last_push_approval: z.union([z.literal(false), z.literal(true)]).optional(),
   required_status_checks: z.array(z.string()),
   required_status_checks_enforcement_level: z.union([
     z.literal('off'),
@@ -41,7 +41,7 @@ export const BranchProtectionRuleSchema = z.object({
     z.literal('everyone'),
   ]),
   admin_enforced: z.boolean(),
-  create_protected: z.boolean().optional(),
+  create_protected: z.union([z.literal(false), z.literal(true)]).optional(),
   allow_force_pushes_enforcement_level: z.union([
     z.literal('off'),
     z.literal('non_admins'),

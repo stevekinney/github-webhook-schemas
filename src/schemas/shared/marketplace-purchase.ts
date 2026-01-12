@@ -17,7 +17,7 @@ export const MarketplacePurchaseSchema = z.object({
   billing_cycle: z.string(),
   unit_count: z.number(),
   on_free_trial: z.boolean(),
-  free_trial_ends_on: z.string(),
+  free_trial_ends_on: z.string().nullable(),
   next_billing_date: z.string().optional(),
   plan: z.object({
     id: z.number(),
@@ -27,7 +27,7 @@ export const MarketplacePurchaseSchema = z.object({
     yearly_price_in_cents: z.number(),
     price_model: z.string(),
     has_free_trial: z.boolean(),
-    unit_name: z.string(),
+    unit_name: z.string().nullable(),
     bullets: z.array(z.string()),
   }),
 }) satisfies z.ZodType<MarketplacePurchaseOctokit>;

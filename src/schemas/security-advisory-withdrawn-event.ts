@@ -10,7 +10,7 @@ export const SecurityAdvisoryWithdrawnEventSchema = z.object({
   action: z.literal('withdrawn'),
   security_advisory: z.object({
     cvss: z.object({
-      vector_string: z.string(),
+      vector_string: z.string().nullable(),
       score: z.number(),
     }),
     cwes: z.array(
@@ -20,7 +20,7 @@ export const SecurityAdvisoryWithdrawnEventSchema = z.object({
       }),
     ),
     ghsa_id: z.string(),
-    cve_id: z.string(),
+    cve_id: z.string().nullable(),
     summary: z.string(),
     description: z.string(),
     severity: z.string(),
@@ -46,9 +46,11 @@ export const SecurityAdvisoryWithdrawnEventSchema = z.object({
         }),
         severity: z.string(),
         vulnerable_version_range: z.string(),
-        first_patched_version: z.object({
-          identifier: z.string(),
-        }),
+        first_patched_version: z
+          .object({
+            identifier: z.string(),
+          })
+          .nullable(),
       }),
     ),
   }),

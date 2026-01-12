@@ -35,17 +35,19 @@ export const CodeScanningAlertReopenedByUserEventSchema = z.object({
     dismissed_reason: z.null(),
     rule: z.object({
       id: z.string(),
-      severity: z.union([
-        z.literal('none'),
-        z.literal('note'),
-        z.literal('warning'),
-        z.literal('error'),
-      ]),
+      severity: z
+        .union([
+          z.literal('none'),
+          z.literal('note'),
+          z.literal('warning'),
+          z.literal('error'),
+        ])
+        .nullable(),
       description: z.string(),
     }),
     tool: z.object({
       name: z.string(),
-      version: z.string(),
+      version: z.string().nullable(),
     }),
   }),
   ref: z.string(),

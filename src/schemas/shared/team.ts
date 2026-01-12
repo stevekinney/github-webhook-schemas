@@ -11,29 +11,32 @@ export const TeamSchema = z.object({
   id: z.number(),
   node_id: z.string(),
   slug: z.string(),
-  description: z.string(),
+  description: z.string().nullable(),
   privacy: z.union([z.literal('open'), z.literal('closed'), z.literal('secret')]),
   url: z.string(),
   html_url: z.string(),
   members_url: z.string(),
   repositories_url: z.string(),
   permission: z.string(),
-  parent: z.object({
-    name: z.string(),
-    id: z.number(),
-    node_id: z.string(),
-    slug: z.string(),
-    description: z.string(),
-    privacy: z.union([z.literal('open'), z.literal('closed'), z.literal('secret')]),
-    url: z.string(),
-    html_url: z.string(),
-    members_url: z.string(),
-    repositories_url: z.string(),
-    permission: z.string(),
-    notification_setting: z
-      .union([z.literal('notifications_enabled'), z.literal('notifications_disabled')])
-      .optional(),
-  }),
+  parent: z
+    .object({
+      name: z.string(),
+      id: z.number(),
+      node_id: z.string(),
+      slug: z.string(),
+      description: z.string().nullable(),
+      privacy: z.union([z.literal('open'), z.literal('closed'), z.literal('secret')]),
+      url: z.string(),
+      html_url: z.string(),
+      members_url: z.string(),
+      repositories_url: z.string(),
+      permission: z.string(),
+      notification_setting: z
+        .union([z.literal('notifications_enabled'), z.literal('notifications_disabled')])
+        .optional(),
+    })
+    .nullable()
+    .optional(),
   notification_setting: z
     .union([z.literal('notifications_enabled'), z.literal('notifications_disabled')])
     .optional(),

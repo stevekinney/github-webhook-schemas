@@ -19,7 +19,7 @@ export const PageBuildEventSchema = z.object({
     url: z.string(),
     status: z.string(),
     error: z.object({
-      message: z.string(),
+      message: z.string().nullable(),
     }),
     pusher: UserSchema,
     commit: z.string(),

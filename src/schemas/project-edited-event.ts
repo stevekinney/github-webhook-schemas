@@ -16,18 +16,20 @@ import {
 
 export const ProjectEditedEventSchema = z.object({
   action: z.literal('edited'),
-  changes: z.object({
-    name: z
-      .object({
-        from: z.string(),
-      })
-      .optional(),
-    body: z
-      .object({
-        from: z.string(),
-      })
-      .optional(),
-  }),
+  changes: z
+    .object({
+      name: z
+        .object({
+          from: z.string(),
+        })
+        .optional(),
+      body: z
+        .object({
+          from: z.string(),
+        })
+        .optional(),
+    })
+    .optional(),
   project: ProjectSchema,
   repository: RepositorySchema,
   sender: UserSchema,

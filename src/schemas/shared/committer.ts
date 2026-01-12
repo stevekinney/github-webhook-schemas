@@ -8,7 +8,7 @@ import { z } from 'zod';
 
 export const CommitterSchema = z.object({
   name: z.string(),
-  email: z.string(),
+  email: z.string().nullable(),
   date: z.string().optional(),
   username: z.string().optional(),
 }) satisfies z.ZodType<CommitterOctokit>;

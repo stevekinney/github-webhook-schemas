@@ -20,7 +20,7 @@ export const RepositoryLiteSchema = z.object({
   contents_url: z.string(),
   contributors_url: z.string(),
   deployments_url: z.string(),
-  description: z.string(),
+  description: z.string().nullable(),
   downloads_url: z.string(),
   events_url: z.string(),
   fork: z.boolean(),

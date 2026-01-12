@@ -13,7 +13,7 @@ export const CheckRunDeploymentSchema = z.object({
   task: z.string(),
   original_environment: z.string(),
   environment: z.string(),
-  description: z.string(),
+  description: z.string().nullable(),
   created_at: z.string(),
   updated_at: z.string(),
   statuses_url: z.string(),

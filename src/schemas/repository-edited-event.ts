@@ -18,7 +18,7 @@ export const RepositoryEditedEventSchema = z.object({
   changes: z.object({
     description: z
       .object({
-        from: z.string(),
+        from: z.string().nullable(),
       })
       .optional(),
     default_branch: z
@@ -28,7 +28,7 @@ export const RepositoryEditedEventSchema = z.object({
       .optional(),
     homepage: z
       .object({
-        from: z.string(),
+        from: z.string().nullable(),
       })
       .optional(),
     topics: z

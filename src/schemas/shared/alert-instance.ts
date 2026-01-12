@@ -12,16 +12,20 @@ export const AlertInstanceSchema = z.object({
   environment: z.string(),
   state: z.union([z.literal('open'), z.literal('dismissed'), z.literal('fixed')]),
   commit_sha: z.string().optional(),
-  message: z.object({
-    text: z.string().optional(),
-  }),
-  location: z.object({
-    path: z.string().optional(),
-    start_line: z.number().optional(),
-    end_line: z.number().optional(),
-    start_column: z.number().optional(),
-    end_column: z.number().optional(),
-  }),
+  message: z
+    .object({
+      text: z.string().optional(),
+    })
+    .optional(),
+  location: z
+    .object({
+      path: z.string().optional(),
+      start_line: z.number().optional(),
+      end_line: z.number().optional(),
+      start_column: z.number().optional(),
+      end_column: z.number().optional(),
+    })
+    .optional(),
   classifications: z.array(z.string()).optional(),
 }) satisfies z.ZodType<AlertInstanceOctokit>;
 

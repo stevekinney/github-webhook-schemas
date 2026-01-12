@@ -21,7 +21,7 @@ export const DiscussionCommentDeletedEventSchema = z.object({
     id: z.number(),
     node_id: z.string(),
     html_url: z.string(),
-    parent_id: z.number(),
+    parent_id: z.number().nullable(),
     child_comment_count: z.number(),
     repository_url: z.string(),
     discussion_id: z.number(),

@@ -15,18 +15,20 @@ import {
 } from './shared/index.js';
 
 export const DiscussionEditedEventSchema = z.object({
-  changes: z.object({
-    title: z
-      .object({
-        from: z.string(),
-      })
-      .optional(),
-    body: z
-      .object({
-        from: z.string(),
-      })
-      .optional(),
-  }),
+  changes: z
+    .object({
+      title: z
+        .object({
+          from: z.string(),
+        })
+        .optional(),
+      body: z
+        .object({
+          from: z.string(),
+        })
+        .optional(),
+    })
+    .optional(),
   action: z.literal('edited'),
   discussion: DiscussionSchema,
   repository: RepositorySchema,

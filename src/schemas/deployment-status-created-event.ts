@@ -42,7 +42,7 @@ export const DeploymentStatusCreatedEventSchema = z.object({
     updated_at: z.string(),
     deployment_url: z.string(),
     repository_url: z.string(),
-    performed_via_github_app: AppSchema.optional(),
+    performed_via_github_app: AppSchema.nullable().optional(),
   }),
   deployment: DeploymentSchema,
   check_run: z
@@ -61,18 +61,20 @@ export const DeploymentStatusCreatedEventSchema = z.object({
         z.literal('queued'),
         z.literal('waiting'),
       ]),
-      conclusion: z.union([
-        z.literal('success'),
-        z.literal('failure'),
-        z.literal('neutral'),
-        z.literal('cancelled'),
-        z.literal('timed_out'),
-        z.literal('action_required'),
-        z.literal('stale'),
-        z.literal('skipped'),
-      ]),
+      conclusion: z
+        .union([
+          z.literal('success'),
+          z.literal('failure'),
+          z.literal('neutral'),
+          z.literal('cancelled'),
+          z.literal('timed_out'),
+          z.literal('action_required'),
+          z.literal('stale'),
+          z.literal('skipped'),
+        ])
+        .nullable(),
       started_at: z.string(),
-      completed_at: z.string(),
+      completed_at: z.string().nullable(),
     })
     .optional(),
   workflow_run: DeploymentWorkflowRunSchema.optional(),

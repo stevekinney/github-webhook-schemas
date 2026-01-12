@@ -9,12 +9,13 @@ import { z } from 'zod';
 export const OrganizationCustomPropertySchema = z.object({
   property_name: z.string(),
   value_type: z.union([z.literal('string'), z.literal('single_select')]),
-  required: z.boolean().optional(),
-  default_value: z.string().optional(),
-  description: z.string().optional(),
-  allowed_values: z.array(z.string()).optional(),
+  required: z.union([z.literal(false), z.literal(true)]).optional(),
+  default_value: z.string().nullable().optional(),
+  description: z.string().nullable().optional(),
+  allowed_values: z.array(z.string()).nullable().optional(),
   values_editable_by: z
     .union([z.literal('org_actors'), z.literal('org_and_repo_actors')])
+    .nullable()
     .optional(),
 }) satisfies z.ZodType<OrganizationCustomPropertyOctokit>;
 

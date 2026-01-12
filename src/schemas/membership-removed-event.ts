@@ -23,7 +23,7 @@ export const MembershipRemovedEventSchema = z.object({
     z.object({
       id: z.number(),
       name: z.string(),
-      deleted: z.boolean().optional(),
+      deleted: z.union([z.literal(false), z.literal(true)]).optional(),
     }),
   ]),
   organization: OrganizationSchema,

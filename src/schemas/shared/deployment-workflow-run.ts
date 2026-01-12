@@ -26,15 +26,17 @@ export const DeploymentWorkflowRunSchema = z.object({
     z.literal('queued'),
     z.literal('requested'),
   ]),
-  conclusion: z.union([
-    z.literal('success'),
-    z.literal('failure'),
-    z.literal('neutral'),
-    z.literal('cancelled'),
-    z.literal('timed_out'),
-    z.literal('action_required'),
-    z.literal('stale'),
-  ]),
+  conclusion: z
+    .union([
+      z.literal('success'),
+      z.literal('failure'),
+      z.literal('neutral'),
+      z.literal('cancelled'),
+      z.literal('timed_out'),
+      z.literal('action_required'),
+      z.literal('stale'),
+    ])
+    .nullable(),
   workflow_id: z.number(),
   check_suite_id: z.number(),
   check_suite_node_id: z.string(),

@@ -21,26 +21,30 @@ export const CheckSuiteRerequestedEventSchema = z.object({
   check_suite: z.object({
     id: z.number(),
     node_id: z.string(),
-    head_branch: z.string(),
+    head_branch: z.string().nullable(),
     head_sha: z.string(),
-    status: z.union([
-      z.literal('completed'),
-      z.literal('in_progress'),
-      z.literal('queued'),
-      z.literal('requested'),
-    ]),
-    conclusion: z.union([
-      z.literal('success'),
-      z.literal('failure'),
-      z.literal('neutral'),
-      z.literal('cancelled'),
-      z.literal('timed_out'),
-      z.literal('action_required'),
-      z.literal('stale'),
-    ]),
+    status: z
+      .union([
+        z.literal('completed'),
+        z.literal('in_progress'),
+        z.literal('queued'),
+        z.literal('requested'),
+      ])
+      .nullable(),
+    conclusion: z
+      .union([
+        z.literal('success'),
+        z.literal('failure'),
+        z.literal('neutral'),
+        z.literal('cancelled'),
+        z.literal('timed_out'),
+        z.literal('action_required'),
+        z.literal('stale'),
+      ])
+      .nullable(),
     url: z.string(),
-    before: z.string(),
-    after: z.string(),
+    before: z.string().nullable(),
+    after: z.string().nullable(),
     pull_requests: z.array(CheckRunPullRequestSchema),
     app: AppSchema,
     created_at: z.string(),

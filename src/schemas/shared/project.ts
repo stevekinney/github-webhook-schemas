@@ -16,7 +16,7 @@ export const ProjectSchema = z.object({
   id: z.number(),
   node_id: z.string(),
   name: z.string(),
-  body: z.string(),
+  body: z.string().nullable(),
   number: z.number(),
   state: z.union([z.literal('open'), z.literal('closed')]),
   creator: UserSchema,

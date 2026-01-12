@@ -11,7 +11,7 @@ export const UserSchema = z.object({
   id: z.number(),
   node_id: z.string(),
   name: z.string().optional(),
-  email: z.string().optional(),
+  email: z.string().nullable().optional(),
   avatar_url: z.string(),
   gravatar_id: z.string(),
   url: z.string(),

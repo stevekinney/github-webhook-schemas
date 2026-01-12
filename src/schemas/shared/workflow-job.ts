@@ -34,21 +34,23 @@ export const WorkflowJobSchema = z.object({
       WorkflowStepCompletedSchema,
     ]),
   ),
-  conclusion: z.union([
-    z.literal('success'),
-    z.literal('failure'),
-    z.literal('cancelled'),
-    z.literal('skipped'),
-  ]),
+  conclusion: z
+    .union([
+      z.literal('success'),
+      z.literal('failure'),
+      z.literal('cancelled'),
+      z.literal('skipped'),
+    ])
+    .nullable(),
   labels: z.array(z.string()),
-  runner_id: z.number(),
-  runner_name: z.string(),
-  runner_group_id: z.number(),
-  runner_group_name: z.string(),
+  runner_id: z.number().nullable(),
+  runner_name: z.string().nullable(),
+  runner_group_id: z.number().nullable(),
+  runner_group_name: z.string().nullable(),
   started_at: z.string(),
-  completed_at: z.string(),
-  workflow_name: z.string(),
-  head_branch: z.string(),
+  completed_at: z.string().nullable(),
+  workflow_name: z.string().nullable(),
+  head_branch: z.string().nullable(),
   created_at: z.string(),
 }) satisfies z.ZodType<WorkflowJobOctokit>;
 

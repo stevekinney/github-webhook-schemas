@@ -17,7 +17,7 @@ export const CreateEventSchema = z.object({
   ref: z.string(),
   ref_type: z.union([z.literal('tag'), z.literal('branch')]),
   master_branch: z.string(),
-  description: z.string(),
+  description: z.string().nullable(),
   pusher_type: z.string(),
   repository: RepositorySchema,
   sender: UserSchema,

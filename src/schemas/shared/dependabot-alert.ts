@@ -22,11 +22,11 @@ export const DependabotAlertSchema = z.object({
   dependency: z.object({
     package: DependabotAlertPackageSchema,
     manifest_path: z.string(),
-    scope: z.union([z.literal('development'), z.literal('runtime')]),
+    scope: z.union([z.literal('development'), z.literal('runtime')]).nullable(),
   }),
   security_advisory: z.object({
     ghsa_id: z.string(),
-    cve_id: z.string(),
+    cve_id: z.string().nullable(),
     summary: z.string(),
     description: z.string(),
     vulnerabilities: z.array(
@@ -65,7 +65,7 @@ export const DependabotAlertSchema = z.object({
     ),
     published_at: z.string(),
     updated_at: z.string(),
-    withdrawn_at: z.string(),
+    withdrawn_at: z.string().nullable(),
   }),
   security_vulnerability: z.object({
     package: DependabotAlertPackageSchema,
@@ -84,18 +84,20 @@ export const DependabotAlertSchema = z.object({
   html_url: z.string(),
   created_at: z.string(),
   updated_at: z.string(),
-  dismissed_at: z.string(),
-  auto_dismissed_at: z.string().optional(),
+  dismissed_at: z.string().nullable(),
+  auto_dismissed_at: z.string().nullable().optional(),
   dismissed_by: UserSchema.nullable(),
-  dismissed_reason: z.union([
-    z.literal('fix_started'),
-    z.literal('inaccurate'),
-    z.literal('no_bandwidth'),
-    z.literal('not_used'),
-    z.literal('tolerable_risk'),
-  ]),
-  dismissed_comment: z.string(),
-  fixed_at: z.string(),
+  dismissed_reason: z
+    .union([
+      z.literal('fix_started'),
+      z.literal('inaccurate'),
+      z.literal('no_bandwidth'),
+      z.literal('not_used'),
+      z.literal('tolerable_risk'),
+    ])
+    .nullable(),
+  dismissed_comment: z.string().nullable(),
+  fixed_at: z.string().nullable(),
 }) satisfies z.ZodType<DependabotAlertOctokit>;
 
 export type DependabotAlert = DependabotAlertOctokit;

@@ -11,7 +11,7 @@ export const LabelSchema = z.object({
   node_id: z.string(),
   url: z.string(),
   name: z.string(),
-  description: z.string(),
+  description: z.string().nullable(),
   color: z.string(),
   default: z.boolean(),
 }) satisfies z.ZodType<LabelOctokit>;

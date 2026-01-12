@@ -17,23 +17,25 @@ import {
 export const LabelEditedEventSchema = z.object({
   action: z.literal('edited'),
   label: LabelSchema,
-  changes: z.object({
-    color: z
-      .object({
-        from: z.string(),
-      })
-      .optional(),
-    name: z
-      .object({
-        from: z.string(),
-      })
-      .optional(),
-    description: z
-      .object({
-        from: z.string(),
-      })
-      .optional(),
-  }),
+  changes: z
+    .object({
+      color: z
+        .object({
+          from: z.string(),
+        })
+        .optional(),
+      name: z
+        .object({
+          from: z.string(),
+        })
+        .optional(),
+      description: z
+        .object({
+          from: z.string(),
+        })
+        .optional(),
+    })
+    .optional(),
   repository: RepositorySchema,
   sender: UserSchema,
   installation: InstallationLiteSchema.optional(),

@@ -27,7 +27,7 @@ export const IssueCommentEditedEventSchema = z.object({
   }),
   issue: IssueSchema.and(
     z.object({
-      assignee: UserSchema,
+      assignee: UserSchema.nullable(),
       state: z.union([z.literal('open'), z.literal('closed')]),
       locked: z.boolean(),
       labels: z.array(LabelSchema),

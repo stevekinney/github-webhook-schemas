@@ -17,7 +17,7 @@ export const ProjectsV2ItemReorderedEventSchema = z.object({
   changes: z.object({
     previous_projects_v2_item_node_id: z.object({
       from: z.string(),
-      to: z.string(),
+      to: z.string().nullable(),
     }),
   }),
   action: z.literal('reordered'),

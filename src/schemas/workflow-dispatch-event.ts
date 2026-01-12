@@ -14,7 +14,7 @@ import {
 } from './shared/index.js';
 
 export const WorkflowDispatchEventSchema = z.object({
-  inputs: z.object({}),
+  inputs: z.record(z.string(), z.unknown()).nullable(),
   ref: z.string(),
   repository: RepositorySchema,
   sender: UserSchema,

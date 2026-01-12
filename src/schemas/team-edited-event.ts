@@ -32,15 +32,17 @@ export const TeamEditedEventSchema = z.object({
         from: z.string(),
       })
       .optional(),
-    repository: z.object({
-      permissions: z.object({
-        from: z.object({
-          admin: z.boolean().optional(),
-          pull: z.boolean().optional(),
-          push: z.boolean().optional(),
+    repository: z
+      .object({
+        permissions: z.object({
+          from: z.object({
+            admin: z.union([z.literal(false), z.literal(true)]).optional(),
+            pull: z.union([z.literal(false), z.literal(true)]).optional(),
+            push: z.union([z.literal(false), z.literal(true)]).optional(),
+          }),
         }),
-      }),
-    }),
+      })
+      .optional(),
   }),
   team: TeamSchema,
   repository: RepositorySchema.optional(),

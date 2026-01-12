@@ -13,9 +13,9 @@ export const PullRequestReviewSchema = z.object({
   id: z.number(),
   node_id: z.string(),
   user: UserSchema,
-  body: z.string(),
+  body: z.string().nullable(),
   commit_id: z.string(),
-  submitted_at: z.string(),
+  submitted_at: z.string().nullable(),
   state: z.union([
     z.literal('dismissed'),
     z.literal('approved'),

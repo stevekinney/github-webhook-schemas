@@ -18,16 +18,18 @@ export const WorkflowRunSchema = z.object({
   check_suite_url: z.string(),
   check_suite_id: z.number(),
   check_suite_node_id: z.string(),
-  conclusion: z.union([
-    z.literal('success'),
-    z.literal('failure'),
-    z.literal('neutral'),
-    z.literal('cancelled'),
-    z.literal('timed_out'),
-    z.literal('action_required'),
-    z.literal('stale'),
-    z.literal('skipped'),
-  ]),
+  conclusion: z
+    .union([
+      z.literal('success'),
+      z.literal('failure'),
+      z.literal('neutral'),
+      z.literal('cancelled'),
+      z.literal('timed_out'),
+      z.literal('action_required'),
+      z.literal('stale'),
+      z.literal('skipped'),
+    ])
+    .nullable(),
   created_at: z.string(),
   event: z.string(),
   head_branch: z.string(),
@@ -76,7 +78,7 @@ export const WorkflowRunSchema = z.object({
   run_attempt: z.number(),
   referenced_workflows: z.array(ReferencedWorkflowSchema).optional(),
   run_started_at: z.string(),
-  previous_attempt_url: z.string(),
+  previous_attempt_url: z.string().nullable(),
   actor: UserSchema,
   triggering_actor: UserSchema,
 }) satisfies z.ZodType<WorkflowRunOctokit>;

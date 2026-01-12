@@ -14,7 +14,7 @@ export const ReleaseAssetSchema = z.object({
   id: z.number(),
   node_id: z.string(),
   name: z.string(),
-  label: z.string(),
+  label: z.string().nullable(),
   state: z.literal('uploaded'),
   content_type: z.string(),
   size: z.number(),

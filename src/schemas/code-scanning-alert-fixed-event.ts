@@ -30,21 +30,25 @@ export const CodeScanningAlertFixedEventSchema = z.object({
       ),
     ),
     state: z.literal('fixed'),
-    dismissed_by: UserSchema,
-    dismissed_at: z.string(),
-    dismissed_reason: z.union([
-      z.literal('false positive'),
-      z.literal("won't fix"),
-      z.literal('used in tests'),
-    ]),
+    dismissed_by: UserSchema.nullable(),
+    dismissed_at: z.string().nullable(),
+    dismissed_reason: z
+      .union([
+        z.literal('false positive'),
+        z.literal("won't fix"),
+        z.literal('used in tests'),
+      ])
+      .nullable(),
     rule: z.object({
       id: z.string(),
-      severity: z.union([
-        z.literal('none'),
-        z.literal('note'),
-        z.literal('warning'),
-        z.literal('error'),
-      ]),
+      severity: z
+        .union([
+          z.literal('none'),
+          z.literal('note'),
+          z.literal('warning'),
+          z.literal('error'),
+        ])
+        .nullable(),
       description: z.string(),
       name: z.string().optional(),
       full_description: z.string().optional(),
@@ -53,8 +57,8 @@ export const CodeScanningAlertFixedEventSchema = z.object({
     }),
     tool: z.object({
       name: z.string(),
-      version: z.string(),
-      guid: z.string().optional(),
+      version: z.string().nullable(),
+      guid: z.string().nullable().optional(),
     }),
     most_recent_instance: AlertInstanceSchema.optional(),
     instances_url: z.string().optional(),

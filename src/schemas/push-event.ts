@@ -22,7 +22,7 @@ export const PushEventSchema = z.object({
   created: z.boolean(),
   deleted: z.boolean(),
   forced: z.boolean(),
-  base_ref: z.string(),
+  base_ref: z.string().nullable(),
   compare: z.string(),
   commits: z.array(CommitSchema),
   head_commit: CommitSchema.nullable(),

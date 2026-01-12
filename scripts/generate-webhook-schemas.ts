@@ -119,7 +119,7 @@ function collectReferencedTypes(
 
 function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
   // Prevent excessive recursion
-  if (depth > 10) return 'z.unknown()';
+  if (depth > 20) return 'z.unknown()';
 
   // Handle primitive types
   if (type.isString()) return 'z.string()';
@@ -255,7 +255,10 @@ function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
         ) {
           propName = propName.slice(1, -1);
         }
-        const propType = prop.getTypeAtLocation(sourceFile);
+        const propDeclaration = prop.getDeclarations()[0];
+        const propType = propDeclaration
+          ? prop.getTypeAtLocation(propDeclaration)
+          : prop.getTypeAtLocation(sourceFile);
         const isOptional = prop.isOptional();
         const propDeclarations = prop.getDeclarations();
         const hasQuestionToken = propDeclarations.some(
@@ -275,6 +278,12 @@ function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
         propSchemas.push(`  ${key}: ${schema},`);
       }
       return `z.object({\n${propSchemas.join('\n')}\n})`;
+    }
+
+    const stringIndexType = type.getStringIndexType();
+    if (stringIndexType) {
+      const valueSchema = getTypeText(stringIndexType, sourceFile, depth + 1);
+      return `z.record(z.string(), ${valueSchema})`;
     }
 
     // Empty object
@@ -665,6 +674,9 @@ async function main() {
   // Initialize project and parse schema
   const project = new Project({
     skipAddingFilesFromTsConfig: true,
+    compilerOptions: {
+      strictNullChecks: true,
+    },
   });
 
   const sourceFile = project.addSourceFileAtPath(SCHEMA_PATH);
