@@ -18,7 +18,6 @@ interface ExportConditions {
 }
 
 interface PackageExports {
-  '.': ExportConditions;
   [key: string]: ExportConditions;
 }
 
@@ -77,10 +76,7 @@ async function main(): Promise<void> {
   console.log(`Found ${sharedFiles.length} shared schemas`);
 
   // Build new exports object
-  const exports: PackageExports = {
-    // Main entry point
-    '.': createExportEntry('./dist/index'),
-  };
+  const exports: PackageExports = {};
 
   // Add individual event schema exports
   for (const schema of schemaFiles) {

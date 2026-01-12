@@ -19,6 +19,21 @@ if (isContinuousIntegration()) {
 header('Pre-commit checks');
 let ok = true;
 
+// 0) update exports to keep package.json in sync
+info('Running update:exports…');
+try {
+  await $`bun run update:exports`;
+  const packageStatus = await $`git status --porcelain -- package.json`.text();
+  if (packageStatus.trim()) {
+    info('Staging package.json after update:exports…');
+    await $`git add package.json`;
+  }
+  success('update:exports completed');
+} catch {
+  error('update:exports failed');
+  ok = false;
+}
+
 // 1) package/lock checks
 const staged = await getStagedFiles();
 if (staged.includes('package.json')) {

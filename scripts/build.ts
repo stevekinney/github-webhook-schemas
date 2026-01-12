@@ -19,7 +19,7 @@ async function clean(): Promise<void> {
 }
 
 async function getEntrypoints(): Promise<string[]> {
-  const entrypoints: string[] = [resolve(SRC_DIR, 'index.ts')];
+  const entrypoints: string[] = [];
 
   // Add all schema files (excluding tests)
   const schemaGlob = new Bun.Glob('**/*.ts');
@@ -52,6 +52,7 @@ async function buildJavaScript(): Promise<void> {
     minify: true,
     sourcemap: 'external',
     splitting: true,
+    external: ['zod'],
   });
 
   if (!result.success) {

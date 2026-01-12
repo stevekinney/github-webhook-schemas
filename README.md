@@ -36,7 +36,7 @@ Notes:
 ## Quick start
 
 ```ts
-import { PushEventSchema } from 'github-webhook-schemas';
+import { PushEventSchema } from 'github-webhook-schemas/push-event';
 
 const result = PushEventSchema.safeParse(payload);
 
@@ -48,16 +48,6 @@ if (result.success) {
 ```
 
 ## Importing schemas
-
-Import from the main entry point for convenience:
-
-```ts
-import {
-  IssuesOpenedEventSchema,
-  PullRequestOpenedEventSchema,
-  PushEventSchema,
-} from 'github-webhook-schemas';
-```
 
 Import from subpaths for smaller bundles:
 
@@ -79,10 +69,8 @@ GitHub sends event names in the `x-github-event` header and includes `action` on
 payloads. This library exposes schemas for specific actions (for example, opened, closed).
 
 ```ts
-import {
-  PullRequestClosedEventSchema,
-  PullRequestOpenedEventSchema,
-} from 'github-webhook-schemas';
+import { PullRequestClosedEventSchema } from 'github-webhook-schemas/pull-request-closed-event';
+import { PullRequestOpenedEventSchema } from 'github-webhook-schemas/pull-request-opened-event';
 
 function parsePullRequest(payload: unknown) {
   const action = (payload as { action?: string }).action;
@@ -96,14 +84,6 @@ function parsePullRequest(payload: unknown) {
       throw new Error(`Unsupported action: ${action ?? 'unknown'}`);
   }
 }
-```
-
-You can also access the canonical event names list:
-
-```ts
-import { eventTypes } from 'github-webhook-schemas';
-
-console.log(eventTypes);
 ```
 
 ## Type guards and TypeScript types
@@ -161,7 +141,6 @@ This project is built and tested with Bun.
 
 ```
 src/
-  index.ts                 # main entry point
   schemas/                 # generated event schemas and tests
   schemas/shared/          # generated shared schemas
 scripts/
