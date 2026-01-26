@@ -32,8 +32,9 @@ async function getSchemaFiles(): Promise<string[]> {
   const glob = new Bun.Glob('*.ts');
 
   for await (const file of glob.scan({ cwd: SCHEMAS_DIR })) {
-    // Skip test files and index files
-    if (file.endsWith('.test.ts') || file === 'index.ts') continue;
+    // Skip test/spec files and index files
+    if (file.endsWith('.test.ts') || file.endsWith('.spec.ts') || file === 'index.ts')
+      continue;
     schemaFiles.push(file.replace('.ts', ''));
   }
 
@@ -46,7 +47,8 @@ async function getSharedSchemaFiles(): Promise<string[]> {
   const glob = new Bun.Glob('*.ts');
 
   for await (const file of glob.scan({ cwd: sharedDir })) {
-    if (file === 'index.ts') continue;
+    if (file.endsWith('.test.ts') || file.endsWith('.spec.ts') || file === 'index.ts')
+      continue;
     sharedFiles.push(file.replace('.ts', ''));
   }
 

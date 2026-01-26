@@ -1,6 +1,6 @@
 {
   "name": "github-webhook-schemas",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Zod schemas for validating GitHub webhook payloads",
   "keywords": [
     "github",
@@ -1668,12 +1668,6 @@
       "import": "./dist/schemas/shared/security-advisory-cwes.js",
       "default": "./dist/schemas/shared/security-advisory-cwes.js"
     },
-    "./shared/shared-nullability.test": {
-      "types": "./dist/schemas/shared/shared-nullability.test.d.ts",
-      "bun": "./dist/schemas/shared/shared-nullability.test.js",
-      "import": "./dist/schemas/shared/shared-nullability.test.js",
-      "default": "./dist/schemas/shared/shared-nullability.test.js"
-    },
     "./shared/simple-commit": {
       "types": "./dist/schemas/shared/simple-commit.d.ts",
       "bun": "./dist/schemas/shared/simple-commit.js",
@@ -1766,7 +1760,8 @@
     "test:coverage": "bun test --coverage",
     "typecheck": "tsc --noEmit",
     "update:exports": "bun run scripts/update-exports.ts",
-    "validate": "bun run lint && bun run typecheck && bun run test"
+    "validate": "bun run lint && bun run typecheck && bun run test",
+    "verify:release-version": "bun run scripts/verify-release-version.ts"
   },
   "lint-staged": {
     "src/**/*.{js,ts,tsx,jsx,mjs,cjs}": [
