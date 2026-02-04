@@ -14,6 +14,7 @@ This package does not:
 
 - verify webhook signatures
 - run an HTTP server or route requests
+- provide real-world example payloads (fixtures are minimal, schema-valid shapes)
 
 ## Installation
 
@@ -86,6 +87,46 @@ function parsePullRequest(payload: unknown) {
 }
 ```
 
+## Event types
+
+Use the `eventTypes` export to get the list of supported event names. The list
+includes base event names and action-specific names like `pull_request.opened`:
+
+```ts
+import { eventTypes } from 'github-webhook-schemas/event-types';
+```
+
+## Schema registry
+
+Use the registry to look up the schema for a webhook event name and parse any of its actions.
+
+```ts
+import {
+  schemas,
+  isWebhookEventName,
+  type WebhookEventName,
+} from 'github-webhook-schemas/registry';
+
+function parseWebhook(eventType: string, payload: unknown) {
+  if (!isWebhookEventName(eventType)) {
+    throw new Error(`Unsupported event type: ${eventType}`);
+  }
+
+  const schema = schemas.get(eventType);
+  return schema.parse(payload);
+}
+```
+
+`schemas.get` expects the base event name from `x-github-event` (for example,
+`pull_request`), not the action-specific `event.action` string.
+
+The registry module also re-exports useful types:
+
+- `WebhookEvent`
+- `WebhookEventName`
+- `WebhookEventMap`
+- `WebhookEvents`
+
 ## Type guards and TypeScript types
 
 Every schema exports:
@@ -127,6 +168,58 @@ const MinimalPushSchema = PushEventSchema.pick({
   ref: true,
   repository: true,
 }).required();
+```
+
+## Fixtures
+
+Fixture factories live under the `fixtures` subpath and return schema-valid payloads
+with minimal defaults. They are useful for tests and quick experiments.
+
+```ts
+import { createPushEvent } from 'github-webhook-schemas/fixtures';
+
+const payload = createPushEvent({
+  repository: { full_name: 'acme/widgets' },
+  sender: { login: 'octo' },
+});
+```
+
+More detailed example:
+
+```ts
+import { createPullRequestOpenedEvent } from 'github-webhook-schemas/fixtures';
+import { PullRequestOpenedEventSchema } from 'github-webhook-schemas/pull-request-opened-event';
+
+const payload = createPullRequestOpenedEvent({
+  repository: {
+    full_name: 'acme/widgets',
+    owner: { login: 'acme' },
+  },
+  pull_request: {
+    title: 'Fix widget sizing',
+    user: { login: 'octo' },
+  },
+  sender: { login: 'octo' },
+});
+
+const result = PullRequestOpenedEventSchema.safeParse(payload);
+if (!result.success) {
+  throw new Error(result.error.message);
+}
+```
+
+Notes:
+
+- Every event has a `createXxxEvent` factory (for example, `createPushEvent`).
+- Factories accept deep partial overrides and merge them into the base fixture.
+- Overrides are not validated; use a schema or guard if you want to assert validity.
+- Optional fields are omitted unless you set them via overrides.
+- Arrays are replaced when overridden (provide the full array you want).
+
+When you regenerate schemas, also regenerate fixtures:
+
+```bash
+bun run scripts/generate-fixtures.ts
 ```
 
 ## Development

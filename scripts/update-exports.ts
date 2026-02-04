@@ -92,6 +92,10 @@ async function main(): Promise<void> {
 
   // Add fixtures export
   exports['./fixtures'] = createExportEntry('./dist/fixtures/index');
+  // Add event types export
+  exports['./event-types'] = createExportEntry('./dist/event-types');
+  // Add schema registry export
+  exports['./registry'] = createExportEntry('./dist/registry');
 
   // Update package.json
   packageJson.exports = exports;

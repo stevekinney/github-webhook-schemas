@@ -21,6 +21,11 @@ async function clean(): Promise<void> {
 async function getEntrypoints(): Promise<string[]> {
   const entrypoints: string[] = [];
 
+  // Add top-level entry points
+  entrypoints.push(resolve(SRC_DIR, 'index.ts'));
+  entrypoints.push(resolve(SRC_DIR, 'event-types.ts'));
+  entrypoints.push(resolve(SRC_DIR, 'registry.ts'));
+
   // Add all schema files (excluding tests)
   const schemaGlob = new Bun.Glob('**/*.ts');
   for await (const file of schemaGlob.scan({
