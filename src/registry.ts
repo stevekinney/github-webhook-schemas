@@ -11,6 +11,40 @@ import * as Schemas from './schemas/index.js';
 
 export type { WebhookEvent, WebhookEventMap, WebhookEventName, WebhookEvents };
 
+type WebhookRouteAction<EventType extends WebhookEventName> =
+  Extract<WebhookEventMap[EventType], { action: string }> extends infer EventWithAction
+    ? EventWithAction extends { action: infer Action }
+      ? Action extends string
+        ? Action
+        : never
+      : never
+    : never;
+
+type WebhookActionRouteKey = {
+  [EventType in WebhookEventName]: WebhookRouteAction<EventType> extends never
+    ? never
+    : `${EventType}.${WebhookRouteAction<EventType>}`;
+}[WebhookEventName];
+
+export type WebhookRouteKey = WebhookEventName | WebhookActionRouteKey;
+
+export type WebhookRouteEvent<RouteKey extends WebhookRouteKey> =
+  RouteKey extends `${infer EventType}.${infer Action}`
+    ? EventType extends WebhookEventName
+      ? Extract<WebhookEventMap[EventType], { action: Action }>
+      : never
+    : RouteKey extends WebhookEventName
+      ? WebhookEventMap[RouteKey]
+      : never;
+
+export type WebhookRouteHandlers = Partial<{
+  [RouteKey in WebhookRouteKey]: (
+    event: WebhookRouteEvent<RouteKey>,
+  ) => void | Promise<void>;
+}>;
+
+type WebhookRouteHandlerFunction = (event: unknown) => void | Promise<void>;
+
 function toKebabCase(value: string): string {
   let result = '';
 
@@ -140,4 +174,79 @@ export function isWebhookEvent(value: unknown): value is WebhookEvent {
     }
   }
   return false;
+}
+
+type WebhookRouteEntry = {
+  routeKey: string;
+  eventType: WebhookEventName;
+  action?: string;
+  handler: WebhookRouteHandlerFunction;
+  schema: z.ZodTypeAny;
+};
+
+function parseWebhookRouteKey(routeKey: string): {
+  eventType: WebhookEventName;
+  action?: string;
+} {
+  const separatorIndex = routeKey.indexOf('.');
+  const eventTypeCandidate =
+    separatorIndex >= 0 ? routeKey.slice(0, separatorIndex) : routeKey;
+  const action = separatorIndex >= 0 ? routeKey.slice(separatorIndex + 1) : undefined;
+
+  if (!isWebhookEventName(eventTypeCandidate)) {
+    throw new Error(`Unsupported webhook route key: ${routeKey}`);
+  }
+
+  if (separatorIndex >= 0 && !action) {
+    throw new Error(`Webhook route key has an empty action segment: ${routeKey}`);
+  }
+
+  return {
+    eventType: eventTypeCandidate,
+    action,
+  };
+}
+
+export function createGithubWebhookRouter<Handlers extends WebhookRouteHandlers>(
+  handlers: Handlers,
+): (payload: unknown) => Promise<void> {
+  const routeEntries: WebhookRouteEntry[] = Object.entries(handlers)
+    .filter(
+      (entry): entry is [string, WebhookRouteHandlerFunction] =>
+        typeof entry[1] === 'function',
+    )
+    .map(([routeKey, handler]) => {
+      const parsedRoute = parseWebhookRouteKey(routeKey);
+      return {
+        routeKey,
+        eventType: parsedRoute.eventType,
+        action: parsedRoute.action,
+        handler,
+        schema: schemas.get(parsedRoute.eventType),
+      };
+    })
+    .sort((left, right) => Number(Boolean(right.action)) - Number(Boolean(left.action)));
+
+  return async (payload: unknown): Promise<void> => {
+    for (const routeEntry of routeEntries) {
+      const parsed = routeEntry.schema.safeParse(payload);
+      if (!parsed.success) {
+        continue;
+      }
+
+      if (routeEntry.action) {
+        const parsedAction =
+          typeof parsed.data === 'object' && parsed.data && 'action' in parsed.data
+            ? (parsed.data as { action?: string }).action
+            : undefined;
+
+        if (parsedAction !== routeEntry.action) {
+          continue;
+        }
+      }
+
+      await routeEntry.handler(parsed.data);
+      return;
+    }
+  };
 }

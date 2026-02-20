@@ -120,12 +120,42 @@ function parseWebhook(eventType: string, payload: unknown) {
 `schemas.get` expects the base event name from `x-github-event` (for example,
 `pull_request`), not the action-specific `event.action` string.
 
+### Webhook router
+
+Use `createGithubWebhookRouter` to route unknown payloads to typed handlers.
+
+```ts
+import { createGithubWebhookRouter } from 'github-webhook-schemas/registry';
+
+const routeWebhook = createGithubWebhookRouter({
+  push: (event) => {
+    console.log(`push:${event.repository.full_name}`);
+  },
+  'pull_request.opened': async (event) => {
+    await saveAuditEntry(`opened:${event.pull_request.number}`);
+  },
+});
+
+await routeWebhook(payload);
+```
+
+Router behavior:
+
+- Supports both base event keys (for example, `push`) and action-specific keys
+  (for example, `pull_request.opened`).
+- Checks action-specific handlers before base-event handlers.
+- Returns `Promise<void>` and ignores handler return values.
+- Resolves even when no handler matches.
+
 The registry module also re-exports useful types:
 
 - `WebhookEvent`
 - `WebhookEventName`
 - `WebhookEventMap`
 - `WebhookEvents`
+- `WebhookRouteKey`
+- `WebhookRouteEvent`
+- `WebhookRouteHandlers`
 
 ## Type guards and TypeScript types
 
