@@ -7,3 +7,13 @@ export * from './schemas/index.js';
 
 // Re-export event types from @octokit/webhooks for convenience
 export { emitterEventNames as eventTypes } from '@octokit/webhooks';
+
+// Re-export router and related types from registry
+export {
+  createGithubWebhookRouter,
+  type WebhookHandler,
+  type WebhookRouteEvent,
+  type WebhookRouteHandlers,
+  type WebhookRouteKey,
+  type WebhookRouter,
+} from './registry.js';

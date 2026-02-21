@@ -254,12 +254,12 @@ export type WebhookHandler<K extends WebhookRouteKey> = (
 export type WebhookErrorHandler = (error: unknown) => void;
 
 export interface WebhookRouter {
-  on<K extends WebhookRouteKey>(event: K, handler: WebhookHandler<K>): this;
-  on(event: 'error', handler: WebhookErrorHandler): this;
-  off<K extends WebhookRouteKey>(event: K, handler: WebhookHandler<K>): this;
-  off(event: 'error', handler: WebhookErrorHandler): this;
-  removeAllListeners(event?: string): this;
-  receive(payload: unknown): void;
+  (payload: unknown): void;
+  on<K extends WebhookRouteKey>(event: K, handler: WebhookHandler<K>): WebhookRouter;
+  on(event: 'error', handler: WebhookErrorHandler): WebhookRouter;
+  off<K extends WebhookRouteKey>(event: K, handler: WebhookHandler<K>): WebhookRouter;
+  off(event: 'error', handler: WebhookErrorHandler): WebhookRouter;
+  removeAllListeners(event?: string): WebhookRouter;
 }
 
 const schemaRegistry = new Map<WebhookEventName, z.ZodTypeAny>([
@@ -311,16 +311,6 @@ export type WebhookRouteHandlers = Partial<{
   ) => void | Promise<void>;
 }>;
 
-type WebhookRouteHandlerFunction = (event: unknown) => void | Promise<void>;
-
-type WebhookRouteEntry = {
-  routeKey: string;
-  eventType: WebhookEventName;
-  action?: string;
-  handler: WebhookRouteHandlerFunction;
-  schema: z.ZodTypeAny;
-};
-
 function parseWebhookRouteKey(routeKey: string): {
   eventType: WebhookEventName;
   action?: string;
@@ -332,51 +322,7 @@ function parseWebhookRouteKey(routeKey: string): {
   return info;
 }
 
-export function createGithubWebhookRouter<Handlers extends WebhookRouteHandlers>(
-  handlers: Handlers,
-): (payload: unknown) => Promise<void> {
-  const routeEntries: WebhookRouteEntry[] = Object.entries(handlers)
-    .filter(
-      (entry): entry is [string, WebhookRouteHandlerFunction] =>
-        typeof entry[1] === 'function',
-    )
-    .map(([routeKey, handler]) => {
-      const parsedRoute = parseWebhookRouteKey(routeKey);
-      return {
-        routeKey,
-        eventType: parsedRoute.eventType,
-        action: parsedRoute.action,
-        handler,
-        schema: schemas.get(parsedRoute.eventType),
-      };
-    })
-    .sort((left, right) => Number(Boolean(right.action)) - Number(Boolean(left.action)));
-
-  return async (payload: unknown): Promise<void> => {
-    for (const routeEntry of routeEntries) {
-      const parsed = routeEntry.schema.safeParse(payload);
-      if (!parsed.success) {
-        continue;
-      }
-
-      if (routeEntry.action) {
-        const parsedAction =
-          typeof parsed.data === 'object' && parsed.data && 'action' in parsed.data
-            ? (parsed.data as { action?: string }).action
-            : undefined;
-
-        if (parsedAction !== routeEntry.action) {
-          continue;
-        }
-      }
-
-      await routeEntry.handler(parsed.data);
-      return;
-    }
-  };
-}
-
-export function createWebhookRouter(): WebhookRouter {
+export function createGithubWebhookRouter(handlers?: WebhookRouteHandlers): WebhookRouter {
   type Handler = (arg: unknown) => void | Promise<void>;
   const listeners = new Map<string, Set<Handler>>();
 
@@ -400,88 +346,94 @@ export function createWebhookRouter(): WebhookRouter {
     }
   }
 
-  return {
-    on(event: string, handler: Handler) {
+  function callHandler(handler: Handler, data: unknown): void {
+    try {
+      const result = handler(data);
+      if (result instanceof Promise) {
+        result.catch(handleError);
+      }
+    } catch (err) {
+      handleError(err);
+    }
+  }
+
+  function receive(payload: unknown): void {
+    const activeSnakeEventTypes = new Set<WebhookEventName>();
+    for (const key of listeners.keys()) {
+      if (key === 'error') continue;
+      const info = routeKeyInfoMap[key];
+      if (info) {
+        activeSnakeEventTypes.add(info.eventType);
+      }
+    }
+
+    for (const [eventType, schema] of schemaRegistry) {
+      if (!activeSnakeEventTypes.has(eventType)) continue;
+
+      const parsed = schema.safeParse(payload);
+      if (!parsed.success) continue;
+
+      const action =
+        typeof parsed.data === 'object' && parsed.data && 'action' in parsed.data
+          ? (parsed.data as { action?: string }).action
+          : undefined;
+
+      const camelBase = snakeToCamelBaseMap[eventType];
+      if (!camelBase) continue;
+
+      // Emit action-specific event first (more specific)
+      if (action) {
+        const camelActionKey = camelBase + actionToPascal(action);
+        const actionListeners = listeners.get(camelActionKey);
+        if (actionListeners) {
+          for (const handler of actionListeners) {
+            callHandler(handler, parsed.data);
+          }
+        }
+      }
+
+      // Emit base event
+      const baseListeners = listeners.get(camelBase);
+      if (baseListeners) {
+        for (const handler of baseListeners) {
+          callHandler(handler, parsed.data);
+        }
+      }
+
+      return;
+    }
+  }
+
+  const router: WebhookRouter = Object.assign(receive, {
+    on(event: string, handler: Handler): WebhookRouter {
       getListeners(event).add(handler);
-      return this;
+      return router;
     },
-
-    off(event: string, handler: Handler) {
+    off(event: string, handler: Handler): WebhookRouter {
       listeners.get(event)?.delete(handler);
-      return this;
+      return router;
     },
-
-    removeAllListeners(event?: string) {
+    removeAllListeners(event?: string): WebhookRouter {
       if (event) {
         listeners.delete(event);
       } else {
         listeners.clear();
       }
-      return this;
+      return router;
     },
+  });
 
-    receive(payload: unknown) {
-      // Collect snake_case event types that have at least one listener (via camelCase keys)
-      const activeSnakeEventTypes = new Set<WebhookEventName>();
-      for (const key of listeners.keys()) {
-        if (key === 'error') continue;
-        const info = routeKeyInfoMap[key];
-        if (info) {
-          activeSnakeEventTypes.add(info.eventType);
-        }
+  // Register initial handlers from config object
+  if (handlers) {
+    for (const [routeKey, handler] of Object.entries(handlers)) {
+      if (typeof handler === 'function') {
+        parseWebhookRouteKey(routeKey);
+        getListeners(routeKey).add(handler as Handler);
       }
+    }
+  }
 
-      for (const [eventType, schema] of schemaRegistry) {
-        if (!activeSnakeEventTypes.has(eventType)) continue;
-
-        const parsed = schema.safeParse(payload);
-        if (!parsed.success) continue;
-
-        const action =
-          typeof parsed.data === 'object' && parsed.data && 'action' in parsed.data
-            ? (parsed.data as { action?: string }).action
-            : undefined;
-
-        const camelBase = snakeToCamelBaseMap[eventType];
-        if (!camelBase) continue;
-
-        // Emit action-specific event first (more specific)
-        if (action) {
-          const camelActionKey = camelBase + actionToPascal(action);
-          const actionListeners = listeners.get(camelActionKey);
-          if (actionListeners) {
-            for (const handler of actionListeners) {
-              try {
-                const result = handler(parsed.data);
-                if (result instanceof Promise) {
-                  result.catch(handleError);
-                }
-              } catch (err) {
-                handleError(err);
-              }
-            }
-          }
-        }
-
-        // Emit base event
-        const baseListeners = listeners.get(camelBase);
-        if (baseListeners) {
-          for (const handler of baseListeners) {
-            try {
-              const result = handler(parsed.data);
-              if (result instanceof Promise) {
-                result.catch(handleError);
-              }
-            } catch (err) {
-              handleError(err);
-            }
-          }
-        }
-
-        return;
-      }
-    },
-  };
+  return router;
 }
 `;
 }
