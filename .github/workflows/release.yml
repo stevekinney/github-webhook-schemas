@@ -39,6 +39,18 @@ jobs:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Configure npm for trusted publishing
+        shell: bash
+        run: |
+          echo "NPM_CONFIG_USERCONFIG=$HOME/.npmrc" >> "$GITHUB_ENV"
+          cat > "$HOME/.npmrc" <<'EOF'
+          registry=https://registry.npmjs.org/
+          always-auth=false
+          EOF
+
+      - name: Upgrade npm
+        run: npm install -g npm@11.5.1
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
@@ -55,6 +67,5 @@ jobs:
 
       - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'true'
         run: npm publish
