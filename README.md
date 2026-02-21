@@ -122,30 +122,43 @@ function parseWebhook(eventType: string, payload: unknown) {
 
 ### Webhook router
 
-Use `createGithubWebhookRouter` to route unknown payloads to typed handlers.
+Use `createWebhookRouter` to route unknown payloads to typed handlers using an
+event emitter pattern.
 
 ```ts
-import { createGithubWebhookRouter } from 'github-webhook-schemas/registry';
+import { createWebhookRouter } from 'github-webhook-schemas/registry';
 
-const routeWebhook = createGithubWebhookRouter({
-  push: (event) => {
-    console.log(`push:${event.repository.full_name}`);
-  },
-  'pull_request.opened': async (event) => {
-    await saveAuditEntry(`opened:${event.pull_request.number}`);
-  },
+const router = createWebhookRouter();
+
+router.on('push', (event) => {
+  console.log(`push:${event.repository.full_name}`);
 });
 
-await routeWebhook(payload);
+router.on('pullRequestOpened', (event) => {
+  console.log(`opened:${event.pull_request.number}`);
+});
+
+router.on('error', (err) => {
+  console.error('Handler error:', err);
+});
+
+// In your server handler — synchronous, fire-and-forget
+router.receive(payload);
 ```
 
 Router behavior:
 
 - Supports both base event keys (for example, `push`) and action-specific keys
-  (for example, `pull_request.opened`).
-- Checks action-specific handlers before base-event handlers.
-- Returns `Promise<void>` and ignores handler return values.
-- Resolves even when no handler matches.
+  (for example, `pullRequestOpened`).
+- A payload with an action emits both the action-specific event and the base
+  event (action-specific first).
+- Multiple handlers can be registered for the same event.
+- `receive(payload)` is synchronous. Async handlers run independently; rejected
+  promises are forwarded to the `error` event.
+- If a handler throws and no `error` listener is registered, the error is
+  re-thrown.
+- Use `off(event, handler)` to remove a specific handler, or
+  `removeAllListeners()` to clear everything.
 
 The registry module also re-exports useful types:
 
@@ -155,7 +168,31 @@ The registry module also re-exports useful types:
 - `WebhookEvents`
 - `WebhookRouteKey`
 - `WebhookRouteEvent`
+- `WebhookHandler`
+- `WebhookRouter`
 - `WebhookRouteHandlers`
+
+Alternatively, use `createGithubWebhookRouter` for a config-object style where
+you pass all handlers upfront and get back an async function:
+
+```ts
+import { createGithubWebhookRouter } from 'github-webhook-schemas/registry';
+
+const routeWebhook = createGithubWebhookRouter({
+  push: (event) => {
+    console.log(`push:${event.repository.full_name}`);
+  },
+  pullRequestOpened: async (event) => {
+    await saveAuditEntry(`opened:${event.pull_request.number}`);
+  },
+});
+
+await routeWebhook(payload);
+```
+
+This style checks action-specific handlers before base-event handlers and
+invokes only the first match. It returns `Promise<void>` and resolves even when
+no handler matches.
 
 ## Type guards and TypeScript types
 
