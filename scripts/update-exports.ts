@@ -14,6 +14,7 @@ interface ExportConditions {
   types: string;
   bun: string;
   import: string;
+  require: string;
   default: string;
 }
 
@@ -60,6 +61,7 @@ function createExportEntry(distPath: string): ExportConditions {
     types: `${distPath}.d.ts`,
     bun: `${distPath}.js`,
     import: `${distPath}.js`,
+    require: `${distPath}.js`,
     default: `${distPath}.js`,
   };
 }
