@@ -288,6 +288,7 @@ export const schemas = {
     if (!schema) {
       throw new Error(\`No schema registered for event type: \${eventType}\`);
     }
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- tsc requires the assertion here even though the type-aware lint pass (which uses a different project resolution) considers it redundant
     return schema as z.ZodType<WebhookEventMap[EventType]>;
   },
 };

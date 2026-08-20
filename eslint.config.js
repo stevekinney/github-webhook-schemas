@@ -1,7 +1,7 @@
 // eslint.config.js
 import js from '@eslint/js';
+import eslintComments from '@eslint-community/eslint-plugin-eslint-comments';
 import eslintConfigPrettier from 'eslint-config-prettier';
-import eslintComments from 'eslint-plugin-eslint-comments';
 import importPlugin from 'eslint-plugin-import';
 import promise from 'eslint-plugin-promise';
 import regexp from 'eslint-plugin-regexp';
