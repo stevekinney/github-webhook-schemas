@@ -130,6 +130,8 @@ export const InstallationSchema = z.object({
 
 export type Installation = InstallationOctokit;
 
-export function isInstallation(value: unknown): value is Installation {
+export function isInstallation(
+  value: unknown,
+): value is z.input<typeof InstallationSchema> {
   return InstallationSchema.safeParse(value).success;
 }

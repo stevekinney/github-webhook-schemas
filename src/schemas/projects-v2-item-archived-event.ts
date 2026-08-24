@@ -35,6 +35,6 @@ export type ProjectsV2ItemArchivedEvent = ProjectsV2ItemArchivedEventOctokit;
 
 export function isProjectsV2ItemArchivedEvent(
   value: unknown,
-): value is ProjectsV2ItemArchivedEvent {
+): value is z.input<typeof ProjectsV2ItemArchivedEventSchema> {
   return ProjectsV2ItemArchivedEventSchema.safeParse(value).success;
 }

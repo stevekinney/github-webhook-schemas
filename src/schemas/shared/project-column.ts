@@ -19,6 +19,8 @@ export const ProjectColumnSchema = z.object({
 
 export type ProjectColumn = ProjectColumnOctokit;
 
-export function isProjectColumn(value: unknown): value is ProjectColumn {
+export function isProjectColumn(
+  value: unknown,
+): value is z.input<typeof ProjectColumnSchema> {
   return ProjectColumnSchema.safeParse(value).success;
 }

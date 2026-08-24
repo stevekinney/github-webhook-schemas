@@ -32,6 +32,6 @@ export type DependabotAlertFixedEvent = DependabotAlertFixedEventOctokit;
 
 export function isDependabotAlertFixedEvent(
   value: unknown,
-): value is DependabotAlertFixedEvent {
+): value is z.input<typeof DependabotAlertFixedEventSchema> {
   return DependabotAlertFixedEventSchema.safeParse(value).success;
 }

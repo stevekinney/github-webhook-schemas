@@ -26,6 +26,6 @@ export const ProjectSchema = z.object({
 
 export type Project = ProjectOctokit;
 
-export function isProject(value: unknown): value is Project {
+export function isProject(value: unknown): value is z.input<typeof ProjectSchema> {
   return ProjectSchema.safeParse(value).success;
 }

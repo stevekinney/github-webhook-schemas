@@ -19,6 +19,6 @@ export type WorkflowStepInProgress = WorkflowStepInProgressOctokit;
 
 export function isWorkflowStepInProgress(
   value: unknown,
-): value is WorkflowStepInProgress {
+): value is z.input<typeof WorkflowStepInProgressSchema> {
   return WorkflowStepInProgressSchema.safeParse(value).success;
 }

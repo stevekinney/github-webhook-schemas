@@ -23,6 +23,8 @@ export const RepositoryImportEventSchema = z.object({
 
 export type RepositoryImportEvent = RepositoryImportEventOctokit;
 
-export function isRepositoryImportEvent(value: unknown): value is RepositoryImportEvent {
+export function isRepositoryImportEvent(
+  value: unknown,
+): value is z.input<typeof RepositoryImportEventSchema> {
   return RepositoryImportEventSchema.safeParse(value).success;
 }

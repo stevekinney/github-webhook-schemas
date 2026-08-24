@@ -38,6 +38,6 @@ export type WorkflowJobCompletedEvent = WorkflowJobCompletedEventOctokit;
 
 export function isWorkflowJobCompletedEvent(
   value: unknown,
-): value is WorkflowJobCompletedEvent {
+): value is z.input<typeof WorkflowJobCompletedEventSchema> {
   return WorkflowJobCompletedEventSchema.safeParse(value).success;
 }

@@ -37,6 +37,8 @@ export const ReleaseEditedEventSchema = z.object({
 
 export type ReleaseEditedEvent = ReleaseEditedEventOctokit;
 
-export function isReleaseEditedEvent(value: unknown): value is ReleaseEditedEvent {
+export function isReleaseEditedEvent(
+  value: unknown,
+): value is z.input<typeof ReleaseEditedEventSchema> {
   return ReleaseEditedEventSchema.safeParse(value).success;
 }

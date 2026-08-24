@@ -57,6 +57,6 @@ export type PullRequestReviewComment = PullRequestReviewCommentOctokit;
 
 export function isPullRequestReviewComment(
   value: unknown,
-): value is PullRequestReviewComment {
+): value is z.input<typeof PullRequestReviewCommentSchema> {
   return PullRequestReviewCommentSchema.safeParse(value).success;
 }

@@ -59,6 +59,6 @@ export type DiscussionAnsweredEvent = DiscussionAnsweredEventOctokit;
 
 export function isDiscussionAnsweredEvent(
   value: unknown,
-): value is DiscussionAnsweredEvent {
+): value is z.input<typeof DiscussionAnsweredEventSchema> {
   return DiscussionAnsweredEventSchema.safeParse(value).success;
 }

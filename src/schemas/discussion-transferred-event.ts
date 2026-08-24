@@ -31,6 +31,6 @@ export type DiscussionTransferredEvent = DiscussionTransferredEventOctokit;
 
 export function isDiscussionTransferredEvent(
   value: unknown,
-): value is DiscussionTransferredEvent {
+): value is z.input<typeof DiscussionTransferredEventSchema> {
   return DiscussionTransferredEventSchema.safeParse(value).success;
 }

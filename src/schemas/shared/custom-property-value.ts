@@ -13,6 +13,8 @@ export const CustomPropertyValueSchema = z.object({
 
 export type CustomPropertyValue = CustomPropertyValueOctokit;
 
-export function isCustomPropertyValue(value: unknown): value is CustomPropertyValue {
+export function isCustomPropertyValue(
+  value: unknown,
+): value is z.input<typeof CustomPropertyValueSchema> {
   return CustomPropertyValueSchema.safeParse(value).success;
 }

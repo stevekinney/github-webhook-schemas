@@ -25,6 +25,6 @@ export type OrganizationMemberRemovedEvent = OrganizationMemberRemovedEventOctok
 
 export function isOrganizationMemberRemovedEvent(
   value: unknown,
-): value is OrganizationMemberRemovedEvent {
+): value is z.input<typeof OrganizationMemberRemovedEventSchema> {
   return OrganizationMemberRemovedEventSchema.safeParse(value).success;
 }

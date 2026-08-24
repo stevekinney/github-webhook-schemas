@@ -32,6 +32,6 @@ export type RepositoryRenamedEvent = RepositoryRenamedEventOctokit;
 
 export function isRepositoryRenamedEvent(
   value: unknown,
-): value is RepositoryRenamedEvent {
+): value is z.input<typeof RepositoryRenamedEventSchema> {
   return RepositoryRenamedEventSchema.safeParse(value).success;
 }

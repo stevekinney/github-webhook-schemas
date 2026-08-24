@@ -88,6 +88,8 @@ export const MetaDeletedEventSchema = z.object({
 
 export type MetaDeletedEvent = MetaDeletedEventOctokit;
 
-export function isMetaDeletedEvent(value: unknown): value is MetaDeletedEvent {
+export function isMetaDeletedEvent(
+  value: unknown,
+): value is z.input<typeof MetaDeletedEventSchema> {
   return MetaDeletedEventSchema.safeParse(value).success;
 }

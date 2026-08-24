@@ -25,6 +25,8 @@ export const ReleaseReleasedEventSchema = z.object({
 
 export type ReleaseReleasedEvent = ReleaseReleasedEventOctokit;
 
-export function isReleaseReleasedEvent(value: unknown): value is ReleaseReleasedEvent {
+export function isReleaseReleasedEvent(
+  value: unknown,
+): value is z.input<typeof ReleaseReleasedEventSchema> {
   return ReleaseReleasedEventSchema.safeParse(value).success;
 }

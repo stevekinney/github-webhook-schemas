@@ -18,6 +18,6 @@ export const MembershipSchema = z.object({
 
 export type Membership = MembershipOctokit;
 
-export function isMembership(value: unknown): value is Membership {
+export function isMembership(value: unknown): value is z.input<typeof MembershipSchema> {
   return MembershipSchema.safeParse(value).success;
 }

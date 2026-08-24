@@ -24,6 +24,6 @@ export const CommitSchema = z.object({
 
 export type Commit = CommitOctokit;
 
-export function isCommit(value: unknown): value is Commit {
+export function isCommit(value: unknown): value is z.input<typeof CommitSchema> {
   return CommitSchema.safeParse(value).success;
 }

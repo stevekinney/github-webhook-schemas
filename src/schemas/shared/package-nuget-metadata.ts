@@ -27,6 +27,8 @@ export const PackageNugetMetadataSchema = z.object({
 
 export type PackageNugetMetadata = PackageNugetMetadataOctokit;
 
-export function isPackageNugetMetadata(value: unknown): value is PackageNugetMetadata {
+export function isPackageNugetMetadata(
+  value: unknown,
+): value is z.input<typeof PackageNugetMetadataSchema> {
   return PackageNugetMetadataSchema.safeParse(value).success;
 }

@@ -59,6 +59,8 @@ export const RepositoryLiteSchema = z.object({
 
 export type RepositoryLite = RepositoryLiteOctokit;
 
-export function isRepositoryLite(value: unknown): value is RepositoryLite {
+export function isRepositoryLite(
+  value: unknown,
+): value is z.input<typeof RepositoryLiteSchema> {
   return RepositoryLiteSchema.safeParse(value).success;
 }

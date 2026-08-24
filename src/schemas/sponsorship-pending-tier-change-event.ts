@@ -31,6 +31,6 @@ export type SponsorshipPendingTierChangeEvent = SponsorshipPendingTierChangeEven
 
 export function isSponsorshipPendingTierChangeEvent(
   value: unknown,
-): value is SponsorshipPendingTierChangeEvent {
+): value is z.input<typeof SponsorshipPendingTierChangeEventSchema> {
   return SponsorshipPendingTierChangeEventSchema.safeParse(value).success;
 }

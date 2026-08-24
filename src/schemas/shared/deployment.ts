@@ -32,6 +32,6 @@ export const DeploymentSchema = z.object({
 
 export type Deployment = DeploymentOctokit;
 
-export function isDeployment(value: unknown): value is Deployment {
+export function isDeployment(value: unknown): value is z.input<typeof DeploymentSchema> {
   return DeploymentSchema.safeParse(value).success;
 }

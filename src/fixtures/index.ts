@@ -1538,6 +1538,24 @@ export function createPullRequestReviewEditedEvent(
   );
 }
 
+export function createPullRequestReviewRequestRemovedEvent(
+  overrides: DeepPartial<SchemaTypes.PullRequestReviewRequestRemovedEvent> = {},
+): SchemaTypes.PullRequestReviewRequestRemovedEvent {
+  return createFixture<SchemaTypes.PullRequestReviewRequestRemovedEvent>(
+    Schemas.PullRequestReviewRequestRemovedEventSchema,
+    overrides,
+  );
+}
+
+export function createPullRequestReviewRequestedEvent(
+  overrides: DeepPartial<SchemaTypes.PullRequestReviewRequestedEvent> = {},
+): SchemaTypes.PullRequestReviewRequestedEvent {
+  return createFixture<SchemaTypes.PullRequestReviewRequestedEvent>(
+    Schemas.PullRequestReviewRequestedEventSchema,
+    overrides,
+  );
+}
+
 export function createPullRequestReviewSubmittedEvent(
   overrides: DeepPartial<SchemaTypes.PullRequestReviewSubmittedEvent> = {},
 ): SchemaTypes.PullRequestReviewSubmittedEvent {

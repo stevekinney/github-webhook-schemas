@@ -36,6 +36,6 @@ export type DependabotAlertCreatedEvent = DependabotAlertCreatedEventOctokit;
 
 export function isDependabotAlertCreatedEvent(
   value: unknown,
-): value is DependabotAlertCreatedEvent {
+): value is z.input<typeof DependabotAlertCreatedEventSchema> {
   return DependabotAlertCreatedEventSchema.safeParse(value).success;
 }

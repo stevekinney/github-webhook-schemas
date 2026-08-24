@@ -25,6 +25,8 @@ export const MilestoneDeletedEventSchema = z.object({
 
 export type MilestoneDeletedEvent = MilestoneDeletedEventOctokit;
 
-export function isMilestoneDeletedEvent(value: unknown): value is MilestoneDeletedEvent {
+export function isMilestoneDeletedEvent(
+  value: unknown,
+): value is z.input<typeof MilestoneDeletedEventSchema> {
   return MilestoneDeletedEventSchema.safeParse(value).success;
 }

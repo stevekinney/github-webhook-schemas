@@ -27,6 +27,6 @@ export type ProjectColumnMovedEvent = ProjectColumnMovedEventOctokit;
 
 export function isProjectColumnMovedEvent(
   value: unknown,
-): value is ProjectColumnMovedEvent {
+): value is z.input<typeof ProjectColumnMovedEventSchema> {
   return ProjectColumnMovedEventSchema.safeParse(value).success;
 }

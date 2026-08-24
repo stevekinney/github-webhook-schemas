@@ -21,6 +21,6 @@ export const WorkflowSchema = z.object({
 
 export type Workflow = WorkflowOctokit;
 
-export function isWorkflow(value: unknown): value is Workflow {
+export function isWorkflow(value: unknown): value is z.input<typeof WorkflowSchema> {
   return WorkflowSchema.safeParse(value).success;
 }

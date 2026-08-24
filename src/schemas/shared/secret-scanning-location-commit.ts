@@ -22,6 +22,6 @@ export type SecretScanningLocationCommit = SecretScanningLocationCommitOctokit;
 
 export function isSecretScanningLocationCommit(
   value: unknown,
-): value is SecretScanningLocationCommit {
+): value is z.input<typeof SecretScanningLocationCommitSchema> {
   return SecretScanningLocationCommitSchema.safeParse(value).success;
 }

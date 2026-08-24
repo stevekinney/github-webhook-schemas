@@ -50,6 +50,6 @@ export type SecretScanningAlertLocationCreatedEvent =
 
 export function isSecretScanningAlertLocationCreatedEvent(
   value: unknown,
-): value is SecretScanningAlertLocationCreatedEvent {
+): value is z.input<typeof SecretScanningAlertLocationCreatedEventSchema> {
   return SecretScanningAlertLocationCreatedEventSchema.safeParse(value).success;
 }

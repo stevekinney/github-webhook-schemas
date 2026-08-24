@@ -108,6 +108,6 @@ export type PullRequestReviewCommentDeletedEvent =
 
 export function isPullRequestReviewCommentDeletedEvent(
   value: unknown,
-): value is PullRequestReviewCommentDeletedEvent {
+): value is z.input<typeof PullRequestReviewCommentDeletedEventSchema> {
   return PullRequestReviewCommentDeletedEventSchema.safeParse(value).success;
 }

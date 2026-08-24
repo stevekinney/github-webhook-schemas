@@ -36,6 +36,6 @@ export type PullRequestConvertedToDraftEvent = PullRequestConvertedToDraftEventO
 
 export function isPullRequestConvertedToDraftEvent(
   value: unknown,
-): value is PullRequestConvertedToDraftEvent {
+): value is z.input<typeof PullRequestConvertedToDraftEventSchema> {
   return PullRequestConvertedToDraftEventSchema.safeParse(value).success;
 }

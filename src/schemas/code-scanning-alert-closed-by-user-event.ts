@@ -74,6 +74,6 @@ export type CodeScanningAlertClosedByUserEvent =
 
 export function isCodeScanningAlertClosedByUserEvent(
   value: unknown,
-): value is CodeScanningAlertClosedByUserEvent {
+): value is z.input<typeof CodeScanningAlertClosedByUserEventSchema> {
   return CodeScanningAlertClosedByUserEventSchema.safeParse(value).success;
 }

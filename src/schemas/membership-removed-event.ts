@@ -34,6 +34,6 @@ export type MembershipRemovedEvent = MembershipRemovedEventOctokit;
 
 export function isMembershipRemovedEvent(
   value: unknown,
-): value is MembershipRemovedEvent {
+): value is z.input<typeof MembershipRemovedEventSchema> {
   return MembershipRemovedEventSchema.safeParse(value).success;
 }

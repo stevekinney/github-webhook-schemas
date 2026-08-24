@@ -163,6 +163,7 @@ Router behavior:
 The registry module also re-exports useful types:
 
 - `WebhookEvent`
+- `WebhookEventInput`
 - `WebhookEventName`
 - `WebhookEventMap`
 - `WebhookEvents`
@@ -199,21 +200,24 @@ no handler matches.
 Every schema exports:
 
 - `XxxEventSchema` (the Zod schema)
-- `XxxEvent` (the TypeScript type)
-- `isXxxEvent` (a type guard)
+- `XxxEvent` (the parsed output type)
+- `isXxxEvent` (a type guard for the accepted input type)
 
 Example:
 
 ```ts
-import { isPushEvent, type PushEvent } from 'github-webhook-schemas/push-event';
+import { isPushEvent } from 'github-webhook-schemas/push-event';
 
 function handleWebhook(payload: unknown) {
   if (isPushEvent(payload)) {
-    const event: PushEvent = payload;
-    console.log(`Push to ${event.repository.full_name}`);
+    console.log(`Push to ${payload.repository.full_name}`);
   }
 }
 ```
+
+Guards narrow the original value to `z.input<typeof XxxEventSchema>`. Use
+`parse` or `safeParse` and read its returned data when you need the parsed
+`XxxEvent` output, including defaults or transforms.
 
 You can also infer types directly from a schema:
 
@@ -236,6 +240,22 @@ const MinimalPushSchema = PushEventSchema.pick({
   repository: true,
 }).required();
 ```
+
+### Validate only fields that are present
+
+GitHub occasionally omits fields that its published webhook types mark as required.
+For "validate what's present" semantics, wrap a schema with `deepPartial`:
+
+```ts
+import { deepPartial } from 'github-webhook-schemas/deep-partial';
+import { schemas } from 'github-webhook-schemas/registry';
+
+const LoosePullRequestSchema = deepPartial(schemas.get('pull_request'));
+const result = LoosePullRequestSchema.safeParse(payload);
+```
+
+Every object property becomes optional recursively. Values that are present must
+still match the original schema.
 
 ## Fixtures
 

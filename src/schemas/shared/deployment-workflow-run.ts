@@ -54,6 +54,8 @@ export const DeploymentWorkflowRunSchema = z.object({
 
 export type DeploymentWorkflowRun = DeploymentWorkflowRunOctokit;
 
-export function isDeploymentWorkflowRun(value: unknown): value is DeploymentWorkflowRun {
+export function isDeploymentWorkflowRun(
+  value: unknown,
+): value is z.input<typeof DeploymentWorkflowRunSchema> {
   return DeploymentWorkflowRunSchema.safeParse(value).success;
 }

@@ -60,6 +60,6 @@ export type SecurityAdvisoryWithdrawnEvent = SecurityAdvisoryWithdrawnEventOctok
 
 export function isSecurityAdvisoryWithdrawnEvent(
   value: unknown,
-): value is SecurityAdvisoryWithdrawnEvent {
+): value is z.input<typeof SecurityAdvisoryWithdrawnEventSchema> {
   return SecurityAdvisoryWithdrawnEventSchema.safeParse(value).success;
 }

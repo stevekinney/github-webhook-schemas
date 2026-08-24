@@ -42,6 +42,8 @@ export const MilestoneEditedEventSchema = z.object({
 
 export type MilestoneEditedEvent = MilestoneEditedEventOctokit;
 
-export function isMilestoneEditedEvent(value: unknown): value is MilestoneEditedEvent {
+export function isMilestoneEditedEvent(
+  value: unknown,
+): value is z.input<typeof MilestoneEditedEventSchema> {
   return MilestoneEditedEventSchema.safeParse(value).success;
 }

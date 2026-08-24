@@ -25,6 +25,8 @@ export const ProjectReopenedEventSchema = z.object({
 
 export type ProjectReopenedEvent = ProjectReopenedEventOctokit;
 
-export function isProjectReopenedEvent(value: unknown): value is ProjectReopenedEvent {
+export function isProjectReopenedEvent(
+  value: unknown,
+): value is z.input<typeof ProjectReopenedEventSchema> {
   return ProjectReopenedEventSchema.safeParse(value).success;
 }

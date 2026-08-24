@@ -25,6 +25,8 @@ export const TeamDeletedEventSchema = z.object({
 
 export type TeamDeletedEvent = TeamDeletedEventOctokit;
 
-export function isTeamDeletedEvent(value: unknown): value is TeamDeletedEvent {
+export function isTeamDeletedEvent(
+  value: unknown,
+): value is z.input<typeof TeamDeletedEventSchema> {
   return TeamDeletedEventSchema.safeParse(value).success;
 }

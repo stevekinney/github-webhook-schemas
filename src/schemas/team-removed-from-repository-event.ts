@@ -27,6 +27,6 @@ export type TeamRemovedFromRepositoryEvent = TeamRemovedFromRepositoryEventOctok
 
 export function isTeamRemovedFromRepositoryEvent(
   value: unknown,
-): value is TeamRemovedFromRepositoryEvent {
+): value is z.input<typeof TeamRemovedFromRepositoryEventSchema> {
   return TeamRemovedFromRepositoryEventSchema.safeParse(value).success;
 }

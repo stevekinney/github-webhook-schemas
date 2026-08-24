@@ -22,6 +22,8 @@ export const WorkflowStepCompletedSchema = z.object({
 
 export type WorkflowStepCompleted = WorkflowStepCompletedOctokit;
 
-export function isWorkflowStepCompleted(value: unknown): value is WorkflowStepCompleted {
+export function isWorkflowStepCompleted(
+  value: unknown,
+): value is z.input<typeof WorkflowStepCompletedSchema> {
   return WorkflowStepCompletedSchema.safeParse(value).success;
 }

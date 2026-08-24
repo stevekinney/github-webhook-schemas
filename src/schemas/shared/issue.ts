@@ -71,6 +71,6 @@ export const IssueSchema = z.object({
 
 export type Issue = IssueOctokit;
 
-export function isIssue(value: unknown): value is Issue {
+export function isIssue(value: unknown): value is z.input<typeof IssueSchema> {
   return IssueSchema.safeParse(value).success;
 }

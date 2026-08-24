@@ -65,6 +65,6 @@ export type CheckSuiteCompletedEvent = CheckSuiteCompletedEventOctokit;
 
 export function isCheckSuiteCompletedEvent(
   value: unknown,
-): value is CheckSuiteCompletedEvent {
+): value is z.input<typeof CheckSuiteCompletedEventSchema> {
   return CheckSuiteCompletedEventSchema.safeParse(value).success;
 }

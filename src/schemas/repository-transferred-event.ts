@@ -32,6 +32,6 @@ export type RepositoryTransferredEvent = RepositoryTransferredEventOctokit;
 
 export function isRepositoryTransferredEvent(
   value: unknown,
-): value is RepositoryTransferredEvent {
+): value is z.input<typeof RepositoryTransferredEventSchema> {
   return RepositoryTransferredEventSchema.safeParse(value).success;
 }

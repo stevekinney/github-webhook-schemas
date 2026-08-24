@@ -95,6 +95,6 @@ export type DeploymentReviewRejectedEvent = DeploymentReviewRejectedEventOctokit
 
 export function isDeploymentReviewRejectedEvent(
   value: unknown,
-): value is DeploymentReviewRejectedEvent {
+): value is z.input<typeof DeploymentReviewRejectedEventSchema> {
   return DeploymentReviewRejectedEventSchema.safeParse(value).success;
 }

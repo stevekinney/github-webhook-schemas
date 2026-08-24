@@ -31,6 +31,6 @@ export type InstallationRepositoriesRemovedEvent =
 
 export function isInstallationRepositoriesRemovedEvent(
   value: unknown,
-): value is InstallationRepositoriesRemovedEvent {
+): value is z.input<typeof InstallationRepositoriesRemovedEventSchema> {
   return InstallationRepositoriesRemovedEventSchema.safeParse(value).success;
 }

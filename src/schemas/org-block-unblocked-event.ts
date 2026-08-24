@@ -24,6 +24,6 @@ export type OrgBlockUnblockedEvent = OrgBlockUnblockedEventOctokit;
 
 export function isOrgBlockUnblockedEvent(
   value: unknown,
-): value is OrgBlockUnblockedEvent {
+): value is z.input<typeof OrgBlockUnblockedEventSchema> {
   return OrgBlockUnblockedEventSchema.safeParse(value).success;
 }

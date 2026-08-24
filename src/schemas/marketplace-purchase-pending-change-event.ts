@@ -44,6 +44,6 @@ export type MarketplacePurchasePendingChangeEvent =
 
 export function isMarketplacePurchasePendingChangeEvent(
   value: unknown,
-): value is MarketplacePurchasePendingChangeEvent {
+): value is z.input<typeof MarketplacePurchasePendingChangeEventSchema> {
   return MarketplacePurchasePendingChangeEventSchema.safeParse(value).success;
 }

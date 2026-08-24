@@ -29,6 +29,6 @@ export type PullRequestDequeuedEvent = PullRequestDequeuedEventOctokit;
 
 export function isPullRequestDequeuedEvent(
   value: unknown,
-): value is PullRequestDequeuedEvent {
+): value is z.input<typeof PullRequestDequeuedEventSchema> {
   return PullRequestDequeuedEventSchema.safeParse(value).success;
 }

@@ -30,6 +30,6 @@ export type InstallationCreatedEvent = InstallationCreatedEventOctokit;
 
 export function isInstallationCreatedEvent(
   value: unknown,
-): value is InstallationCreatedEvent {
+): value is z.input<typeof InstallationCreatedEventSchema> {
   return InstallationCreatedEventSchema.safeParse(value).success;
 }

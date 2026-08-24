@@ -19,6 +19,8 @@ export const SponsorshipTierSchema = z.object({
 
 export type SponsorshipTier = SponsorshipTierOctokit;
 
-export function isSponsorshipTier(value: unknown): value is SponsorshipTier {
+export function isSponsorshipTier(
+  value: unknown,
+): value is z.input<typeof SponsorshipTierSchema> {
   return SponsorshipTierSchema.safeParse(value).success;
 }

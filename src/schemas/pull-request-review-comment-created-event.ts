@@ -108,6 +108,6 @@ export type PullRequestReviewCommentCreatedEvent =
 
 export function isPullRequestReviewCommentCreatedEvent(
   value: unknown,
-): value is PullRequestReviewCommentCreatedEvent {
+): value is z.input<typeof PullRequestReviewCommentCreatedEventSchema> {
   return PullRequestReviewCommentCreatedEventSchema.safeParse(value).success;
 }

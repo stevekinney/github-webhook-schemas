@@ -25,6 +25,8 @@ export const IssuesDeletedEventSchema = z.object({
 
 export type IssuesDeletedEvent = IssuesDeletedEventOctokit;
 
-export function isIssuesDeletedEvent(value: unknown): value is IssuesDeletedEvent {
+export function isIssuesDeletedEvent(
+  value: unknown,
+): value is z.input<typeof IssuesDeletedEventSchema> {
   return IssuesDeletedEventSchema.safeParse(value).success;
 }

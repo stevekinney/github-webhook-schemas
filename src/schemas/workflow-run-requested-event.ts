@@ -29,6 +29,6 @@ export type WorkflowRunRequestedEvent = WorkflowRunRequestedEventOctokit;
 
 export function isWorkflowRunRequestedEvent(
   value: unknown,
-): value is WorkflowRunRequestedEvent {
+): value is z.input<typeof WorkflowRunRequestedEventSchema> {
   return WorkflowRunRequestedEventSchema.safeParse(value).success;
 }

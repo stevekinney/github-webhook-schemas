@@ -28,6 +28,6 @@ export type OrganizationRenamedEvent = OrganizationRenamedEventOctokit;
 
 export function isOrganizationRenamedEvent(
   value: unknown,
-): value is OrganizationRenamedEvent {
+): value is z.input<typeof OrganizationRenamedEventSchema> {
   return OrganizationRenamedEventSchema.safeParse(value).success;
 }

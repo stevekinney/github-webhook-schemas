@@ -33,6 +33,8 @@ export const MemberAddedEventSchema = z.object({
 
 export type MemberAddedEvent = MemberAddedEventOctokit;
 
-export function isMemberAddedEvent(value: unknown): value is MemberAddedEvent {
+export function isMemberAddedEvent(
+  value: unknown,
+): value is z.input<typeof MemberAddedEventSchema> {
   return MemberAddedEventSchema.safeParse(value).success;
 }

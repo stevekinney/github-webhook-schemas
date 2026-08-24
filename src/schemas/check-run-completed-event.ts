@@ -99,6 +99,6 @@ export type CheckRunCompletedEvent = CheckRunCompletedEventOctokit;
 
 export function isCheckRunCompletedEvent(
   value: unknown,
-): value is CheckRunCompletedEvent {
+): value is z.input<typeof CheckRunCompletedEventSchema> {
   return CheckRunCompletedEventSchema.safeParse(value).success;
 }

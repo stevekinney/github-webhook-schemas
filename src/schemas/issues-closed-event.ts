@@ -30,6 +30,8 @@ export const IssuesClosedEventSchema = z.object({
 
 export type IssuesClosedEvent = IssuesClosedEventOctokit;
 
-export function isIssuesClosedEvent(value: unknown): value is IssuesClosedEvent {
+export function isIssuesClosedEvent(
+  value: unknown,
+): value is z.input<typeof IssuesClosedEventSchema> {
   return IssuesClosedEventSchema.safeParse(value).success;
 }

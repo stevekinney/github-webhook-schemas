@@ -34,6 +34,8 @@ export const MarketplacePurchaseSchema = z.object({
 
 export type MarketplacePurchase = MarketplacePurchaseOctokit;
 
-export function isMarketplacePurchase(value: unknown): value is MarketplacePurchase {
+export function isMarketplacePurchase(
+  value: unknown,
+): value is z.input<typeof MarketplacePurchaseSchema> {
   return MarketplacePurchaseSchema.safeParse(value).success;
 }

@@ -35,6 +35,8 @@ export const PageBuildEventSchema = z.object({
 
 export type PageBuildEvent = PageBuildEventOctokit;
 
-export function isPageBuildEvent(value: unknown): value is PageBuildEvent {
+export function isPageBuildEvent(
+  value: unknown,
+): value is z.input<typeof PageBuildEventSchema> {
   return PageBuildEventSchema.safeParse(value).success;
 }

@@ -26,6 +26,8 @@ export const PublicEventSchema = z.object({
 
 export type PublicEvent = PublicEventOctokit;
 
-export function isPublicEvent(value: unknown): value is PublicEvent {
+export function isPublicEvent(
+  value: unknown,
+): value is z.input<typeof PublicEventSchema> {
   return PublicEventSchema.safeParse(value).success;
 }

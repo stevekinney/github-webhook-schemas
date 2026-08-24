@@ -31,6 +31,6 @@ export type ReleaseUnpublishedEvent = ReleaseUnpublishedEventOctokit;
 
 export function isReleaseUnpublishedEvent(
   value: unknown,
-): value is ReleaseUnpublishedEvent {
+): value is z.input<typeof ReleaseUnpublishedEventSchema> {
   return ReleaseUnpublishedEventSchema.safeParse(value).success;
 }

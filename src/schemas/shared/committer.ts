@@ -15,6 +15,6 @@ export const CommitterSchema = z.object({
 
 export type Committer = CommitterOctokit;
 
-export function isCommitter(value: unknown): value is Committer {
+export function isCommitter(value: unknown): value is z.input<typeof CommitterSchema> {
   return CommitterSchema.safeParse(value).success;
 }

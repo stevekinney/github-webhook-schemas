@@ -29,6 +29,6 @@ export type WorkflowRunInProgressEvent = WorkflowRunInProgressEventOctokit;
 
 export function isWorkflowRunInProgressEvent(
   value: unknown,
-): value is WorkflowRunInProgressEvent {
+): value is z.input<typeof WorkflowRunInProgressEventSchema> {
   return WorkflowRunInProgressEventSchema.safeParse(value).success;
 }

@@ -24,6 +24,8 @@ export const OrganizationSchema = z.object({
 
 export type Organization = OrganizationOctokit;
 
-export function isOrganization(value: unknown): value is Organization {
+export function isOrganization(
+  value: unknown,
+): value is z.input<typeof OrganizationSchema> {
   return OrganizationSchema.safeParse(value).success;
 }

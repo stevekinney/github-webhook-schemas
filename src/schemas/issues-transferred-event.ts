@@ -31,6 +31,6 @@ export type IssuesTransferredEvent = IssuesTransferredEventOctokit;
 
 export function isIssuesTransferredEvent(
   value: unknown,
-): value is IssuesTransferredEvent {
+): value is z.input<typeof IssuesTransferredEventSchema> {
   return IssuesTransferredEventSchema.safeParse(value).success;
 }

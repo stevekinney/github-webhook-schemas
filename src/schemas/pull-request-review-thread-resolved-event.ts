@@ -33,6 +33,6 @@ export type PullRequestReviewThreadResolvedEvent =
 
 export function isPullRequestReviewThreadResolvedEvent(
   value: unknown,
-): value is PullRequestReviewThreadResolvedEvent {
+): value is z.input<typeof PullRequestReviewThreadResolvedEventSchema> {
   return PullRequestReviewThreadResolvedEventSchema.safeParse(value).success;
 }

@@ -25,6 +25,6 @@ export type RepositoryCreatedEvent = RepositoryCreatedEventOctokit;
 
 export function isRepositoryCreatedEvent(
   value: unknown,
-): value is RepositoryCreatedEvent {
+): value is z.input<typeof RepositoryCreatedEventSchema> {
   return RepositoryCreatedEventSchema.safeParse(value).success;
 }

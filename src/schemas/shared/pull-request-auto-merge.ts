@@ -17,6 +17,8 @@ export const PullRequestAutoMergeSchema = z.object({
 
 export type PullRequestAutoMerge = PullRequestAutoMergeOctokit;
 
-export function isPullRequestAutoMerge(value: unknown): value is PullRequestAutoMerge {
+export function isPullRequestAutoMerge(
+  value: unknown,
+): value is z.input<typeof PullRequestAutoMergeSchema> {
   return PullRequestAutoMergeSchema.safeParse(value).success;
 }

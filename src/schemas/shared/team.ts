@@ -44,6 +44,6 @@ export const TeamSchema = z.object({
 
 export type Team = TeamOctokit;
 
-export function isTeam(value: unknown): value is Team {
+export function isTeam(value: unknown): value is z.input<typeof TeamSchema> {
   return TeamSchema.safeParse(value).success;
 }

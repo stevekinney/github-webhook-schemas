@@ -17,6 +17,8 @@ export const WorkflowStepQueuedSchema = z.object({
 
 export type WorkflowStepQueued = WorkflowStepQueuedOctokit;
 
-export function isWorkflowStepQueued(value: unknown): value is WorkflowStepQueued {
+export function isWorkflowStepQueued(
+  value: unknown,
+): value is z.input<typeof WorkflowStepQueuedSchema> {
   return WorkflowStepQueuedSchema.safeParse(value).success;
 }

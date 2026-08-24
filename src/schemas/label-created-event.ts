@@ -25,6 +25,8 @@ export const LabelCreatedEventSchema = z.object({
 
 export type LabelCreatedEvent = LabelCreatedEventOctokit;
 
-export function isLabelCreatedEvent(value: unknown): value is LabelCreatedEvent {
+export function isLabelCreatedEvent(
+  value: unknown,
+): value is z.input<typeof LabelCreatedEventSchema> {
   return LabelCreatedEventSchema.safeParse(value).success;
 }

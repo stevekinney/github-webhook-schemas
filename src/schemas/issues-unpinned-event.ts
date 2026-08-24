@@ -25,6 +25,8 @@ export const IssuesUnpinnedEventSchema = z.object({
 
 export type IssuesUnpinnedEvent = IssuesUnpinnedEventOctokit;
 
-export function isIssuesUnpinnedEvent(value: unknown): value is IssuesUnpinnedEvent {
+export function isIssuesUnpinnedEvent(
+  value: unknown,
+): value is z.input<typeof IssuesUnpinnedEventSchema> {
   return IssuesUnpinnedEventSchema.safeParse(value).success;
 }

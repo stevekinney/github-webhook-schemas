@@ -85,6 +85,8 @@ export const WorkflowRunSchema = z.object({
 
 export type WorkflowRun = WorkflowRunOctokit;
 
-export function isWorkflowRun(value: unknown): value is WorkflowRun {
+export function isWorkflowRun(
+  value: unknown,
+): value is z.input<typeof WorkflowRunSchema> {
   return WorkflowRunSchema.safeParse(value).success;
 }

@@ -29,6 +29,6 @@ export const MilestoneSchema = z.object({
 
 export type Milestone = MilestoneOctokit;
 
-export function isMilestone(value: unknown): value is Milestone {
+export function isMilestone(value: unknown): value is z.input<typeof MilestoneSchema> {
   return MilestoneSchema.safeParse(value).success;
 }

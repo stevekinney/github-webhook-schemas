@@ -34,6 +34,6 @@ export type ProjectColumnEditedEvent = ProjectColumnEditedEventOctokit;
 
 export function isProjectColumnEditedEvent(
   value: unknown,
-): value is ProjectColumnEditedEvent {
+): value is z.input<typeof ProjectColumnEditedEventSchema> {
   return ProjectColumnEditedEventSchema.safeParse(value).success;
 }

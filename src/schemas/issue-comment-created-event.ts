@@ -37,6 +37,6 @@ export type IssueCommentCreatedEvent = IssueCommentCreatedEventOctokit;
 
 export function isIssueCommentCreatedEvent(
   value: unknown,
-): value is IssueCommentCreatedEvent {
+): value is z.input<typeof IssueCommentCreatedEventSchema> {
   return IssueCommentCreatedEventSchema.safeParse(value).success;
 }

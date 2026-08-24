@@ -46,6 +46,6 @@ export type MergeGroupDestroyedEvent = MergeGroupDestroyedEventOctokit;
 
 export function isMergeGroupDestroyedEvent(
   value: unknown,
-): value is MergeGroupDestroyedEvent {
+): value is z.input<typeof MergeGroupDestroyedEventSchema> {
   return MergeGroupDestroyedEventSchema.safeParse(value).success;
 }

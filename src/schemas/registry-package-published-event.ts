@@ -199,6 +199,6 @@ export type RegistryPackagePublishedEvent = RegistryPackagePublishedEventOctokit
 
 export function isRegistryPackagePublishedEvent(
   value: unknown,
-): value is RegistryPackagePublishedEvent {
+): value is z.input<typeof RegistryPackagePublishedEventSchema> {
   return RegistryPackagePublishedEventSchema.safeParse(value).success;
 }

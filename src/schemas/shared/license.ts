@@ -16,6 +16,6 @@ export const LicenseSchema = z.object({
 
 export type License = LicenseOctokit;
 
-export function isLicense(value: unknown): value is License {
+export function isLicense(value: unknown): value is z.input<typeof LicenseSchema> {
   return LicenseSchema.safeParse(value).success;
 }

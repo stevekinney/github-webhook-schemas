@@ -138,6 +138,6 @@ export const AppSchema = z.object({
 
 export type App = AppOctokit;
 
-export function isApp(value: unknown): value is App {
+export function isApp(value: unknown): value is z.input<typeof AppSchema> {
   return AppSchema.safeParse(value).success;
 }

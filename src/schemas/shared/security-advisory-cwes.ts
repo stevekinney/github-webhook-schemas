@@ -13,6 +13,8 @@ export const SecurityAdvisoryCwesSchema = z.object({
 
 export type SecurityAdvisoryCwes = SecurityAdvisoryCwesOctokit;
 
-export function isSecurityAdvisoryCwes(value: unknown): value is SecurityAdvisoryCwes {
+export function isSecurityAdvisoryCwes(
+  value: unknown,
+): value is z.input<typeof SecurityAdvisoryCwesSchema> {
   return SecurityAdvisoryCwesSchema.safeParse(value).success;
 }

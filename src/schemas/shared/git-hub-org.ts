@@ -31,6 +31,6 @@ export const GitHubOrgSchema = z.object({
 
 export type GitHubOrg = GitHubOrgOctokit;
 
-export function isGitHubOrg(value: unknown): value is GitHubOrg {
+export function isGitHubOrg(value: unknown): value is z.input<typeof GitHubOrgSchema> {
   return GitHubOrgSchema.safeParse(value).success;
 }

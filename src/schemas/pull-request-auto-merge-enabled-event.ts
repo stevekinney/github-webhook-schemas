@@ -29,6 +29,6 @@ export type PullRequestAutoMergeEnabledEvent = PullRequestAutoMergeEnabledEventO
 
 export function isPullRequestAutoMergeEnabledEvent(
   value: unknown,
-): value is PullRequestAutoMergeEnabledEvent {
+): value is z.input<typeof PullRequestAutoMergeEnabledEventSchema> {
   return PullRequestAutoMergeEnabledEventSchema.safeParse(value).success;
 }

@@ -39,6 +39,8 @@ export const ProjectEditedEventSchema = z.object({
 
 export type ProjectEditedEvent = ProjectEditedEventOctokit;
 
-export function isProjectEditedEvent(value: unknown): value is ProjectEditedEvent {
+export function isProjectEditedEvent(
+  value: unknown,
+): value is z.input<typeof ProjectEditedEventSchema> {
   return ProjectEditedEventSchema.safeParse(value).success;
 }

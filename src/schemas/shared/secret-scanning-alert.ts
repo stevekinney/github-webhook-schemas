@@ -40,6 +40,8 @@ export const SecretScanningAlertSchema = z.object({
 
 export type SecretScanningAlert = SecretScanningAlertOctokit;
 
-export function isSecretScanningAlert(value: unknown): value is SecretScanningAlert {
+export function isSecretScanningAlert(
+  value: unknown,
+): value is z.input<typeof SecretScanningAlertSchema> {
   return SecretScanningAlertSchema.safeParse(value).success;
 }

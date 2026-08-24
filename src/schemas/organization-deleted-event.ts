@@ -25,6 +25,6 @@ export type OrganizationDeletedEvent = OrganizationDeletedEventOctokit;
 
 export function isOrganizationDeletedEvent(
   value: unknown,
-): value is OrganizationDeletedEvent {
+): value is z.input<typeof OrganizationDeletedEventSchema> {
   return OrganizationDeletedEventSchema.safeParse(value).success;
 }

@@ -34,6 +34,6 @@ export type PullRequestMilestonedEvent = PullRequestMilestonedEventOctokit;
 
 export function isPullRequestMilestonedEvent(
   value: unknown,
-): value is PullRequestMilestonedEvent {
+): value is z.input<typeof PullRequestMilestonedEventSchema> {
   return PullRequestMilestonedEventSchema.safeParse(value).success;
 }

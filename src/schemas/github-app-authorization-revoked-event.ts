@@ -18,6 +18,6 @@ export type GithubAppAuthorizationRevokedEvent =
 
 export function isGithubAppAuthorizationRevokedEvent(
   value: unknown,
-): value is GithubAppAuthorizationRevokedEvent {
+): value is z.input<typeof GithubAppAuthorizationRevokedEventSchema> {
   return GithubAppAuthorizationRevokedEventSchema.safeParse(value).success;
 }

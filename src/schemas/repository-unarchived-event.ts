@@ -29,6 +29,6 @@ export type RepositoryUnarchivedEvent = RepositoryUnarchivedEventOctokit;
 
 export function isRepositoryUnarchivedEvent(
   value: unknown,
-): value is RepositoryUnarchivedEvent {
+): value is z.input<typeof RepositoryUnarchivedEventSchema> {
   return RepositoryUnarchivedEventSchema.safeParse(value).success;
 }

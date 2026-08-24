@@ -63,6 +63,6 @@ export type CheckSuiteRerequestedEvent = CheckSuiteRerequestedEventOctokit;
 
 export function isCheckSuiteRerequestedEvent(
   value: unknown,
-): value is CheckSuiteRerequestedEvent {
+): value is z.input<typeof CheckSuiteRerequestedEventSchema> {
   return CheckSuiteRerequestedEventSchema.safeParse(value).success;
 }

@@ -25,6 +25,6 @@ export type CustomPropertyCreatedEvent = CustomPropertyCreatedEventOctokit;
 
 export function isCustomPropertyCreatedEvent(
   value: unknown,
-): value is CustomPropertyCreatedEvent {
+): value is z.input<typeof CustomPropertyCreatedEventSchema> {
   return CustomPropertyCreatedEventSchema.safeParse(value).success;
 }

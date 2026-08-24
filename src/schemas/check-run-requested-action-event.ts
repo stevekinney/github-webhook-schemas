@@ -101,6 +101,6 @@ export type CheckRunRequestedActionEvent = CheckRunRequestedActionEventOctokit;
 
 export function isCheckRunRequestedActionEvent(
   value: unknown,
-): value is CheckRunRequestedActionEvent {
+): value is z.input<typeof CheckRunRequestedActionEventSchema> {
   return CheckRunRequestedActionEventSchema.safeParse(value).success;
 }

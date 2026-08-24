@@ -14,6 +14,6 @@ export type SecretScanningLocationIssueTitle = SecretScanningLocationIssueTitleO
 
 export function isSecretScanningLocationIssueTitle(
   value: unknown,
-): value is SecretScanningLocationIssueTitle {
+): value is z.input<typeof SecretScanningLocationIssueTitleSchema> {
   return SecretScanningLocationIssueTitleSchema.safeParse(value).success;
 }

@@ -35,6 +35,6 @@ export type InstallationSuspendEvent = InstallationSuspendEventOctokit;
 
 export function isInstallationSuspendEvent(
   value: unknown,
-): value is InstallationSuspendEvent {
+): value is z.input<typeof InstallationSuspendEventSchema> {
   return InstallationSuspendEventSchema.safeParse(value).success;
 }

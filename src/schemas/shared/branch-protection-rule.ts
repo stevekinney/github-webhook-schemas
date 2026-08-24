@@ -73,6 +73,8 @@ export const BranchProtectionRuleSchema = z.object({
 
 export type BranchProtectionRule = BranchProtectionRuleOctokit;
 
-export function isBranchProtectionRule(value: unknown): value is BranchProtectionRule {
+export function isBranchProtectionRule(
+  value: unknown,
+): value is z.input<typeof BranchProtectionRuleSchema> {
   return BranchProtectionRuleSchema.safeParse(value).success;
 }

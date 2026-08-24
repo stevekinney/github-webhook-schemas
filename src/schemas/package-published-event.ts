@@ -143,6 +143,8 @@ export const PackagePublishedEventSchema = z.object({
 
 export type PackagePublishedEvent = PackagePublishedEventOctokit;
 
-export function isPackagePublishedEvent(value: unknown): value is PackagePublishedEvent {
+export function isPackagePublishedEvent(
+  value: unknown,
+): value is z.input<typeof PackagePublishedEventSchema> {
   return PackagePublishedEventSchema.safeParse(value).success;
 }

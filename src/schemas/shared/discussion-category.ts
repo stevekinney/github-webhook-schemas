@@ -21,6 +21,8 @@ export const DiscussionCategorySchema = z.object({
 
 export type DiscussionCategory = DiscussionCategoryOctokit;
 
-export function isDiscussionCategory(value: unknown): value is DiscussionCategory {
+export function isDiscussionCategory(
+  value: unknown,
+): value is z.input<typeof DiscussionCategorySchema> {
   return DiscussionCategorySchema.safeParse(value).success;
 }

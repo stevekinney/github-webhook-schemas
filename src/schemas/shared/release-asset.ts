@@ -26,6 +26,8 @@ export const ReleaseAssetSchema = z.object({
 
 export type ReleaseAsset = ReleaseAssetOctokit;
 
-export function isReleaseAsset(value: unknown): value is ReleaseAsset {
+export function isReleaseAsset(
+  value: unknown,
+): value is z.input<typeof ReleaseAssetSchema> {
   return ReleaseAssetSchema.safeParse(value).success;
 }

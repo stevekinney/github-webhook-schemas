@@ -33,6 +33,6 @@ export type IssuesDemilestonedEvent = IssuesDemilestonedEventOctokit;
 
 export function isIssuesDemilestonedEvent(
   value: unknown,
-): value is IssuesDemilestonedEvent {
+): value is z.input<typeof IssuesDemilestonedEventSchema> {
   return IssuesDemilestonedEventSchema.safeParse(value).success;
 }

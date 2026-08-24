@@ -23,6 +23,6 @@ export type OrganizationCustomProperty = OrganizationCustomPropertyOctokit;
 
 export function isOrganizationCustomProperty(
   value: unknown,
-): value is OrganizationCustomProperty {
+): value is z.input<typeof OrganizationCustomPropertySchema> {
   return OrganizationCustomPropertySchema.safeParse(value).success;
 }

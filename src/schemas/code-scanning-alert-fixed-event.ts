@@ -75,6 +75,6 @@ export type CodeScanningAlertFixedEvent = CodeScanningAlertFixedEventOctokit;
 
 export function isCodeScanningAlertFixedEvent(
   value: unknown,
-): value is CodeScanningAlertFixedEvent {
+): value is z.input<typeof CodeScanningAlertFixedEventSchema> {
   return CodeScanningAlertFixedEventSchema.safeParse(value).success;
 }

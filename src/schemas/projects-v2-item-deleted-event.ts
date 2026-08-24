@@ -25,6 +25,6 @@ export type ProjectsV2ItemDeletedEvent = ProjectsV2ItemDeletedEventOctokit;
 
 export function isProjectsV2ItemDeletedEvent(
   value: unknown,
-): value is ProjectsV2ItemDeletedEvent {
+): value is z.input<typeof ProjectsV2ItemDeletedEventSchema> {
   return ProjectsV2ItemDeletedEventSchema.safeParse(value).success;
 }

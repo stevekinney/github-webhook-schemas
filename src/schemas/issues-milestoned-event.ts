@@ -31,6 +31,8 @@ export const IssuesMilestonedEventSchema = z.object({
 
 export type IssuesMilestonedEvent = IssuesMilestonedEventOctokit;
 
-export function isIssuesMilestonedEvent(value: unknown): value is IssuesMilestonedEvent {
+export function isIssuesMilestonedEvent(
+  value: unknown,
+): value is z.input<typeof IssuesMilestonedEventSchema> {
   return IssuesMilestonedEventSchema.safeParse(value).success;
 }

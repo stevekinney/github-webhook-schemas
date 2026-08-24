@@ -45,6 +45,6 @@ export type MergeGroupChecksRequestedEvent = MergeGroupChecksRequestedEventOctok
 
 export function isMergeGroupChecksRequestedEvent(
   value: unknown,
-): value is MergeGroupChecksRequestedEvent {
+): value is z.input<typeof MergeGroupChecksRequestedEventSchema> {
   return MergeGroupChecksRequestedEventSchema.safeParse(value).success;
 }

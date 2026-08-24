@@ -30,6 +30,6 @@ export type InstallationDeletedEvent = InstallationDeletedEventOctokit;
 
 export function isInstallationDeletedEvent(
   value: unknown,
-): value is InstallationDeletedEvent {
+): value is z.input<typeof InstallationDeletedEventSchema> {
   return InstallationDeletedEventSchema.safeParse(value).success;
 }

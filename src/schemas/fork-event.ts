@@ -27,6 +27,6 @@ export const ForkEventSchema = z.object({
 
 export type ForkEvent = ForkEventOctokit;
 
-export function isForkEvent(value: unknown): value is ForkEvent {
+export function isForkEvent(value: unknown): value is z.input<typeof ForkEventSchema> {
   return ForkEventSchema.safeParse(value).success;
 }

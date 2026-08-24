@@ -35,6 +35,6 @@ export const PushEventSchema = z.object({
 
 export type PushEvent = PushEventOctokit;
 
-export function isPushEvent(value: unknown): value is PushEvent {
+export function isPushEvent(value: unknown): value is z.input<typeof PushEventSchema> {
   return PushEventSchema.safeParse(value).success;
 }

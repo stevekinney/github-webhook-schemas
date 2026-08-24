@@ -102,6 +102,8 @@ export const DependabotAlertSchema = z.object({
 
 export type DependabotAlert = DependabotAlertOctokit;
 
-export function isDependabotAlert(value: unknown): value is DependabotAlert {
+export function isDependabotAlert(
+  value: unknown,
+): value is z.input<typeof DependabotAlertSchema> {
   return DependabotAlertSchema.safeParse(value).success;
 }

@@ -42,6 +42,6 @@ export type WorkflowRunCompletedEvent = WorkflowRunCompletedEventOctokit;
 
 export function isWorkflowRunCompletedEvent(
   value: unknown,
-): value is WorkflowRunCompletedEvent {
+): value is z.input<typeof WorkflowRunCompletedEventSchema> {
   return WorkflowRunCompletedEventSchema.safeParse(value).success;
 }

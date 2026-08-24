@@ -24,6 +24,8 @@ export const StarDeletedEventSchema = z.object({
 
 export type StarDeletedEvent = StarDeletedEventOctokit;
 
-export function isStarDeletedEvent(value: unknown): value is StarDeletedEvent {
+export function isStarDeletedEvent(
+  value: unknown,
+): value is z.input<typeof StarDeletedEventSchema> {
   return StarDeletedEventSchema.safeParse(value).success;
 }

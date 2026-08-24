@@ -26,6 +26,8 @@ export const CheckRunPullRequestSchema = z.object({
 
 export type CheckRunPullRequest = CheckRunPullRequestOctokit;
 
-export function isCheckRunPullRequest(value: unknown): value is CheckRunPullRequest {
+export function isCheckRunPullRequest(
+  value: unknown,
+): value is z.input<typeof CheckRunPullRequestSchema> {
   return CheckRunPullRequestSchema.safeParse(value).success;
 }

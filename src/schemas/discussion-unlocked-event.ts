@@ -32,6 +32,6 @@ export type DiscussionUnlockedEvent = DiscussionUnlockedEventOctokit;
 
 export function isDiscussionUnlockedEvent(
   value: unknown,
-): value is DiscussionUnlockedEvent {
+): value is z.input<typeof DiscussionUnlockedEventSchema> {
   return DiscussionUnlockedEventSchema.safeParse(value).success;
 }

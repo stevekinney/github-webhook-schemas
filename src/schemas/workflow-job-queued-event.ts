@@ -33,6 +33,6 @@ export type WorkflowJobQueuedEvent = WorkflowJobQueuedEventOctokit;
 
 export function isWorkflowJobQueuedEvent(
   value: unknown,
-): value is WorkflowJobQueuedEvent {
+): value is z.input<typeof WorkflowJobQueuedEventSchema> {
   return WorkflowJobQueuedEventSchema.safeParse(value).success;
 }

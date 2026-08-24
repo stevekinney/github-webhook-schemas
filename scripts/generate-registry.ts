@@ -72,8 +72,23 @@ const eventTypeSlugs = candidateEventNames
   .sort((a, b) => b.slug.length - a.slug.length);
 
 function findEventType(schemaSlug: string): WebhookEventName | undefined {
+  // Prefer an exact base-event match or a prefix whose remainder is one of the
+  // event's actions. This disambiguates slugs like
+  // "pull-request-review-requested-event", which is the "review_requested"
+  // action of pull_request, not a pull_request_review schema.
   for (const { eventType, slug } of eventTypeSlugs) {
-    if (schemaSlug === `${slug}-event` || schemaSlug.startsWith(`${slug}-`)) {
+    if (schemaSlug === `${slug}-event`) return eventType;
+    if (!schemaSlug.startsWith(`${slug}-`)) continue;
+    const actionSlug = schemaSlug.slice(slug.length + 1).replace(/-event$/, '');
+    const actions = eventActionsMap.get(eventType) ?? [];
+    if (actions.some((action) => action.replace(/_/g, '-') === actionSlug)) {
+      return eventType;
+    }
+  }
+  // Fall back to the longest matching prefix for schemas whose file names do
+  // not correspond one-to-one with an emitter action.
+  for (const { eventType, slug } of eventTypeSlugs) {
+    if (schemaSlug.startsWith(`${slug}-`)) {
       return eventType;
     }
   }
@@ -155,6 +170,16 @@ function renderAllEventSchemas(grouped: Map<WebhookEventName, SchemaEntry[]>): s
   return names.join('\n');
 }
 
+function renderWebhookEventInput(grouped: Map<WebhookEventName, SchemaEntry[]>): string {
+  const lines = ['export type WebhookEventInput ='];
+  for (const entries of grouped.values()) {
+    for (const { schemaName } of entries) {
+      lines.push(`  | z.input<typeof ${schemaName}>`);
+    }
+  }
+  return `${lines.join('\n')};`;
+}
+
 function renderRouteKeyEventMap(grouped: Map<WebhookEventName, SchemaEntry[]>): string {
   const lines: string[] = ['interface WebhookRouteKeyEventMap {'];
   const eventTypes = Array.from(grouped.keys()).sort();
@@ -220,6 +245,7 @@ function renderFile(grouped: Map<WebhookEventName, SchemaEntry[]>): string {
   const schemaImports = renderImports(grouped);
   const registryEntries = renderRegistryEntries(grouped);
   const allSchemas = renderAllEventSchemas(grouped);
+  const webhookEventInput = renderWebhookEventInput(grouped);
   const routeKeyEventMap = renderRouteKeyEventMap(grouped);
   const routeKeyInfoMapCode = renderRouteKeyInfoMap(grouped);
   const snakeToCamelBaseMapCode = renderSnakeToCamelBaseMap(grouped);
@@ -270,6 +296,8 @@ const allEventSchemas: z.ZodTypeAny[] = [
 ${allSchemas}
 ];
 
+${webhookEventInput}
+
 const eventTypeSet = new Set<WebhookEventName>(schemaRegistry.keys());
 
 ${routeKeyInfoMapCode}
@@ -297,7 +325,7 @@ export function isWebhookEventName(value: unknown): value is WebhookEventName {
   return typeof value === 'string' && eventTypeSet.has(value as WebhookEventName);
 }
 
-export function isWebhookEvent(value: unknown): value is WebhookEvent {
+export function isWebhookEvent(value: unknown): value is WebhookEventInput {
   for (const schema of allEventSchemas) {
     if (schema.safeParse(value).success) {
       return true;

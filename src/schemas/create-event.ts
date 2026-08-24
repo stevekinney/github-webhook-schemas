@@ -27,6 +27,8 @@ export const CreateEventSchema = z.object({
 
 export type CreateEvent = CreateEventOctokit;
 
-export function isCreateEvent(value: unknown): value is CreateEvent {
+export function isCreateEvent(
+  value: unknown,
+): value is z.input<typeof CreateEventSchema> {
   return CreateEventSchema.safeParse(value).success;
 }

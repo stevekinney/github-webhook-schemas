@@ -29,6 +29,6 @@ export type RepositoryPrivatizedEvent = RepositoryPrivatizedEventOctokit;
 
 export function isRepositoryPrivatizedEvent(
   value: unknown,
-): value is RepositoryPrivatizedEvent {
+): value is z.input<typeof RepositoryPrivatizedEventSchema> {
   return RepositoryPrivatizedEventSchema.safeParse(value).success;
 }

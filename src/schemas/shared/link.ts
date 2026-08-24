@@ -12,6 +12,6 @@ export const LinkSchema = z.object({
 
 export type Link = LinkOctokit;
 
-export function isLink(value: unknown): value is Link {
+export function isLink(value: unknown): value is z.input<typeof LinkSchema> {
   return LinkSchema.safeParse(value).success;
 }

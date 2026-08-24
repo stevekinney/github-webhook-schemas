@@ -77,6 +77,6 @@ export type InstallationTargetRenamedEvent = InstallationTargetRenamedEventOctok
 
 export function isInstallationTargetRenamedEvent(
   value: unknown,
-): value is InstallationTargetRenamedEvent {
+): value is z.input<typeof InstallationTargetRenamedEventSchema> {
   return InstallationTargetRenamedEventSchema.safeParse(value).success;
 }

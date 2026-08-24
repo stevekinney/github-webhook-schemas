@@ -27,6 +27,6 @@ export type RepositoryDispatchEvent = RepositoryDispatchEventOctokit;
 
 export function isRepositoryDispatchEvent(
   value: unknown,
-): value is RepositoryDispatchEvent {
+): value is z.input<typeof RepositoryDispatchEventSchema> {
   return RepositoryDispatchEventSchema.safeParse(value).success;
 }
