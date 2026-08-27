@@ -103,6 +103,8 @@ export const StatusEventSchema = z.object({
 
 export type StatusEvent = StatusEventOctokit;
 
-export function isStatusEvent(value: unknown): value is StatusEvent {
+export function isStatusEvent(
+  value: unknown,
+): value is z.input<typeof StatusEventSchema> {
   return StatusEventSchema.safeParse(value).success;
 }

@@ -26,6 +26,6 @@ export type BranchProtectionConfigurationEnabledEvent =
 
 export function isBranchProtectionConfigurationEnabledEvent(
   value: unknown,
-): value is BranchProtectionConfigurationEnabledEvent {
+): value is z.input<typeof BranchProtectionConfigurationEnabledEventSchema> {
   return BranchProtectionConfigurationEnabledEventSchema.safeParse(value).success;
 }

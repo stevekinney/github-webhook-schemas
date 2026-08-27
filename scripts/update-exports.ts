@@ -96,6 +96,8 @@ async function main(): Promise<void> {
   exports['./fixtures'] = createExportEntry('./dist/fixtures/index');
   // Add event types export
   exports['./event-types'] = createExportEntry('./dist/event-types');
+  // Add deep-partial helper export
+  exports['./deep-partial'] = createExportEntry('./dist/deep-partial');
   // Add schema registry export
   exports['./registry'] = createExportEntry('./dist/registry');
 

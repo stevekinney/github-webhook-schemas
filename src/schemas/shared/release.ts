@@ -36,6 +36,6 @@ export const ReleaseSchema = z.object({
 
 export type Release = ReleaseOctokit;
 
-export function isRelease(value: unknown): value is Release {
+export function isRelease(value: unknown): value is z.input<typeof ReleaseSchema> {
   return ReleaseSchema.safeParse(value).success;
 }

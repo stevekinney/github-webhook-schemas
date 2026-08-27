@@ -95,6 +95,6 @@ export type DeploymentReviewApprovedEvent = DeploymentReviewApprovedEventOctokit
 
 export function isDeploymentReviewApprovedEvent(
   value: unknown,
-): value is DeploymentReviewApprovedEvent {
+): value is z.input<typeof DeploymentReviewApprovedEventSchema> {
   return DeploymentReviewApprovedEventSchema.safeParse(value).success;
 }

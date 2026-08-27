@@ -31,6 +31,6 @@ export type ReleasePrereleasedEvent = ReleasePrereleasedEventOctokit;
 
 export function isReleasePrereleasedEvent(
   value: unknown,
-): value is ReleasePrereleasedEvent {
+): value is z.input<typeof ReleasePrereleasedEventSchema> {
   return ReleasePrereleasedEventSchema.safeParse(value).success;
 }

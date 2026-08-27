@@ -13,6 +13,8 @@ export const InstallationLiteSchema = z.object({
 
 export type InstallationLite = InstallationLiteOctokit;
 
-export function isInstallationLite(value: unknown): value is InstallationLite {
+export function isInstallationLite(
+  value: unknown,
+): value is z.input<typeof InstallationLiteSchema> {
   return InstallationLiteSchema.safeParse(value).success;
 }

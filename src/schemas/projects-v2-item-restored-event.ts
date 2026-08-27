@@ -35,6 +35,6 @@ export type ProjectsV2ItemRestoredEvent = ProjectsV2ItemRestoredEventOctokit;
 
 export function isProjectsV2ItemRestoredEvent(
   value: unknown,
-): value is ProjectsV2ItemRestoredEvent {
+): value is z.input<typeof ProjectsV2ItemRestoredEventSchema> {
   return ProjectsV2ItemRestoredEventSchema.safeParse(value).success;
 }

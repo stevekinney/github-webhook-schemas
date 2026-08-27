@@ -14,6 +14,8 @@ export const ReferencedWorkflowSchema = z.object({
 
 export type ReferencedWorkflow = ReferencedWorkflowOctokit;
 
-export function isReferencedWorkflow(value: unknown): value is ReferencedWorkflow {
+export function isReferencedWorkflow(
+  value: unknown,
+): value is z.input<typeof ReferencedWorkflowSchema> {
   return ReferencedWorkflowSchema.safeParse(value).success;
 }

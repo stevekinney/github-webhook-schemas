@@ -25,6 +25,8 @@ export const WorkflowDispatchEventSchema = z.object({
 
 export type WorkflowDispatchEvent = WorkflowDispatchEventOctokit;
 
-export function isWorkflowDispatchEvent(value: unknown): value is WorkflowDispatchEvent {
+export function isWorkflowDispatchEvent(
+  value: unknown,
+): value is z.input<typeof WorkflowDispatchEventSchema> {
   return WorkflowDispatchEventSchema.safeParse(value).success;
 }

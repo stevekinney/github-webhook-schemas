@@ -48,6 +48,8 @@ export const PackageNPMMetadataSchema = z.object({
 
 export type PackageNPMMetadata = PackageNPMMetadataOctokit;
 
-export function isPackageNPMMetadata(value: unknown): value is PackageNPMMetadata {
+export function isPackageNPMMetadata(
+  value: unknown,
+): value is z.input<typeof PackageNPMMetadataSchema> {
   return PackageNPMMetadataSchema.safeParse(value).success;
 }

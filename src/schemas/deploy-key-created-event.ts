@@ -32,6 +32,8 @@ export const DeployKeyCreatedEventSchema = z.object({
 
 export type DeployKeyCreatedEvent = DeployKeyCreatedEventOctokit;
 
-export function isDeployKeyCreatedEvent(value: unknown): value is DeployKeyCreatedEvent {
+export function isDeployKeyCreatedEvent(
+  value: unknown,
+): value is z.input<typeof DeployKeyCreatedEventSchema> {
   return DeployKeyCreatedEventSchema.safeParse(value).success;
 }

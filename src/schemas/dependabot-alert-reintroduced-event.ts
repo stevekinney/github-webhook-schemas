@@ -27,6 +27,6 @@ export type DependabotAlertReintroducedEvent = DependabotAlertReintroducedEventO
 
 export function isDependabotAlertReintroducedEvent(
   value: unknown,
-): value is DependabotAlertReintroducedEvent {
+): value is z.input<typeof DependabotAlertReintroducedEventSchema> {
   return DependabotAlertReintroducedEventSchema.safeParse(value).success;
 }

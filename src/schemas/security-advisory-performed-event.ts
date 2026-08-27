@@ -60,6 +60,6 @@ export type SecurityAdvisoryPerformedEvent = SecurityAdvisoryPerformedEventOctok
 
 export function isSecurityAdvisoryPerformedEvent(
   value: unknown,
-): value is SecurityAdvisoryPerformedEvent {
+): value is z.input<typeof SecurityAdvisoryPerformedEventSchema> {
   return SecurityAdvisoryPerformedEventSchema.safeParse(value).success;
 }

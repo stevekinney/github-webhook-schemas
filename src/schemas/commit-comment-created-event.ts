@@ -49,6 +49,6 @@ export type CommitCommentCreatedEvent = CommitCommentCreatedEventOctokit;
 
 export function isCommitCommentCreatedEvent(
   value: unknown,
-): value is CommitCommentCreatedEvent {
+): value is z.input<typeof CommitCommentCreatedEventSchema> {
   return CommitCommentCreatedEventSchema.safeParse(value).success;
 }

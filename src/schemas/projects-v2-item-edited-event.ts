@@ -37,6 +37,6 @@ export type ProjectsV2ItemEditedEvent = ProjectsV2ItemEditedEventOctokit;
 
 export function isProjectsV2ItemEditedEvent(
   value: unknown,
-): value is ProjectsV2ItemEditedEvent {
+): value is z.input<typeof ProjectsV2ItemEditedEventSchema> {
   return ProjectsV2ItemEditedEventSchema.safeParse(value).success;
 }

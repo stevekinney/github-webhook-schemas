@@ -141,6 +141,6 @@ export type BranchProtectionRuleEditedEvent = BranchProtectionRuleEditedEventOct
 
 export function isBranchProtectionRuleEditedEvent(
   value: unknown,
-): value is BranchProtectionRuleEditedEvent {
+): value is z.input<typeof BranchProtectionRuleEditedEventSchema> {
   return BranchProtectionRuleEditedEventSchema.safeParse(value).success;
 }

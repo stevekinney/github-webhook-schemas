@@ -31,6 +31,8 @@ export const AlertInstanceSchema = z.object({
 
 export type AlertInstance = AlertInstanceOctokit;
 
-export function isAlertInstance(value: unknown): value is AlertInstance {
+export function isAlertInstance(
+  value: unknown,
+): value is z.input<typeof AlertInstanceSchema> {
   return AlertInstanceSchema.safeParse(value).success;
 }

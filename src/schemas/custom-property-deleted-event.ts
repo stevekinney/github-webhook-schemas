@@ -26,6 +26,6 @@ export type CustomPropertyDeletedEvent = CustomPropertyDeletedEventOctokit;
 
 export function isCustomPropertyDeletedEvent(
   value: unknown,
-): value is CustomPropertyDeletedEvent {
+): value is z.input<typeof CustomPropertyDeletedEventSchema> {
   return CustomPropertyDeletedEventSchema.safeParse(value).success;
 }

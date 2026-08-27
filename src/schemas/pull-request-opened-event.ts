@@ -36,6 +36,6 @@ export type PullRequestOpenedEvent = PullRequestOpenedEventOctokit;
 
 export function isPullRequestOpenedEvent(
   value: unknown,
-): value is PullRequestOpenedEvent {
+): value is z.input<typeof PullRequestOpenedEventSchema> {
   return PullRequestOpenedEventSchema.safeParse(value).success;
 }

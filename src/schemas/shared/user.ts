@@ -31,6 +31,6 @@ export const UserSchema = z.object({
 
 export type User = UserOctokit;
 
-export function isUser(value: unknown): value is User {
+export function isUser(value: unknown): value is z.input<typeof UserSchema> {
   return UserSchema.safeParse(value).success;
 }

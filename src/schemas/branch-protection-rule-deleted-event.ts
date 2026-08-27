@@ -27,6 +27,6 @@ export type BranchProtectionRuleDeletedEvent = BranchProtectionRuleDeletedEventO
 
 export function isBranchProtectionRuleDeletedEvent(
   value: unknown,
-): value is BranchProtectionRuleDeletedEvent {
+): value is z.input<typeof BranchProtectionRuleDeletedEventSchema> {
   return BranchProtectionRuleDeletedEventSchema.safeParse(value).success;
 }

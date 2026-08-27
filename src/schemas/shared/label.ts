@@ -18,6 +18,6 @@ export const LabelSchema = z.object({
 
 export type Label = LabelOctokit;
 
-export function isLabel(value: unknown): value is Label {
+export function isLabel(value: unknown): value is z.input<typeof LabelSchema> {
   return LabelSchema.safeParse(value).success;
 }

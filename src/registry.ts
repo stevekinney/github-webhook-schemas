@@ -168,6 +168,8 @@ import { PullRequestReviewCommentDeletedEventSchema } from './schemas/pull-reque
 import { PullRequestReviewCommentEditedEventSchema } from './schemas/pull-request-review-comment-edited-event.js';
 import { PullRequestReviewDismissedEventSchema } from './schemas/pull-request-review-dismissed-event.js';
 import { PullRequestReviewEditedEventSchema } from './schemas/pull-request-review-edited-event.js';
+import { PullRequestReviewRequestRemovedEventSchema } from './schemas/pull-request-review-request-removed-event.js';
+import { PullRequestReviewRequestedEventSchema } from './schemas/pull-request-review-requested-event.js';
 import { PullRequestReviewSubmittedEventSchema } from './schemas/pull-request-review-submitted-event.js';
 import { PullRequestReviewThreadResolvedEventSchema } from './schemas/pull-request-review-thread-resolved-event.js';
 import { PullRequestReviewThreadUnresolvedEventSchema } from './schemas/pull-request-review-thread-unresolved-event.js';
@@ -1104,6 +1106,8 @@ const schemaRegistry = new Map<WebhookEventName, z.ZodTypeAny>([
       PullRequestOpenedEventSchema,
       PullRequestReadyForReviewEventSchema,
       PullRequestReopenedEventSchema,
+      PullRequestReviewRequestRemovedEventSchema,
+      PullRequestReviewRequestedEventSchema,
       PullRequestSynchronizeEventSchema,
       PullRequestUnassignedEventSchema,
       PullRequestUnlabeledEventSchema,
@@ -1392,6 +1396,8 @@ const allEventSchemas: z.ZodTypeAny[] = [
   PullRequestOpenedEventSchema,
   PullRequestReadyForReviewEventSchema,
   PullRequestReopenedEventSchema,
+  PullRequestReviewRequestRemovedEventSchema,
+  PullRequestReviewRequestedEventSchema,
   PullRequestSynchronizeEventSchema,
   PullRequestUnassignedEventSchema,
   PullRequestUnlabeledEventSchema,
@@ -1463,6 +1469,232 @@ const allEventSchemas: z.ZodTypeAny[] = [
   WorkflowRunInProgressEventSchema,
   WorkflowRunRequestedEventSchema,
 ];
+
+export type WebhookEventInput =
+  | z.input<typeof BranchProtectionConfigurationDisabledEventSchema>
+  | z.input<typeof BranchProtectionConfigurationEnabledEventSchema>
+  | z.input<typeof BranchProtectionRuleCreatedEventSchema>
+  | z.input<typeof BranchProtectionRuleDeletedEventSchema>
+  | z.input<typeof BranchProtectionRuleEditedEventSchema>
+  | z.input<typeof CheckRunCompletedEventSchema>
+  | z.input<typeof CheckRunCreatedEventSchema>
+  | z.input<typeof CheckRunRequestedActionEventSchema>
+  | z.input<typeof CheckRunRerequestedEventSchema>
+  | z.input<typeof CheckSuiteCompletedEventSchema>
+  | z.input<typeof CheckSuiteRequestedEventSchema>
+  | z.input<typeof CheckSuiteRerequestedEventSchema>
+  | z.input<typeof CodeScanningAlertAppearedInBranchEventSchema>
+  | z.input<typeof CodeScanningAlertClosedByUserEventSchema>
+  | z.input<typeof CodeScanningAlertCreatedEventSchema>
+  | z.input<typeof CodeScanningAlertFixedEventSchema>
+  | z.input<typeof CodeScanningAlertReopenedByUserEventSchema>
+  | z.input<typeof CodeScanningAlertReopenedEventSchema>
+  | z.input<typeof CommitCommentCreatedEventSchema>
+  | z.input<typeof CreateEventSchema>
+  | z.input<typeof CustomPropertyCreatedEventSchema>
+  | z.input<typeof CustomPropertyDeletedEventSchema>
+  | z.input<typeof CustomPropertyValuesUpdatedEventSchema>
+  | z.input<typeof DeleteEventSchema>
+  | z.input<typeof DependabotAlertCreatedEventSchema>
+  | z.input<typeof DependabotAlertDismissedEventSchema>
+  | z.input<typeof DependabotAlertFixedEventSchema>
+  | z.input<typeof DependabotAlertReintroducedEventSchema>
+  | z.input<typeof DependabotAlertReopenedEventSchema>
+  | z.input<typeof DeployKeyCreatedEventSchema>
+  | z.input<typeof DeployKeyDeletedEventSchema>
+  | z.input<typeof DeploymentCreatedEventSchema>
+  | z.input<typeof DeploymentProtectionRuleRequestedEventSchema>
+  | z.input<typeof DeploymentReviewApprovedEventSchema>
+  | z.input<typeof DeploymentReviewRejectedEventSchema>
+  | z.input<typeof DeploymentReviewRequestedEventSchema>
+  | z.input<typeof DeploymentStatusCreatedEventSchema>
+  | z.input<typeof DiscussionAnsweredEventSchema>
+  | z.input<typeof DiscussionCategoryChangedEventSchema>
+  | z.input<typeof DiscussionCreatedEventSchema>
+  | z.input<typeof DiscussionDeletedEventSchema>
+  | z.input<typeof DiscussionEditedEventSchema>
+  | z.input<typeof DiscussionLabeledEventSchema>
+  | z.input<typeof DiscussionLockedEventSchema>
+  | z.input<typeof DiscussionPinnedEventSchema>
+  | z.input<typeof DiscussionTransferredEventSchema>
+  | z.input<typeof DiscussionUnansweredEventSchema>
+  | z.input<typeof DiscussionUnlabeledEventSchema>
+  | z.input<typeof DiscussionUnlockedEventSchema>
+  | z.input<typeof DiscussionUnpinnedEventSchema>
+  | z.input<typeof DiscussionCommentCreatedEventSchema>
+  | z.input<typeof DiscussionCommentDeletedEventSchema>
+  | z.input<typeof DiscussionCommentEditedEventSchema>
+  | z.input<typeof ForkEventSchema>
+  | z.input<typeof GithubAppAuthorizationRevokedEventSchema>
+  | z.input<typeof GollumEventSchema>
+  | z.input<typeof InstallationCreatedEventSchema>
+  | z.input<typeof InstallationDeletedEventSchema>
+  | z.input<typeof InstallationNewPermissionsAcceptedEventSchema>
+  | z.input<typeof InstallationSuspendEventSchema>
+  | z.input<typeof InstallationUnsuspendEventSchema>
+  | z.input<typeof InstallationRepositoriesAddedEventSchema>
+  | z.input<typeof InstallationRepositoriesRemovedEventSchema>
+  | z.input<typeof InstallationTargetRenamedEventSchema>
+  | z.input<typeof IssueCommentCreatedEventSchema>
+  | z.input<typeof IssueCommentDeletedEventSchema>
+  | z.input<typeof IssueCommentEditedEventSchema>
+  | z.input<typeof IssuesAssignedEventSchema>
+  | z.input<typeof IssuesClosedEventSchema>
+  | z.input<typeof IssuesDeletedEventSchema>
+  | z.input<typeof IssuesDemilestonedEventSchema>
+  | z.input<typeof IssuesEditedEventSchema>
+  | z.input<typeof IssuesLabeledEventSchema>
+  | z.input<typeof IssuesLockedEventSchema>
+  | z.input<typeof IssuesMilestonedEventSchema>
+  | z.input<typeof IssuesOpenedEventSchema>
+  | z.input<typeof IssuesPinnedEventSchema>
+  | z.input<typeof IssuesReopenedEventSchema>
+  | z.input<typeof IssuesTransferredEventSchema>
+  | z.input<typeof IssuesUnassignedEventSchema>
+  | z.input<typeof IssuesUnlabeledEventSchema>
+  | z.input<typeof IssuesUnlockedEventSchema>
+  | z.input<typeof IssuesUnpinnedEventSchema>
+  | z.input<typeof LabelCreatedEventSchema>
+  | z.input<typeof LabelDeletedEventSchema>
+  | z.input<typeof LabelEditedEventSchema>
+  | z.input<typeof MarketplacePurchaseCancelledEventSchema>
+  | z.input<typeof MarketplacePurchaseChangedEventSchema>
+  | z.input<typeof MarketplacePurchasePendingChangeCancelledEventSchema>
+  | z.input<typeof MarketplacePurchasePendingChangeEventSchema>
+  | z.input<typeof MarketplacePurchasePurchasedEventSchema>
+  | z.input<typeof MemberAddedEventSchema>
+  | z.input<typeof MemberEditedEventSchema>
+  | z.input<typeof MemberRemovedEventSchema>
+  | z.input<typeof MembershipAddedEventSchema>
+  | z.input<typeof MembershipRemovedEventSchema>
+  | z.input<typeof MergeGroupChecksRequestedEventSchema>
+  | z.input<typeof MergeGroupDestroyedEventSchema>
+  | z.input<typeof MetaDeletedEventSchema>
+  | z.input<typeof MilestoneClosedEventSchema>
+  | z.input<typeof MilestoneCreatedEventSchema>
+  | z.input<typeof MilestoneDeletedEventSchema>
+  | z.input<typeof MilestoneEditedEventSchema>
+  | z.input<typeof MilestoneOpenedEventSchema>
+  | z.input<typeof OrgBlockBlockedEventSchema>
+  | z.input<typeof OrgBlockUnblockedEventSchema>
+  | z.input<typeof OrganizationDeletedEventSchema>
+  | z.input<typeof OrganizationMemberAddedEventSchema>
+  | z.input<typeof OrganizationMemberInvitedEventSchema>
+  | z.input<typeof OrganizationMemberRemovedEventSchema>
+  | z.input<typeof OrganizationRenamedEventSchema>
+  | z.input<typeof PackagePublishedEventSchema>
+  | z.input<typeof PackageUpdatedEventSchema>
+  | z.input<typeof PageBuildEventSchema>
+  | z.input<typeof PingEventSchema>
+  | z.input<typeof ProjectCardConvertedEventSchema>
+  | z.input<typeof ProjectCardCreatedEventSchema>
+  | z.input<typeof ProjectCardDeletedEventSchema>
+  | z.input<typeof ProjectCardEditedEventSchema>
+  | z.input<typeof ProjectCardMovedEventSchema>
+  | z.input<typeof ProjectClosedEventSchema>
+  | z.input<typeof ProjectCreatedEventSchema>
+  | z.input<typeof ProjectDeletedEventSchema>
+  | z.input<typeof ProjectEditedEventSchema>
+  | z.input<typeof ProjectReopenedEventSchema>
+  | z.input<typeof ProjectColumnCreatedEventSchema>
+  | z.input<typeof ProjectColumnDeletedEventSchema>
+  | z.input<typeof ProjectColumnEditedEventSchema>
+  | z.input<typeof ProjectColumnMovedEventSchema>
+  | z.input<typeof ProjectsV2ItemArchivedEventSchema>
+  | z.input<typeof ProjectsV2ItemConvertedEventSchema>
+  | z.input<typeof ProjectsV2ItemCreatedEventSchema>
+  | z.input<typeof ProjectsV2ItemDeletedEventSchema>
+  | z.input<typeof ProjectsV2ItemEditedEventSchema>
+  | z.input<typeof ProjectsV2ItemReorderedEventSchema>
+  | z.input<typeof ProjectsV2ItemRestoredEventSchema>
+  | z.input<typeof PublicEventSchema>
+  | z.input<typeof PullRequestAssignedEventSchema>
+  | z.input<typeof PullRequestAutoMergeDisabledEventSchema>
+  | z.input<typeof PullRequestAutoMergeEnabledEventSchema>
+  | z.input<typeof PullRequestClosedEventSchema>
+  | z.input<typeof PullRequestConvertedToDraftEventSchema>
+  | z.input<typeof PullRequestDemilestonedEventSchema>
+  | z.input<typeof PullRequestDequeuedEventSchema>
+  | z.input<typeof PullRequestEditedEventSchema>
+  | z.input<typeof PullRequestEnqueuedEventSchema>
+  | z.input<typeof PullRequestLabeledEventSchema>
+  | z.input<typeof PullRequestLockedEventSchema>
+  | z.input<typeof PullRequestMilestonedEventSchema>
+  | z.input<typeof PullRequestOpenedEventSchema>
+  | z.input<typeof PullRequestReadyForReviewEventSchema>
+  | z.input<typeof PullRequestReopenedEventSchema>
+  | z.input<typeof PullRequestReviewRequestRemovedEventSchema>
+  | z.input<typeof PullRequestReviewRequestedEventSchema>
+  | z.input<typeof PullRequestSynchronizeEventSchema>
+  | z.input<typeof PullRequestUnassignedEventSchema>
+  | z.input<typeof PullRequestUnlabeledEventSchema>
+  | z.input<typeof PullRequestUnlockedEventSchema>
+  | z.input<typeof PullRequestReviewCommentCreatedEventSchema>
+  | z.input<typeof PullRequestReviewCommentDeletedEventSchema>
+  | z.input<typeof PullRequestReviewCommentEditedEventSchema>
+  | z.input<typeof PullRequestReviewDismissedEventSchema>
+  | z.input<typeof PullRequestReviewEditedEventSchema>
+  | z.input<typeof PullRequestReviewSubmittedEventSchema>
+  | z.input<typeof PullRequestReviewThreadResolvedEventSchema>
+  | z.input<typeof PullRequestReviewThreadUnresolvedEventSchema>
+  | z.input<typeof PushEventSchema>
+  | z.input<typeof RegistryPackagePublishedEventSchema>
+  | z.input<typeof RegistryPackageUpdatedEventSchema>
+  | z.input<typeof ReleaseCreatedEventSchema>
+  | z.input<typeof ReleaseDeletedEventSchema>
+  | z.input<typeof ReleaseEditedEventSchema>
+  | z.input<typeof ReleasePrereleasedEventSchema>
+  | z.input<typeof ReleasePublishedEventSchema>
+  | z.input<typeof ReleaseReleasedEventSchema>
+  | z.input<typeof ReleaseUnpublishedEventSchema>
+  | z.input<typeof RepositoryArchivedEventSchema>
+  | z.input<typeof RepositoryCreatedEventSchema>
+  | z.input<typeof RepositoryDeletedEventSchema>
+  | z.input<typeof RepositoryEditedEventSchema>
+  | z.input<typeof RepositoryPrivatizedEventSchema>
+  | z.input<typeof RepositoryPublicizedEventSchema>
+  | z.input<typeof RepositoryRenamedEventSchema>
+  | z.input<typeof RepositoryTransferredEventSchema>
+  | z.input<typeof RepositoryUnarchivedEventSchema>
+  | z.input<typeof RepositoryDispatchEventSchema>
+  | z.input<typeof RepositoryImportEventSchema>
+  | z.input<typeof RepositoryVulnerabilityAlertCreateEventSchema>
+  | z.input<typeof RepositoryVulnerabilityAlertDismissEventSchema>
+  | z.input<typeof RepositoryVulnerabilityAlertReopenEventSchema>
+  | z.input<typeof RepositoryVulnerabilityAlertResolveEventSchema>
+  | z.input<typeof SecretScanningAlertCreatedEventSchema>
+  | z.input<typeof SecretScanningAlertReopenedEventSchema>
+  | z.input<typeof SecretScanningAlertResolvedEventSchema>
+  | z.input<typeof SecretScanningAlertRevokedEventSchema>
+  | z.input<typeof SecretScanningAlertLocationCreatedEventSchema>
+  | z.input<typeof SecurityAdvisoryPerformedEventSchema>
+  | z.input<typeof SecurityAdvisoryPublishedEventSchema>
+  | z.input<typeof SecurityAdvisoryUpdatedEventSchema>
+  | z.input<typeof SecurityAdvisoryWithdrawnEventSchema>
+  | z.input<typeof SponsorshipCancelledEventSchema>
+  | z.input<typeof SponsorshipCreatedEventSchema>
+  | z.input<typeof SponsorshipEditedEventSchema>
+  | z.input<typeof SponsorshipPendingCancellationEventSchema>
+  | z.input<typeof SponsorshipPendingTierChangeEventSchema>
+  | z.input<typeof SponsorshipTierChangedEventSchema>
+  | z.input<typeof StarCreatedEventSchema>
+  | z.input<typeof StarDeletedEventSchema>
+  | z.input<typeof StatusEventSchema>
+  | z.input<typeof TeamAddEventSchema>
+  | z.input<typeof TeamAddedToRepositoryEventSchema>
+  | z.input<typeof TeamCreatedEventSchema>
+  | z.input<typeof TeamDeletedEventSchema>
+  | z.input<typeof TeamEditedEventSchema>
+  | z.input<typeof TeamRemovedFromRepositoryEventSchema>
+  | z.input<typeof WatchStartedEventSchema>
+  | z.input<typeof WorkflowDispatchEventSchema>
+  | z.input<typeof WorkflowJobCompletedEventSchema>
+  | z.input<typeof WorkflowJobInProgressEventSchema>
+  | z.input<typeof WorkflowJobQueuedEventSchema>
+  | z.input<typeof WorkflowJobWaitingEventSchema>
+  | z.input<typeof WorkflowRunCompletedEventSchema>
+  | z.input<typeof WorkflowRunInProgressEventSchema>
+  | z.input<typeof WorkflowRunRequestedEventSchema>;
 
 const eventTypeSet = new Set<WebhookEventName>(schemaRegistry.keys());
 
@@ -1980,7 +2212,7 @@ export function isWebhookEventName(value: unknown): value is WebhookEventName {
   return typeof value === 'string' && eventTypeSet.has(value as WebhookEventName);
 }
 
-export function isWebhookEvent(value: unknown): value is WebhookEvent {
+export function isWebhookEvent(value: unknown): value is WebhookEventInput {
   for (const schema of allEventSchemas) {
     if (schema.safeParse(value).success) {
       return true;

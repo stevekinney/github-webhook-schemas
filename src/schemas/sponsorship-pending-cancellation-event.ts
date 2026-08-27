@@ -27,6 +27,6 @@ export type SponsorshipPendingCancellationEvent =
 
 export function isSponsorshipPendingCancellationEvent(
   value: unknown,
-): value is SponsorshipPendingCancellationEvent {
+): value is z.input<typeof SponsorshipPendingCancellationEventSchema> {
   return SponsorshipPendingCancellationEventSchema.safeParse(value).success;
 }

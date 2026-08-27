@@ -32,6 +32,6 @@ export type SponsorshipEditedEvent = SponsorshipEditedEventOctokit;
 
 export function isSponsorshipEditedEvent(
   value: unknown,
-): value is SponsorshipEditedEvent {
+): value is z.input<typeof SponsorshipEditedEventSchema> {
   return SponsorshipEditedEventSchema.safeParse(value).success;
 }

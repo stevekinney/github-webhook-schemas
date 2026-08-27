@@ -22,6 +22,8 @@ export const OrgBlockBlockedEventSchema = z.object({
 
 export type OrgBlockBlockedEvent = OrgBlockBlockedEventOctokit;
 
-export function isOrgBlockBlockedEvent(value: unknown): value is OrgBlockBlockedEvent {
+export function isOrgBlockBlockedEvent(
+  value: unknown,
+): value is z.input<typeof OrgBlockBlockedEventSchema> {
   return OrgBlockBlockedEventSchema.safeParse(value).success;
 }

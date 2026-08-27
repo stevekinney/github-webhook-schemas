@@ -27,6 +27,6 @@ export type TeamAddedToRepositoryEvent = TeamAddedToRepositoryEventOctokit;
 
 export function isTeamAddedToRepositoryEvent(
   value: unknown,
-): value is TeamAddedToRepositoryEvent {
+): value is z.input<typeof TeamAddedToRepositoryEventSchema> {
   return TeamAddedToRepositoryEventSchema.safeParse(value).success;
 }

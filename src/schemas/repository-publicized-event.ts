@@ -29,6 +29,6 @@ export type RepositoryPublicizedEvent = RepositoryPublicizedEventOctokit;
 
 export function isRepositoryPublicizedEvent(
   value: unknown,
-): value is RepositoryPublicizedEvent {
+): value is z.input<typeof RepositoryPublicizedEventSchema> {
   return RepositoryPublicizedEventSchema.safeParse(value).success;
 }

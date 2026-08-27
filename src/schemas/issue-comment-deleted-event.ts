@@ -37,6 +37,6 @@ export type IssueCommentDeletedEvent = IssueCommentDeletedEventOctokit;
 
 export function isIssueCommentDeletedEvent(
   value: unknown,
-): value is IssueCommentDeletedEvent {
+): value is z.input<typeof IssueCommentDeletedEventSchema> {
   return IssueCommentDeletedEventSchema.safeParse(value).success;
 }

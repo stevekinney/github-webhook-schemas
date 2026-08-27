@@ -32,6 +32,8 @@ export const GollumEventSchema = z.object({
 
 export type GollumEvent = GollumEventOctokit;
 
-export function isGollumEvent(value: unknown): value is GollumEvent {
+export function isGollumEvent(
+  value: unknown,
+): value is z.input<typeof GollumEventSchema> {
   return GollumEventSchema.safeParse(value).success;
 }

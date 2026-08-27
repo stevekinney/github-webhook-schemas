@@ -36,6 +36,8 @@ export const ProjectCardMovedEventSchema = z.object({
 
 export type ProjectCardMovedEvent = ProjectCardMovedEventOctokit;
 
-export function isProjectCardMovedEvent(value: unknown): value is ProjectCardMovedEvent {
+export function isProjectCardMovedEvent(
+  value: unknown,
+): value is z.input<typeof ProjectCardMovedEventSchema> {
   return ProjectCardMovedEventSchema.safeParse(value).success;
 }

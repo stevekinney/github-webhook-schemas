@@ -60,6 +60,6 @@ export type SecurityAdvisoryPublishedEvent = SecurityAdvisoryPublishedEventOctok
 
 export function isSecurityAdvisoryPublishedEvent(
   value: unknown,
-): value is SecurityAdvisoryPublishedEvent {
+): value is z.input<typeof SecurityAdvisoryPublishedEventSchema> {
   return SecurityAdvisoryPublishedEventSchema.safeParse(value).success;
 }

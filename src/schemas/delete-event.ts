@@ -25,6 +25,8 @@ export const DeleteEventSchema = z.object({
 
 export type DeleteEvent = DeleteEventOctokit;
 
-export function isDeleteEvent(value: unknown): value is DeleteEvent {
+export function isDeleteEvent(
+  value: unknown,
+): value is z.input<typeof DeleteEventSchema> {
   return DeleteEventSchema.safeParse(value).success;
 }

@@ -27,6 +27,6 @@ export type ProjectColumnDeletedEvent = ProjectColumnDeletedEventOctokit;
 
 export function isProjectColumnDeletedEvent(
   value: unknown,
-): value is ProjectColumnDeletedEvent {
+): value is z.input<typeof ProjectColumnDeletedEventSchema> {
   return ProjectColumnDeletedEventSchema.safeParse(value).success;
 }

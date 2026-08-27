@@ -30,6 +30,8 @@ export const MilestoneClosedEventSchema = z.object({
 
 export type MilestoneClosedEvent = MilestoneClosedEventOctokit;
 
-export function isMilestoneClosedEvent(value: unknown): value is MilestoneClosedEvent {
+export function isMilestoneClosedEvent(
+  value: unknown,
+): value is z.input<typeof MilestoneClosedEventSchema> {
   return MilestoneClosedEventSchema.safeParse(value).success;
 }

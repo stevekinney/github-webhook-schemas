@@ -769,6 +769,16 @@ export {
   PullRequestReviewEditedEventSchema,
 } from './pull-request-review-edited-event.js';
 export {
+  isPullRequestReviewRequestRemovedEvent,
+  type PullRequestReviewRequestRemovedEvent,
+  PullRequestReviewRequestRemovedEventSchema,
+} from './pull-request-review-request-removed-event.js';
+export {
+  isPullRequestReviewRequestedEvent,
+  type PullRequestReviewRequestedEvent,
+  PullRequestReviewRequestedEventSchema,
+} from './pull-request-review-requested-event.js';
+export {
   isPullRequestReviewSubmittedEvent,
   type PullRequestReviewSubmittedEvent,
   PullRequestReviewSubmittedEventSchema,

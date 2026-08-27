@@ -67,6 +67,6 @@ export type CodeScanningAlertReopenedEvent = CodeScanningAlertReopenedEventOctok
 
 export function isCodeScanningAlertReopenedEvent(
   value: unknown,
-): value is CodeScanningAlertReopenedEvent {
+): value is z.input<typeof CodeScanningAlertReopenedEventSchema> {
   return CodeScanningAlertReopenedEventSchema.safeParse(value).success;
 }

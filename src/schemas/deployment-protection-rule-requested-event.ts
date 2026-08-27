@@ -33,6 +33,6 @@ export type DeploymentProtectionRuleRequestedEvent =
 
 export function isDeploymentProtectionRuleRequestedEvent(
   value: unknown,
-): value is DeploymentProtectionRuleRequestedEvent {
+): value is z.input<typeof DeploymentProtectionRuleRequestedEventSchema> {
   return DeploymentProtectionRuleRequestedEventSchema.safeParse(value).success;
 }

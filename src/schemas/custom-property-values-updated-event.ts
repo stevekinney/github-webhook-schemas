@@ -28,6 +28,6 @@ export type CustomPropertyValuesUpdatedEvent = CustomPropertyValuesUpdatedEventO
 
 export function isCustomPropertyValuesUpdatedEvent(
   value: unknown,
-): value is CustomPropertyValuesUpdatedEvent {
+): value is z.input<typeof CustomPropertyValuesUpdatedEventSchema> {
   return CustomPropertyValuesUpdatedEventSchema.safeParse(value).success;
 }

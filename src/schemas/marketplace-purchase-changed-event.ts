@@ -43,6 +43,6 @@ export type MarketplacePurchaseChangedEvent = MarketplacePurchaseChangedEventOct
 
 export function isMarketplacePurchaseChangedEvent(
   value: unknown,
-): value is MarketplacePurchaseChangedEvent {
+): value is z.input<typeof MarketplacePurchaseChangedEventSchema> {
   return MarketplacePurchaseChangedEventSchema.safeParse(value).success;
 }

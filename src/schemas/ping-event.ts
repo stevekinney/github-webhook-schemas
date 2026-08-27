@@ -101,6 +101,6 @@ export const PingEventSchema = z.object({
 
 export type PingEvent = PingEventOctokit;
 
-export function isPingEvent(value: unknown): value is PingEvent {
+export function isPingEvent(value: unknown): value is z.input<typeof PingEventSchema> {
   return PingEventSchema.safeParse(value).success;
 }

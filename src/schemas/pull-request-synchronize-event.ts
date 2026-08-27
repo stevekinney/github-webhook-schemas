@@ -30,6 +30,6 @@ export type PullRequestSynchronizeEvent = PullRequestSynchronizeEventOctokit;
 
 export function isPullRequestSynchronizeEvent(
   value: unknown,
-): value is PullRequestSynchronizeEvent {
+): value is z.input<typeof PullRequestSynchronizeEventSchema> {
   return PullRequestSynchronizeEventSchema.safeParse(value).success;
 }

@@ -26,6 +26,8 @@ export const ProjectCardSchema = z.object({
 
 export type ProjectCard = ProjectCardOctokit;
 
-export function isProjectCard(value: unknown): value is ProjectCard {
+export function isProjectCard(
+  value: unknown,
+): value is z.input<typeof ProjectCardSchema> {
   return ProjectCardSchema.safeParse(value).success;
 }

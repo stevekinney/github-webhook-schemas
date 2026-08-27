@@ -27,6 +27,6 @@ export type DiscussionDeletedEvent = DiscussionDeletedEventOctokit;
 
 export function isDiscussionDeletedEvent(
   value: unknown,
-): value is DiscussionDeletedEvent {
+): value is z.input<typeof DiscussionDeletedEventSchema> {
   return DiscussionDeletedEventSchema.safeParse(value).success;
 }

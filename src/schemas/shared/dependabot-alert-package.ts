@@ -15,6 +15,6 @@ export type DependabotAlertPackage = DependabotAlertPackageOctokit;
 
 export function isDependabotAlertPackage(
   value: unknown,
-): value is DependabotAlertPackage {
+): value is z.input<typeof DependabotAlertPackageSchema> {
   return DependabotAlertPackageSchema.safeParse(value).success;
 }

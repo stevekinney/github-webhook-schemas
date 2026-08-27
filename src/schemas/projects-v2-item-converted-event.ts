@@ -35,6 +35,6 @@ export type ProjectsV2ItemConvertedEvent = ProjectsV2ItemConvertedEventOctokit;
 
 export function isProjectsV2ItemConvertedEvent(
   value: unknown,
-): value is ProjectsV2ItemConvertedEvent {
+): value is z.input<typeof ProjectsV2ItemConvertedEventSchema> {
   return ProjectsV2ItemConvertedEventSchema.safeParse(value).success;
 }

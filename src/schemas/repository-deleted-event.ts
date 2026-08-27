@@ -25,6 +25,6 @@ export type RepositoryDeletedEvent = RepositoryDeletedEventOctokit;
 
 export function isRepositoryDeletedEvent(
   value: unknown,
-): value is RepositoryDeletedEvent {
+): value is z.input<typeof RepositoryDeletedEventSchema> {
   return RepositoryDeletedEventSchema.safeParse(value).success;
 }

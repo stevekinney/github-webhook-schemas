@@ -33,6 +33,6 @@ export type DiscussionCategoryChangedEvent = DiscussionCategoryChangedEventOctok
 
 export function isDiscussionCategoryChangedEvent(
   value: unknown,
-): value is DiscussionCategoryChangedEvent {
+): value is z.input<typeof DiscussionCategoryChangedEventSchema> {
   return DiscussionCategoryChangedEventSchema.safeParse(value).success;
 }

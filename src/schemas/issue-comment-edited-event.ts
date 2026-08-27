@@ -44,6 +44,6 @@ export type IssueCommentEditedEvent = IssueCommentEditedEventOctokit;
 
 export function isIssueCommentEditedEvent(
   value: unknown,
-): value is IssueCommentEditedEvent {
+): value is z.input<typeof IssueCommentEditedEventSchema> {
   return IssueCommentEditedEventSchema.safeParse(value).success;
 }

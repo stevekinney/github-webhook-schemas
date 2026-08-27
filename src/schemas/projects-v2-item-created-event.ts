@@ -29,6 +29,6 @@ export type ProjectsV2ItemCreatedEvent = ProjectsV2ItemCreatedEventOctokit;
 
 export function isProjectsV2ItemCreatedEvent(
   value: unknown,
-): value is ProjectsV2ItemCreatedEvent {
+): value is z.input<typeof ProjectsV2ItemCreatedEventSchema> {
   return ProjectsV2ItemCreatedEventSchema.safeParse(value).success;
 }

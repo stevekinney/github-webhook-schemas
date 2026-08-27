@@ -53,6 +53,8 @@ export const TeamEditedEventSchema = z.object({
 
 export type TeamEditedEvent = TeamEditedEventOctokit;
 
-export function isTeamEditedEvent(value: unknown): value is TeamEditedEvent {
+export function isTeamEditedEvent(
+  value: unknown,
+): value is z.input<typeof TeamEditedEventSchema> {
   return TeamEditedEventSchema.safeParse(value).success;
 }

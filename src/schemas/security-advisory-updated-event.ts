@@ -60,6 +60,6 @@ export type SecurityAdvisoryUpdatedEvent = SecurityAdvisoryUpdatedEventOctokit;
 
 export function isSecurityAdvisoryUpdatedEvent(
   value: unknown,
-): value is SecurityAdvisoryUpdatedEvent {
+): value is z.input<typeof SecurityAdvisoryUpdatedEventSchema> {
   return SecurityAdvisoryUpdatedEventSchema.safeParse(value).success;
 }

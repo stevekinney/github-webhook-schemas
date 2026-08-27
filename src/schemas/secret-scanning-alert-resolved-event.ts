@@ -38,6 +38,6 @@ export type SecretScanningAlertResolvedEvent = SecretScanningAlertResolvedEventO
 
 export function isSecretScanningAlertResolvedEvent(
   value: unknown,
-): value is SecretScanningAlertResolvedEvent {
+): value is z.input<typeof SecretScanningAlertResolvedEventSchema> {
   return SecretScanningAlertResolvedEventSchema.safeParse(value).success;
 }

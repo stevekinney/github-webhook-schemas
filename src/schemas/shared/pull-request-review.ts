@@ -42,6 +42,8 @@ export const PullRequestReviewSchema = z.object({
 
 export type PullRequestReview = PullRequestReviewOctokit;
 
-export function isPullRequestReview(value: unknown): value is PullRequestReview {
+export function isPullRequestReview(
+  value: unknown,
+): value is z.input<typeof PullRequestReviewSchema> {
   return PullRequestReviewSchema.safeParse(value).success;
 }

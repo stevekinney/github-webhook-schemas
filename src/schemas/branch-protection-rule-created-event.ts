@@ -27,6 +27,6 @@ export type BranchProtectionRuleCreatedEvent = BranchProtectionRuleCreatedEventO
 
 export function isBranchProtectionRuleCreatedEvent(
   value: unknown,
-): value is BranchProtectionRuleCreatedEvent {
+): value is z.input<typeof BranchProtectionRuleCreatedEventSchema> {
   return BranchProtectionRuleCreatedEventSchema.safeParse(value).success;
 }

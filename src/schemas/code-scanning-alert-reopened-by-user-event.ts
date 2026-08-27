@@ -63,6 +63,6 @@ export type CodeScanningAlertReopenedByUserEvent =
 
 export function isCodeScanningAlertReopenedByUserEvent(
   value: unknown,
-): value is CodeScanningAlertReopenedByUserEvent {
+): value is z.input<typeof CodeScanningAlertReopenedByUserEventSchema> {
   return CodeScanningAlertReopenedByUserEventSchema.safeParse(value).success;
 }

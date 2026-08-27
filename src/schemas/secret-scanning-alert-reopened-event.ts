@@ -32,6 +32,6 @@ export type SecretScanningAlertReopenedEvent = SecretScanningAlertReopenedEventO
 
 export function isSecretScanningAlertReopenedEvent(
   value: unknown,
-): value is SecretScanningAlertReopenedEvent {
+): value is z.input<typeof SecretScanningAlertReopenedEventSchema> {
   return SecretScanningAlertReopenedEventSchema.safeParse(value).success;
 }

@@ -34,6 +34,6 @@ export type PullRequestDemilestonedEvent = PullRequestDemilestonedEventOctokit;
 
 export function isPullRequestDemilestonedEvent(
   value: unknown,
-): value is PullRequestDemilestonedEvent {
+): value is z.input<typeof PullRequestDemilestonedEventSchema> {
   return PullRequestDemilestonedEventSchema.safeParse(value).success;
 }

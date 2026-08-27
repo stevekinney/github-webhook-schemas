@@ -30,6 +30,6 @@ export type PullRequestUnlabeledEvent = PullRequestUnlabeledEventOctokit;
 
 export function isPullRequestUnlabeledEvent(
   value: unknown,
-): value is PullRequestUnlabeledEvent {
+): value is z.input<typeof PullRequestUnlabeledEventSchema> {
   return PullRequestUnlabeledEventSchema.safeParse(value).success;
 }

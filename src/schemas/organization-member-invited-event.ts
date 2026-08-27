@@ -37,6 +37,6 @@ export type OrganizationMemberInvitedEvent = OrganizationMemberInvitedEventOctok
 
 export function isOrganizationMemberInvitedEvent(
   value: unknown,
-): value is OrganizationMemberInvitedEvent {
+): value is z.input<typeof OrganizationMemberInvitedEventSchema> {
   return OrganizationMemberInvitedEventSchema.safeParse(value).success;
 }

@@ -52,6 +52,6 @@ export type DiscussionCommentDeletedEvent = DiscussionCommentDeletedEventOctokit
 
 export function isDiscussionCommentDeletedEvent(
   value: unknown,
-): value is DiscussionCommentDeletedEvent {
+): value is z.input<typeof DiscussionCommentDeletedEventSchema> {
   return DiscussionCommentDeletedEventSchema.safeParse(value).success;
 }

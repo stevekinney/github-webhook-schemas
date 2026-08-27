@@ -45,6 +45,8 @@ export const RepositoryEditedEventSchema = z.object({
 
 export type RepositoryEditedEvent = RepositoryEditedEventOctokit;
 
-export function isRepositoryEditedEvent(value: unknown): value is RepositoryEditedEvent {
+export function isRepositoryEditedEvent(
+  value: unknown,
+): value is z.input<typeof RepositoryEditedEventSchema> {
   return RepositoryEditedEventSchema.safeParse(value).success;
 }

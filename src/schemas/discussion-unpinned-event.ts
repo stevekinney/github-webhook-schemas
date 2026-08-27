@@ -27,6 +27,6 @@ export type DiscussionUnpinnedEvent = DiscussionUnpinnedEventOctokit;
 
 export function isDiscussionUnpinnedEvent(
   value: unknown,
-): value is DiscussionUnpinnedEvent {
+): value is z.input<typeof DiscussionUnpinnedEventSchema> {
   return DiscussionUnpinnedEventSchema.safeParse(value).success;
 }

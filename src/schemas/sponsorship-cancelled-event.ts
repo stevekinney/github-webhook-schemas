@@ -25,6 +25,6 @@ export type SponsorshipCancelledEvent = SponsorshipCancelledEventOctokit;
 
 export function isSponsorshipCancelledEvent(
   value: unknown,
-): value is SponsorshipCancelledEvent {
+): value is z.input<typeof SponsorshipCancelledEventSchema> {
   return SponsorshipCancelledEventSchema.safeParse(value).success;
 }

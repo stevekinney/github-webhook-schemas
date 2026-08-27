@@ -33,6 +33,6 @@ export type WorkflowJobInProgressEvent = WorkflowJobInProgressEventOctokit;
 
 export function isWorkflowJobInProgressEvent(
   value: unknown,
-): value is WorkflowJobInProgressEvent {
+): value is z.input<typeof WorkflowJobInProgressEventSchema> {
   return WorkflowJobInProgressEventSchema.safeParse(value).success;
 }

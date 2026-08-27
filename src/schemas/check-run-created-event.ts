@@ -102,6 +102,8 @@ export const CheckRunCreatedEventSchema = z.object({
 
 export type CheckRunCreatedEvent = CheckRunCreatedEventOctokit;
 
-export function isCheckRunCreatedEvent(value: unknown): value is CheckRunCreatedEvent {
+export function isCheckRunCreatedEvent(
+  value: unknown,
+): value is z.input<typeof CheckRunCreatedEventSchema> {
   return CheckRunCreatedEventSchema.safeParse(value).success;
 }

@@ -24,6 +24,8 @@ export const TeamAddEventSchema = z.object({
 
 export type TeamAddEvent = TeamAddEventOctokit;
 
-export function isTeamAddEvent(value: unknown): value is TeamAddEvent {
+export function isTeamAddEvent(
+  value: unknown,
+): value is z.input<typeof TeamAddEventSchema> {
   return TeamAddEventSchema.safeParse(value).success;
 }

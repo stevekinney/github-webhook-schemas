@@ -29,6 +29,6 @@ export type PullRequestUnassignedEvent = PullRequestUnassignedEventOctokit;
 
 export function isPullRequestUnassignedEvent(
   value: unknown,
-): value is PullRequestUnassignedEvent {
+): value is z.input<typeof PullRequestUnassignedEventSchema> {
   return PullRequestUnassignedEventSchema.safeParse(value).success;
 }

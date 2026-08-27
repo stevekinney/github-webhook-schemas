@@ -65,6 +65,6 @@ export type DeploymentReviewRequestedEvent = DeploymentReviewRequestedEventOctok
 
 export function isDeploymentReviewRequestedEvent(
   value: unknown,
-): value is DeploymentReviewRequestedEvent {
+): value is z.input<typeof DeploymentReviewRequestedEventSchema> {
   return DeploymentReviewRequestedEventSchema.safeParse(value).success;
 }

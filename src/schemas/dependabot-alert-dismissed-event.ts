@@ -40,6 +40,6 @@ export type DependabotAlertDismissedEvent = DependabotAlertDismissedEventOctokit
 
 export function isDependabotAlertDismissedEvent(
   value: unknown,
-): value is DependabotAlertDismissedEvent {
+): value is z.input<typeof DependabotAlertDismissedEventSchema> {
   return DependabotAlertDismissedEventSchema.safeParse(value).success;
 }

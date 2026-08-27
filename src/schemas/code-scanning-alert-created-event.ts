@@ -67,6 +67,6 @@ export type CodeScanningAlertCreatedEvent = CodeScanningAlertCreatedEventOctokit
 
 export function isCodeScanningAlertCreatedEvent(
   value: unknown,
-): value is CodeScanningAlertCreatedEvent {
+): value is z.input<typeof CodeScanningAlertCreatedEventSchema> {
   return CodeScanningAlertCreatedEventSchema.safeParse(value).success;
 }

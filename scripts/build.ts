@@ -25,6 +25,7 @@ async function getEntrypoints(): Promise<string[]> {
   entrypoints.push(resolve(SRC_DIR, 'index.ts'));
   entrypoints.push(resolve(SRC_DIR, 'event-types.ts'));
   entrypoints.push(resolve(SRC_DIR, 'registry.ts'));
+  entrypoints.push(resolve(SRC_DIR, 'deep-partial.ts'));
 
   // Add all schema files (excluding tests)
   const schemaGlob = new Bun.Glob('**/*.ts');

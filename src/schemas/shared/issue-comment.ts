@@ -36,6 +36,8 @@ export const IssueCommentSchema = z.object({
 
 export type IssueComment = IssueCommentOctokit;
 
-export function isIssueComment(value: unknown): value is IssueComment {
+export function isIssueComment(
+  value: unknown,
+): value is z.input<typeof IssueCommentSchema> {
   return IssueCommentSchema.safeParse(value).success;
 }

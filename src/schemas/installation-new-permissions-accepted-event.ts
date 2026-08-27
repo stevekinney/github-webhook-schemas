@@ -31,6 +31,6 @@ export type InstallationNewPermissionsAcceptedEvent =
 
 export function isInstallationNewPermissionsAcceptedEvent(
   value: unknown,
-): value is InstallationNewPermissionsAcceptedEvent {
+): value is z.input<typeof InstallationNewPermissionsAcceptedEventSchema> {
   return InstallationNewPermissionsAcceptedEventSchema.safeParse(value).success;
 }

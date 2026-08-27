@@ -37,6 +37,6 @@ export type PullRequestReadyForReviewEvent = PullRequestReadyForReviewEventOctok
 
 export function isPullRequestReadyForReviewEvent(
   value: unknown,
-): value is PullRequestReadyForReviewEvent {
+): value is z.input<typeof PullRequestReadyForReviewEventSchema> {
   return PullRequestReadyForReviewEventSchema.safeParse(value).success;
 }

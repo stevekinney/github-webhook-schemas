@@ -25,6 +25,8 @@ export const MembershipAddedEventSchema = z.object({
 
 export type MembershipAddedEvent = MembershipAddedEventOctokit;
 
-export function isMembershipAddedEvent(value: unknown): value is MembershipAddedEvent {
+export function isMembershipAddedEvent(
+  value: unknown,
+): value is z.input<typeof MembershipAddedEventSchema> {
   return MembershipAddedEventSchema.safeParse(value).success;
 }

@@ -30,6 +30,8 @@ export const DiscussionLockedEventSchema = z.object({
 
 export type DiscussionLockedEvent = DiscussionLockedEventOctokit;
 
-export function isDiscussionLockedEvent(value: unknown): value is DiscussionLockedEvent {
+export function isDiscussionLockedEvent(
+  value: unknown,
+): value is z.input<typeof DiscussionLockedEventSchema> {
   return DiscussionLockedEventSchema.safeParse(value).success;
 }

@@ -28,6 +28,6 @@ export type PullRequestUnlockedEvent = PullRequestUnlockedEventOctokit;
 
 export function isPullRequestUnlockedEvent(
   value: unknown,
-): value is PullRequestUnlockedEvent {
+): value is z.input<typeof PullRequestUnlockedEventSchema> {
   return PullRequestUnlockedEventSchema.safeParse(value).success;
 }

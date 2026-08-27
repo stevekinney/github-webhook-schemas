@@ -22,6 +22,8 @@ export const CheckRunDeploymentSchema = z.object({
 
 export type CheckRunDeployment = CheckRunDeploymentOctokit;
 
-export function isCheckRunDeployment(value: unknown): value is CheckRunDeployment {
+export function isCheckRunDeployment(
+  value: unknown,
+): value is z.input<typeof CheckRunDeploymentSchema> {
   return CheckRunDeploymentSchema.safeParse(value).success;
 }

@@ -32,6 +32,6 @@ export type ProjectCardConvertedEvent = ProjectCardConvertedEventOctokit;
 
 export function isProjectCardConvertedEvent(
   value: unknown,
-): value is ProjectCardConvertedEvent {
+): value is z.input<typeof ProjectCardConvertedEventSchema> {
   return ProjectCardConvertedEventSchema.safeParse(value).success;
 }

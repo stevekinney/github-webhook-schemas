@@ -31,6 +31,6 @@ export type ProjectsV2ItemReorderedEvent = ProjectsV2ItemReorderedEventOctokit;
 
 export function isProjectsV2ItemReorderedEvent(
   value: unknown,
-): value is ProjectsV2ItemReorderedEvent {
+): value is z.input<typeof ProjectsV2ItemReorderedEventSchema> {
   return ProjectsV2ItemReorderedEventSchema.safeParse(value).success;
 }

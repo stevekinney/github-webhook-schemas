@@ -18,6 +18,7 @@ import {
   SyntaxKind,
   type Type,
   type TypeAliasDeclaration,
+  UnionTypeNode,
 } from 'ts-morph';
 
 const ROOT_DIR = resolve(import.meta.dirname, '..');
@@ -47,6 +48,36 @@ const SKIP_TYPES = new Set([
   'Set',
   'RegExp',
 ]);
+
+/**
+ * Zod method-chain suffixes for properties that `@octokit/webhooks-types`
+ * (and the upstream JSON schema) mark as required but GitHub omits from real
+ * deliveries. Keys are dotted property paths rooted at the interface or type
+ * alias name; values are appended to the generated property schema.
+ *
+ * `.default(...)` is used instead of `.optional()` so the schema's output type
+ * stays aligned with the upstream type and the generated
+ * `satisfies z.ZodType<...>` contract keeps holding.
+ *
+ * - `Repository.custom_properties`: GitHub omits this on nested repository
+ *   snapshots such as `pull_request.head.repo` and `pull_request.base.repo`.
+ *   See https://github.com/stevekinney/github-webhook-schemas/issues/8
+ */
+const SCHEMA_SUFFIX_OVERRIDES: Record<string, string> = {
+  'Repository.custom_properties': '.default({})',
+};
+
+// Overrides that matched during generation; unmatched entries indicate drift
+// against @octokit/webhooks-types and are reported at the end of a run.
+const appliedSchemaOverrides = new Set<string>();
+
+function getSchemaOverride(propPath: string): string | undefined {
+  const override = SCHEMA_SUFFIX_OVERRIDES[propPath];
+  if (override !== undefined) {
+    appliedSchemaOverrides.add(propPath);
+  }
+  return override;
+}
 
 function collectReferencedTypes(
   type: Type,
@@ -117,7 +148,7 @@ function collectReferencedTypes(
   }
 }
 
-function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
+function getTypeText(type: Type, sourceFile: SourceFile, depth = 0, path = ''): string {
   // Prevent excessive recursion
   if (depth > 20) return 'z.unknown()';
 
@@ -161,7 +192,7 @@ function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
       // Has elements - try to get tuple elements
       if (type.isTuple()) {
         const tupleTypes = type.getTupleElements();
-        const tupleSchemas = tupleTypes.map((t) => getTypeText(t, sourceFile, depth + 1));
+        const tupleSchemas = tupleTypes.map((t) => getTypeText(t, sourceFile, depth + 1, path));
         return `z.tuple([${tupleSchemas.join(', ')}])`;
       }
     }
@@ -173,7 +204,7 @@ function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
   if (type.isArray()) {
     const elementType = type.getArrayElementType();
     if (elementType) {
-      return `z.array(${getTypeText(elementType, sourceFile, depth + 1)})`;
+      return `z.array(${getTypeText(elementType, sourceFile, depth + 1, path)})`;
     }
     return 'z.array(z.unknown())';
   }
@@ -200,14 +231,14 @@ function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
     if (nonNullTypes.length === 1) {
       const firstType = nonNullTypes[0];
       if (!firstType) return 'z.unknown()';
-      let result = getTypeText(firstType, sourceFile, depth + 1);
+      let result = getTypeText(firstType, sourceFile, depth + 1, path);
       if (hasNull) result += '.nullable()';
       if (hasUndefined) result += '.optional()';
       return result;
     }
 
     // Regular union
-    const unionSchemas = nonNullTypes.map((t) => getTypeText(t, sourceFile, depth + 1));
+    const unionSchemas = nonNullTypes.map((t) => getTypeText(t, sourceFile, depth + 1, path));
     let result = `z.union([${unionSchemas.join(', ')}])`;
     if (hasNull) result += '.nullable()';
     if (hasUndefined) result += '.optional()';
@@ -217,7 +248,7 @@ function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
   // Handle intersection types
   if (type.isIntersection()) {
     const intersectionTypes = type.getIntersectionTypes();
-    const schemas = intersectionTypes.map((t) => getTypeText(t, sourceFile, depth + 1));
+    const schemas = intersectionTypes.map((t) => getTypeText(t, sourceFile, depth + 1, path));
     if (schemas.length === 0) return 'z.unknown()';
     if (schemas.length === 1) return schemas[0] ?? 'z.unknown()';
     return schemas.reduce((acc, schema, i) => {
@@ -267,8 +298,12 @@ function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
             (d as PropertySignature).hasQuestionToken(),
         );
 
-        let schema = getTypeText(propType, sourceFile, depth + 1);
-        if ((isOptional || hasQuestionToken) && !schema.includes('.optional()')) {
+        const propPath = path ? `${path}.${propName}` : propName;
+        let schema = getTypeText(propType, sourceFile, depth + 1, propPath);
+        const override = getSchemaOverride(propPath);
+        if (override) {
+          schema += override;
+        } else if ((isOptional || hasQuestionToken) && !schema.includes('.optional()')) {
           schema += '.optional()';
         }
 
@@ -282,7 +317,7 @@ function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
 
     const stringIndexType = type.getStringIndexType();
     if (stringIndexType) {
-      const valueSchema = getTypeText(stringIndexType, sourceFile, depth + 1);
+      const valueSchema = getTypeText(stringIndexType, sourceFile, depth + 1, path);
       return `z.record(z.string(), ${valueSchema})`;
     }
 
@@ -293,7 +328,7 @@ function getTypeText(type: Type, sourceFile: SourceFile, depth = 0): string {
   // Handle tuple types
   if (type.isTuple()) {
     const tupleTypes = type.getTupleElements();
-    const tupleSchemas = tupleTypes.map((t) => getTypeText(t, sourceFile, depth + 1));
+    const tupleSchemas = tupleTypes.map((t) => getTypeText(t, sourceFile, depth + 1, path));
     return `z.tuple([${tupleSchemas.join(', ')}])`;
   }
 
@@ -349,6 +384,7 @@ function generateInterfaceSchema(
     const typeNode = prop.getTypeNode();
     const typeNodeText = typeNode?.getText();
 
+    const propPath = `${declaration.getName()}.${propName}`;
     let schema: string;
 
     // Check if the type annotation references a shared type
@@ -356,10 +392,13 @@ function generateInterfaceSchema(
     if (sharedSchema) {
       schema = sharedSchema;
     } else {
-      schema = getTypeText(propType, sourceFile);
+      schema = getTypeText(propType, sourceFile, 0, propPath);
     }
 
-    if (isOptional && !schema.includes('.optional()')) {
+    const override = getSchemaOverride(propPath);
+    if (override) {
+      schema += override;
+    } else if (isOptional && !schema.includes('.optional()')) {
       schema += '.optional()';
     }
 
@@ -377,7 +416,7 @@ function generateTypeAliasSchema(
   sourceFile: SourceFile,
 ): string {
   const type = declaration.getType();
-  return getTypeText(type, sourceFile);
+  return getTypeText(type, sourceFile, 0, declaration.getName());
 }
 
 function getSharedTypeDependencies(schemaCode: string): Set<string> {
@@ -475,7 +514,7 @@ export const ${typeName}Schema = ${schemaCode} satisfies z.ZodType<${typeName}Oc
 
 export type ${typeName} = ${typeName}Octokit;
 
-export function is${typeName}(value: unknown): value is ${typeName} {
+export function is${typeName}(value: unknown): value is z.input<typeof ${typeName}Schema> {
   return ${typeName}Schema.safeParse(value).success;
 }
 `;
@@ -509,12 +548,15 @@ async function generateEventSchemas(sourceFile: SourceFile): Promise<string[]> {
 
   for (const eventName of eventInterfaceNames) {
     const eventInterface = interfaceMap.get(eventName);
-    if (!eventInterface) continue;
+    const eventAlias = typeAliasMap.get(eventName);
+    if (!eventInterface && !eventAlias) continue;
 
     eventNames.push(eventName);
     const fileName = kebabCase(eventName);
 
-    const schemaCode = generateInterfaceSchema(eventInterface, sourceFile);
+    const schemaCode = eventInterface
+      ? generateInterfaceSchema(eventInterface, sourceFile)
+      : generateTypeAliasSchema(eventAlias!, sourceFile);
     const deps = getSharedTypeDependencies(schemaCode);
 
     // Generate imports
@@ -540,7 +582,7 @@ export const ${eventName}Schema = ${schemaCode} satisfies z.ZodType<${eventName}
 
 export type ${eventName} = ${eventName}Octokit;
 
-export function is${eventName}(value: unknown): value is ${eventName} {
+export function is${eventName}(value: unknown): value is z.input<typeof ${eventName}Schema> {
   return ${eventName}Schema.safeParse(value).success;
 }
 `;
@@ -700,14 +742,32 @@ async function main() {
     }
   }
 
+  // Some webhook payload types are standalone type aliases rather than
+  // interfaces (e.g. PullRequestReviewRequestedEvent, a union of inline
+  // object variants). Aggregate aliases (PullRequestEvent, WebhookEvent,
+  // possibly via indirections like `type WebhookEvent = Schema`) reference
+  // named types instead and must not become schemas of their own.
+  for (const [name, decl] of typeAliasMap) {
+    if (!name.endsWith('Event') || eventInterfaceNames.has(name)) continue;
+    const typeNode = decl.getTypeNode();
+    if (!typeNode) continue;
+    const members = typeNode instanceof UnionTypeNode
+      ? typeNode.getTypeNodes()
+      : [typeNode];
+    const isInlineVariants = members.every((m) => m.getKind() === SyntaxKind.TypeLiteral);
+    if (isInlineVariants) {
+      eventInterfaceNames.add(name);
+    }
+  }
+
   console.log(`Found ${eventInterfaceNames.size} event interfaces`);
 
   // Collect all shared types referenced by events
   console.log('Collecting shared types...');
   for (const eventName of eventInterfaceNames) {
-    const eventInterface = interfaceMap.get(eventName);
-    if (!eventInterface) continue;
-    collectReferencedTypes(eventInterface.getType(), sourceFile);
+    const eventDecl = interfaceMap.get(eventName) ?? typeAliasMap.get(eventName);
+    if (!eventDecl) continue;
+    collectReferencedTypes(eventDecl.getType(), sourceFile);
   }
 
   // Also collect types referenced by shared types (recursive dependencies)
@@ -741,6 +801,15 @@ async function main() {
   // Generate barrel export
   console.log('Generating barrel export...');
   await generateBarrelExport();
+
+  // Surface overrides that no longer match anything in @octokit/webhooks-types
+  for (const propPath of Object.keys(SCHEMA_SUFFIX_OVERRIDES)) {
+    if (!appliedSchemaOverrides.has(propPath)) {
+      console.warn(
+        `Warning: SCHEMA_SUFFIX_OVERRIDES entry "${propPath}" did not match any property; remove or update it.`,
+      );
+    }
+  }
 
   // Format generated files
   await formatGeneratedFiles();

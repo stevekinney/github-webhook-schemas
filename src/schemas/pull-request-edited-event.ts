@@ -50,6 +50,6 @@ export type PullRequestEditedEvent = PullRequestEditedEventOctokit;
 
 export function isPullRequestEditedEvent(
   value: unknown,
-): value is PullRequestEditedEvent {
+): value is z.input<typeof PullRequestEditedEventSchema> {
   return PullRequestEditedEventSchema.safeParse(value).success;
 }

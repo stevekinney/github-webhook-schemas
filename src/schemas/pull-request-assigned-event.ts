@@ -29,6 +29,6 @@ export type PullRequestAssignedEvent = PullRequestAssignedEventOctokit;
 
 export function isPullRequestAssignedEvent(
   value: unknown,
-): value is PullRequestAssignedEvent {
+): value is z.input<typeof PullRequestAssignedEventSchema> {
   return PullRequestAssignedEventSchema.safeParse(value).success;
 }

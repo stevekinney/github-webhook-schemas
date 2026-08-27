@@ -14,6 +14,6 @@ export const RepoRefSchema = z.object({
 
 export type RepoRef = RepoRefOctokit;
 
-export function isRepoRef(value: unknown): value is RepoRef {
+export function isRepoRef(value: unknown): value is z.input<typeof RepoRefSchema> {
   return RepoRefSchema.safeParse(value).success;
 }

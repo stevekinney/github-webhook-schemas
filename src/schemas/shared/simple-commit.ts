@@ -19,6 +19,8 @@ export const SimpleCommitSchema = z.object({
 
 export type SimpleCommit = SimpleCommitOctokit;
 
-export function isSimpleCommit(value: unknown): value is SimpleCommit {
+export function isSimpleCommit(
+  value: unknown,
+): value is z.input<typeof SimpleCommitSchema> {
   return SimpleCommitSchema.safeParse(value).success;
 }

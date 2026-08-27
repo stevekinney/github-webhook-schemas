@@ -113,14 +113,13 @@ export const RepositorySchema = z.object({
     .optional(),
   public: z.union([z.literal(false), z.literal(true)]).optional(),
   organization: z.string().optional(),
-  custom_properties: z.record(
-    z.string(),
-    z.union([z.string(), z.array(z.string())]).nullable(),
-  ),
+  custom_properties: z
+    .record(z.string(), z.union([z.string(), z.array(z.string())]).nullable())
+    .default({}),
 }) satisfies z.ZodType<RepositoryOctokit>;
 
 export type Repository = RepositoryOctokit;
 
-export function isRepository(value: unknown): value is Repository {
+export function isRepository(value: unknown): value is z.input<typeof RepositorySchema> {
   return RepositorySchema.safeParse(value).success;
 }

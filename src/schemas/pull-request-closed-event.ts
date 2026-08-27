@@ -34,6 +34,6 @@ export type PullRequestClosedEvent = PullRequestClosedEventOctokit;
 
 export function isPullRequestClosedEvent(
   value: unknown,
-): value is PullRequestClosedEvent {
+): value is z.input<typeof PullRequestClosedEventSchema> {
   return PullRequestClosedEventSchema.safeParse(value).success;
 }

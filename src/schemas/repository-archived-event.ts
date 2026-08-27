@@ -29,6 +29,6 @@ export type RepositoryArchivedEvent = RepositoryArchivedEventOctokit;
 
 export function isRepositoryArchivedEvent(
   value: unknown,
-): value is RepositoryArchivedEvent {
+): value is z.input<typeof RepositoryArchivedEventSchema> {
   return RepositoryArchivedEventSchema.safeParse(value).success;
 }

@@ -25,6 +25,8 @@ export const ReleaseDeletedEventSchema = z.object({
 
 export type ReleaseDeletedEvent = ReleaseDeletedEventOctokit;
 
-export function isReleaseDeletedEvent(value: unknown): value is ReleaseDeletedEvent {
+export function isReleaseDeletedEvent(
+  value: unknown,
+): value is z.input<typeof ReleaseDeletedEventSchema> {
   return ReleaseDeletedEventSchema.safeParse(value).success;
 }

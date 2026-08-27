@@ -92,6 +92,8 @@ export const SimplePullRequestSchema = z.object({
 
 export type SimplePullRequest = SimplePullRequestOctokit;
 
-export function isSimplePullRequest(value: unknown): value is SimplePullRequest {
+export function isSimplePullRequest(
+  value: unknown,
+): value is z.input<typeof SimplePullRequestSchema> {
   return SimplePullRequestSchema.safeParse(value).success;
 }

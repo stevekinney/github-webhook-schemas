@@ -29,6 +29,6 @@ export type PullRequestReviewSubmittedEvent = PullRequestReviewSubmittedEventOct
 
 export function isPullRequestReviewSubmittedEvent(
   value: unknown,
-): value is PullRequestReviewSubmittedEvent {
+): value is z.input<typeof PullRequestReviewSubmittedEventSchema> {
   return PullRequestReviewSubmittedEventSchema.safeParse(value).success;
 }

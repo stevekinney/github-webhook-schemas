@@ -89,6 +89,6 @@ export type DeploymentStatusCreatedEvent = DeploymentStatusCreatedEventOctokit;
 
 export function isDeploymentStatusCreatedEvent(
   value: unknown,
-): value is DeploymentStatusCreatedEvent {
+): value is z.input<typeof DeploymentStatusCreatedEventSchema> {
   return DeploymentStatusCreatedEventSchema.safeParse(value).success;
 }

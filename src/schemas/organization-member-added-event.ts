@@ -25,6 +25,6 @@ export type OrganizationMemberAddedEvent = OrganizationMemberAddedEventOctokit;
 
 export function isOrganizationMemberAddedEvent(
   value: unknown,
-): value is OrganizationMemberAddedEvent {
+): value is z.input<typeof OrganizationMemberAddedEventSchema> {
   return OrganizationMemberAddedEventSchema.safeParse(value).success;
 }

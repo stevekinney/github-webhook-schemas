@@ -23,6 +23,8 @@ export const WatchStartedEventSchema = z.object({
 
 export type WatchStartedEvent = WatchStartedEventOctokit;
 
-export function isWatchStartedEvent(value: unknown): value is WatchStartedEvent {
+export function isWatchStartedEvent(
+  value: unknown,
+): value is z.input<typeof WatchStartedEventSchema> {
   return WatchStartedEventSchema.safeParse(value).success;
 }

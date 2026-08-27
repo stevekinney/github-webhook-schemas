@@ -27,6 +27,6 @@ export type ProjectCardCreatedEvent = ProjectCardCreatedEventOctokit;
 
 export function isProjectCardCreatedEvent(
   value: unknown,
-): value is ProjectCardCreatedEvent {
+): value is z.input<typeof ProjectCardCreatedEventSchema> {
   return ProjectCardCreatedEventSchema.safeParse(value).success;
 }

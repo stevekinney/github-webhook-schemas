@@ -21,6 +21,6 @@ export const ReactionsSchema = z.object({
 
 export type Reactions = ReactionsOctokit;
 
-export function isReactions(value: unknown): value is Reactions {
+export function isReactions(value: unknown): value is z.input<typeof ReactionsSchema> {
   return ReactionsSchema.safeParse(value).success;
 }

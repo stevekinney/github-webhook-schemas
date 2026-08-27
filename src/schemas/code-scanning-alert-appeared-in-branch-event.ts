@@ -64,6 +64,6 @@ export type CodeScanningAlertAppearedInBranchEvent =
 
 export function isCodeScanningAlertAppearedInBranchEvent(
   value: unknown,
-): value is CodeScanningAlertAppearedInBranchEvent {
+): value is z.input<typeof CodeScanningAlertAppearedInBranchEventSchema> {
   return CodeScanningAlertAppearedInBranchEventSchema.safeParse(value).success;
 }

@@ -33,6 +33,6 @@ export type PullRequestReviewDismissedEvent = PullRequestReviewDismissedEventOct
 
 export function isPullRequestReviewDismissedEvent(
   value: unknown,
-): value is PullRequestReviewDismissedEvent {
+): value is z.input<typeof PullRequestReviewDismissedEventSchema> {
   return PullRequestReviewDismissedEventSchema.safeParse(value).success;
 }

@@ -27,6 +27,6 @@ export type DependabotAlertReopenedEvent = DependabotAlertReopenedEventOctokit;
 
 export function isDependabotAlertReopenedEvent(
   value: unknown,
-): value is DependabotAlertReopenedEvent {
+): value is z.input<typeof DependabotAlertReopenedEventSchema> {
   return DependabotAlertReopenedEventSchema.safeParse(value).success;
 }

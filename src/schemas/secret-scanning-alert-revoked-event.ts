@@ -33,6 +33,6 @@ export type SecretScanningAlertRevokedEvent = SecretScanningAlertRevokedEventOct
 
 export function isSecretScanningAlertRevokedEvent(
   value: unknown,
-): value is SecretScanningAlertRevokedEvent {
+): value is z.input<typeof SecretScanningAlertRevokedEventSchema> {
   return SecretScanningAlertRevokedEventSchema.safeParse(value).success;
 }

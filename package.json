@@ -1123,6 +1123,20 @@
       "require": "./dist/schemas/pull-request-review-edited-event.js",
       "default": "./dist/schemas/pull-request-review-edited-event.js"
     },
+    "./pull-request-review-request-removed-event": {
+      "types": "./dist/schemas/pull-request-review-request-removed-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-request-removed-event.js",
+      "import": "./dist/schemas/pull-request-review-request-removed-event.js",
+      "require": "./dist/schemas/pull-request-review-request-removed-event.js",
+      "default": "./dist/schemas/pull-request-review-request-removed-event.js"
+    },
+    "./pull-request-review-requested-event": {
+      "types": "./dist/schemas/pull-request-review-requested-event.d.ts",
+      "bun": "./dist/schemas/pull-request-review-requested-event.js",
+      "import": "./dist/schemas/pull-request-review-requested-event.js",
+      "require": "./dist/schemas/pull-request-review-requested-event.js",
+      "default": "./dist/schemas/pull-request-review-requested-event.js"
+    },
     "./pull-request-review-submitted-event": {
       "types": "./dist/schemas/pull-request-review-submitted-event.d.ts",
       "bun": "./dist/schemas/pull-request-review-submitted-event.js",
@@ -2033,6 +2047,13 @@
       "require": "./dist/event-types.js",
       "default": "./dist/event-types.js"
     },
+    "./deep-partial": {
+      "types": "./dist/deep-partial.d.ts",
+      "bun": "./dist/deep-partial.js",
+      "import": "./dist/deep-partial.js",
+      "require": "./dist/deep-partial.js",
+      "default": "./dist/deep-partial.js"
+    },
     "./registry": {
       "types": "./dist/registry.d.ts",
       "bun": "./dist/registry.js",
@@ -2089,6 +2110,7 @@
     "@eslint/eslintrc": "^3.3.6",
     "@eslint/js": "^10.0.1",
     "@eslint/markdown": "^8.0.3",
+    "@octokit/webhooks-examples": "^7.6.1",
     "@types/bun": "^1.3.14",
     "@types/node": "^26.2.0",
     "@typescript-eslint/eslint-plugin": "^8.67.0",

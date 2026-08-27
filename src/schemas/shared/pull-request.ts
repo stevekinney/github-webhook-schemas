@@ -104,6 +104,8 @@ export const PullRequestSchema = z.object({
 
 export type PullRequest = PullRequestOctokit;
 
-export function isPullRequest(value: unknown): value is PullRequest {
+export function isPullRequest(
+  value: unknown,
+): value is z.input<typeof PullRequestSchema> {
   return PullRequestSchema.safeParse(value).success;
 }

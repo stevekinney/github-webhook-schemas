@@ -31,6 +31,6 @@ export type InstallationRepositoriesAddedEvent =
 
 export function isInstallationRepositoriesAddedEvent(
   value: unknown,
-): value is InstallationRepositoriesAddedEvent {
+): value is z.input<typeof InstallationRepositoriesAddedEventSchema> {
   return InstallationRepositoriesAddedEventSchema.safeParse(value).success;
 }
