@@ -47,7 +47,6 @@
     "diagnostics": true,
 
     // Path resolution
-    "baseUrl": ".",
     "rootDir": ".",
     "paths": {
       "@/*": ["./src/*"]
